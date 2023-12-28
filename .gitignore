@@ -1,0 +1,6 @@
+**/objs/
+**/*.o
+**/*.d
+minishell
+*.swp
+**/*.swp

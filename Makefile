@@ -6,7 +6,7 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2023/12/29 00:58:19 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/18 21:42:47 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,32 +14,55 @@ NAME=minishell
 
 SRCDIR=./src
 OBJDIR=objs
-SRCS=main.c
+MAIN_SRC=main.c parse_command.c lexer.c append_token.c create_new_token.c \
+		free_tokens.c get_last_token.c print_token_list.c clean_tokens.c \
+		delete_token.c join_consecutive_tokens.c clean_tokens2.c \
+		syntax_analyzer.c print_error.c check_missing_argument.c \
+		check_missing_argument2.c expander.c expand_env.c expand_wildcard.c \
+		search_env.c contains_in_env.c free_cmds.c parser.c set_redirections.c \
+		set_arguments.c signal_handler.c terminal_setting.c
+
+SRCS=$(MAIN_SRC)
 OBJS=$(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
 DEPS=$(OBJS:.o=.d)
 
-INCLUDE=-I./inc
+INCLUDE=-I./inc -I./libft
 CC=cc
+DEBUG=-fsanitize="address,undefined" -g
 CFLAGS=-Wall -Werror -Wextra
 DEPFLAGS=-MMD
-COMPILE.c=$(CC) $(DEPFLAGS) $(CFLAGS) $(INCLUDE) -c -o
-EXTRAFLAGS=-fsanitize=address
-LIBRARIES=
+LIBFT=libft/libft.a
+#LDFLAGS=-L/opt/homebrew/lib
+#CPPFLAGS=-I/opt/homebrew/include
+LDFLAGS=-L${HOME}/homebrew/opt/readline/lib
+CPPFLAGS=-I${HOME}/homebrew/opt/readline/include
 
-all: $(OBJDIR) $(NAME)
+all: $(OBJDIR) libft $(NAME)
 
-$(NAME): $(OBJS) Makefile
-	$(CC) $(CFLAGS) $(EXTRAFLAGS) -o $@ $(OBJS) $(LIBRARIES)
+$(NAME): $(OBJS) $(LIBFT) Makefile
+	$(CC) $(DEBUG) $(CFLAGS) -o $@ $(OBJS) $(LIBFT) -lreadline $(LDFLAGS)
 	echo "(MINISHELL) COMPILING $@"
-
-$(OBJDIR)/%.o: $(SRCDIR)/%.c Makefile 
-	$(COMPILE.c) $@ $<
+	
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(LIBFT) Makefile
+	$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INCLUDE) -c -o $@ $< $(CPPFLAGS)
+	echo "(MINISHELL) COMPILING $@"
+	
+$(OBJDIR)/%.o: $(SRCDIR)/**/%.c $(LIBFT) Makefile
+	$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INCLUDE) -c -o $@ $< $(CPPFLAGS)
+	echo "(MINISHELL) COMPILING $@"
+	
+$(OBJDIR)/%.o: $(SRCDIR)/**/**/%.c $(LIBFT) Makefile
+	$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INCLUDE) -c -o $@ $< $(CPPFLAGS)
 	echo "(MINISHELL) COMPILING $@"
 
 $(OBJDIR): Makefile
 	mkdir -p $@
 
+libft:
+	make -C libft
+
 clean:
+	make -C libft fclean
 	rm -rf $(OBJDIR)
 
 fclean: clean
@@ -49,5 +72,5 @@ re: fclean all
 
 -include $(DEPS)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libft
 .SILENT:

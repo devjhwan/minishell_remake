@@ -6,15 +6,16 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/18 21:50:17 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/19 16:33:49 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include "parser.h"
 
 int	main(int args, char **argv, char **envp)
 {
-    (void)args;
-    (void)argv;
-    (void)envp;
+	if (args < 2)
+		return (0);
+	parser(argv[1]);
+	(void)envp;
 }

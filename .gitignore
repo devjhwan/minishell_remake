@@ -6,3 +6,4 @@ minishell
 **/*.swp
 .DS_Store
 a.out
+**/*.a

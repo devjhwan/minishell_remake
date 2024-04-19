@@ -6,14 +6,16 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2024/04/18 21:42:47 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/19 17:29:56 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			:=minishell
 
-SRCDIR			:=./src
-SRCS			:=main.c
+SRCDIR			:=./mandatory/src
+SRCS			:=main.c parser.c new_cmd.c get_cmd_type.c free_cmds.c \
+				  is_pipe.c is_redir.c add_argument.c count_arg_length.c \
+				  free_arguments.c set_argument.c set_redir.c
 
 OBJDIR			:=.objs
 OBJS			:=$(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
@@ -21,7 +23,7 @@ OBJS			:=$(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
 DEPS			:=$(OBJS:.o=.d)
 DEPFLAGS		:=-MMD
 
-INCLUDE			:=-I./inc -I./libft
+INC				:=-I./mandatory/inc -I./libft
 CC				:=cc
 CFLAGS			:=-Wall -Werror -Wextra
 
@@ -42,7 +44,11 @@ $(NAME): 		$(OBJS) $(LIBFT) Makefile
 					echo "(MINISHELL) COMPILING $@"
 
 $(OBJDIR)/%.o: 	$(SRCDIR)/%.c $(LIBFT) Makefile
-					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INCLUDE) -c -o $@ $< $(CPPFLAGS)
+					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $< $(CPPFLAGS)
+					echo "(MINISHELL) COMPILING $@"
+
+$(OBJDIR)/%.o: 	$(SRCDIR)/**/%.c $(LIBFT) Makefile
+					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $< $(CPPFLAGS)
 					echo "(MINISHELL) COMPILING $@"
 
 $(OBJDIR): 		Makefile

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdarg.h>
 
 static char	*ft_join(char **strarr)
 {

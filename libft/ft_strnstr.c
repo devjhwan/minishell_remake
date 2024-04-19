@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
 
 static const char	*issubstr(const char *haystack, const char *needle, \
 								size_t i, size_t len)

@@ -10,49 +10,57 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME=minishell
+NAME			:=minishell
 
-SRCDIR=./src
-OBJDIR=objs
-MAIN_SRC=
+SRCDIR			:=./src
+SRCS			:=main.c
 
-SRCS=$(MAIN_SRC)
-OBJS=$(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
-DEPS=$(OBJS:.o=.d)
+OBJDIR			:=.objs
+OBJS			:=$(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
 
-INCLUDE=-I./inc -I./libft
-CC=cc
-DEBUG=-fsanitize="address,undefined" -g
-CFLAGS=-Wall -Werror -Wextra
-DEPFLAGS=-MMD
-LIBFT=libft/libft.a
-LDFLAGS=-L/home/linuxbrew/.linuxbrew/opt/readline/lib
-CPPFLAGS=-I/home/linuxbrew/.linuxbrew/opt/readline/include
-# LDFLAGS=-L${HOME}/homebrew/opt/readline/lib
-# CPPFLAGS=-I${HOME}/homebrew/opt/readline/include
+DEPS			:=$(OBJS:.o=.d)
+DEPFLAGS		:=-MMD
 
-all: $(OBJDIR) libft $(NAME)
+INCLUDE			:=-I./inc -I./libft
+CC				:=cc
+CFLAGS			:=-Wall -Werror -Wextra
 
-$(NAME): $(OBJS) $(LIBFT) Makefile
-	$(CC) $(DEBUG) $(CFLAGS) -o $@ $(OBJS) $(LIBFT) -lreadline $(LDFLAGS)
-	echo "(MINISHELL) COMPILING $@"
+DEBUG			:=-fsanitize="address,undefined" -g
 
-$(OBJDIR): Makefile
-	mkdir -p $@
+LDFLAGS			:=-L/home/linuxbrew/.linuxbrew/opt/readline/lib
+CPPFLAGS		:=-I/home/linuxbrew/.linuxbrew/opt/readline/include
+# LDFLAGS			:=-L${HOME}/homebrew/opt/readline/lib
+# CPPFLAGS		:=-I${HOME}/homebrew/opt/readline/include
+
+LIBFT			:=libft/libft.a
+
+all: 			$(OBJDIR) libft $(NAME)
+
+$(NAME): 		$(OBJS) $(LIBFT) Makefile
+					$(CC) $(DEBUG) $(CFLAGS) -o $@ $(OBJS) $(LIBFT) \
+						-lreadline $(LDFLAGS)
+					echo "(MINISHELL) COMPILING $@"
+
+$(OBJDIR)/%.o: 	$(SRCDIR)/%.c $(LIBFT) Makefile
+					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INCLUDE) -c -o $@ $< $(CPPFLAGS)
+					echo "(MINISHELL) COMPILING $@"
+
+$(OBJDIR): 		Makefile
+					mkdir -p $@
 
 libft:
-	make -C libft
+					make -C libft
 
 clean:
-	make -C libft fclean
-	rm -rf $(OBJDIR)
+					make -C libft fclean
+					rm -rf $(OBJDIR)
 
 fclean: clean
-	rm -f $(NAME)
+					rm -f $(NAME)
 
-re: fclean all
+re: 				fclean all
 
 -include $(DEPS)
 
-.PHONY: all clean fclean re libft
+.PHONY: 			all clean fclean re libft
 .SILENT:

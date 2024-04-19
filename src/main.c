@@ -11,7 +11,10 @@
 /* ************************************************************************** */
 
 
+
 int	main(int args, char **argv, char **envp)
 {
-
+    (void)args;
+    (void)argv;
+    (void)envp;
 }

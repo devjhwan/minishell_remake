@@ -57,11 +57,11 @@ t_cmds	*parse_command(char *arg, char **envp)
 		return (free_tokens(&tokens), NULL);
 	if (!expander(tokens, envp))
 		return (free_tokens(&tokens), NULL);
-	//print_token_list(tokens);
+	print_token_list(tokens);
 	cmds = parser(tokens);
 	if (cmds == NULL)
 		return (free_tokens(&tokens), NULL);
 	print_command(cmds);
 	free_tokens(&tokens);
-	return (NULL);
+	return (cmds);
 }

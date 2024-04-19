@@ -20,7 +20,7 @@ MAIN_SRC=main.c parse_command.c lexer.c append_token.c create_new_token.c \
 		syntax_analyzer.c print_error.c check_missing_argument.c \
 		check_missing_argument2.c expander.c expand_env.c expand_wildcard.c \
 		search_env.c contains_in_env.c free_cmds.c parser.c set_redirections.c \
-		set_arguments.c signal_handler.c terminal_setting.c
+		set_arguments.c signal_handler.c terminal_setting.c expand_quotes.c
 
 SRCS=$(MAIN_SRC)
 OBJS=$(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
@@ -32,10 +32,10 @@ DEBUG=-fsanitize="address,undefined" -g
 CFLAGS=-Wall -Werror -Wextra
 DEPFLAGS=-MMD
 LIBFT=libft/libft.a
-#LDFLAGS=-L/opt/homebrew/lib
-#CPPFLAGS=-I/opt/homebrew/include
-LDFLAGS=-L${HOME}/homebrew/opt/readline/lib
-CPPFLAGS=-I${HOME}/homebrew/opt/readline/include
+LDFLAGS=-L/home/linuxbrew/.linuxbrew/opt/readline/lib
+CPPFLAGS=-I/home/linuxbrew/.linuxbrew/opt/readline/include
+# LDFLAGS=-L${HOME}/homebrew/opt/readline/lib
+# CPPFLAGS=-I${HOME}/homebrew/opt/readline/include
 
 all: $(OBJDIR) libft $(NAME)
 

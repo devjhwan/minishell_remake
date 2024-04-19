@@ -13,6 +13,7 @@
 #include "token.h"
 
 int	expand_env(t_token *tokens, char **envp);
+int	expand_quotes(t_token *tokens);
 int	expand_wildcard(t_token *token);
 
 int	expander(t_token *tokens, char **envp)
@@ -20,6 +21,8 @@ int	expander(t_token *tokens, char **envp)
 	while (tokens != NULL)
 	{
 		if (!expand_env(tokens, envp))
+			return (0);
+		if (!expand_quotes(tokens))
 			return (0);
 		if (!expand_wildcard(tokens))
 			return (0);

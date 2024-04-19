@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "token.h"
-#include "util.h"
+#include "utils.h"
 
 int	check_missing_argument(t_token *tokens);
 int	check_missing_argument2(t_token *tokens);

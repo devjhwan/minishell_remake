@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 04:00:06 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/20 15:02:49 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_cmd	*parser(char *line, char **envp)
 	t_cmd		*tmp;
 	t_arglist	*args;
 
+	printf("%s\n", line);
 	cmds = new_cmd(P);
 	if (cmds == NULL)
 		return (NULL);

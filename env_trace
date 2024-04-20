@@ -1,0 +1,65 @@
+./minishell '< $'
+< $
+
+./minishell '< $$'
+< $$
+
+./minishell '< $USER'
+< $USER
+
+./minishell '< "$USER"'
+< "$USER"
+
+./minishell '< '\''$USER'\'
+< '$USER'
+
+./minishell '< $USER$USER'
+< $USER$USER
+
+./minishell '< "$USER$USER"'
+< "$USER$USER"
+
+./minishell '< $USER hola $USER'
+< $USER hola $USER
+
+./minishell '< "$USER hola $USER"'
+< "$USER hola $USER"
+
+./minishell '< $ASDF'
+< $ASDF
+
+./minishell '< "$ASDF"'
+< "$ASDF"
+
+./minishell '< '\''$ASDF'\'
+< '$ASDF'
+
+./minishell '< $ASDF$ASDF'
+< $ASDF$ASDF
+
+./minishell '< $ASDF$USER'
+< $ASDF$USER
+
+./minishell '< "$USER$ASDF"'
+< "$USER$ASDF"
+
+./minishell '< $ASDF hola $USER'
+< $ASDF hola $USER
+
+./minishell '< "$USER hola $ASDF"'
+< "$USER hola $ASDF"
+
+./minishell '< $"USER"'
+< $"USER"
+
+./minishell '< $'\''USER'\'
+< $'USER'
+
+./minishell '< $"ASDF"'
+< $"ASDF"
+
+./minishell '< $'\''ASDF'\'
+< $'ASDF'
+
+./minishell '< $?'
+< $?

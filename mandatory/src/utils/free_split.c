@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   free_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 14:43:49 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/20 14:43:42 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include <stdlib.h>
 
-typedef enum e_errtype
+void	free_split(char **split)
 {
-	UNEXPECTED_TOKEN,
-	AMBIGUOUS_REDIRECT
-}	t_errtype;
+	int	i;
 
-void	print_error(t_errtype t, char *arg1, char *arg2);
-char	*search_env(char *arg, char **envp);
-int		check_env(char *arg, char **envp);
-void	free_split(char **split);
-
-#endif
+	i = 0;
+	while (split[i] != NULL)
+		free(split[i++]);
+	free(split);
+}

@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 01:58:19 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/20 05:05:26 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ t_cmd		*new_cmd(t_cmdtype	t);
 t_cmdtype	get_cmd_type(char **arg);
 void		free_cmds(t_cmd **cmds);
 void		print_command(t_cmd *cmds);
+t_redir		*new_redir(t_rdtype t, char *filename);
 
 #endif

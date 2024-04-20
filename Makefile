@@ -6,7 +6,7 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2024/04/20 03:22:07 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/20 05:05:31 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRCDIR			:=./mandatory/src
 SRCS			:=main.c parser.c new_cmd.c get_cmd_type.c free_cmds.c \
 				  is_pipe.c is_redir.c add_argument.c count_arg_length.c \
 				  free_arguments.c set_argument.c set_redir.c print_command.c \
-				  print_error.c is_arg.c
+				  print_error.c is_arg.c remove_quote.c print_redir_error.c \
+				  expand_env.c search_env.c new_redir.c
 
 OBJDIR			:=.objs
 OBJS			:=$(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))

@@ -1,24 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_redir_error.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 05:01:37 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/20 03:43:18 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "utils.h"
 
-int	main(int args, char **argv, char **envp)
+static char	*get_err_argument(char *line)
 {
-	t_cmd	*cmd;
-	if (args < 2)
-		return (0);
-	cmd = parser(argv[1], envp);
-	print_command(cmd);
-	free_cmds(&cmd);
-	(void)envp;
+	if (line[0] == '<')
+	{
+		if (line[1] == '<')
+			line[2] = '\0';
+		else
+			line[1] = '\0';
+	}
+	else if (line[0] == '>')
+	{
+		if (line[1] == '>')
+			line[2] = '\0';
+		else
+			line[1] = '\0';
+	}
+	else if (line[0] == '|')
+		line[1] = '\0';
+	return (line);
+}
+
+void	print_redir_error(char *line)
+{
+	char		*arg;
+	
+	while (*line == ' ')
+		line++;
+	if (*line == '\0')
+		print_error(UNEXPECTED_TOKEN, "newline", NULL);
+	else
+	{
+		arg = get_err_argument(line);
+		print_error(UNEXPECTED_TOKEN, arg, NULL);
+	}
 }

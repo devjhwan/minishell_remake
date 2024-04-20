@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/19 17:30:36 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/20 04:00:50 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,18 @@ static t_arglist	*new_argument(char *arg)
 	return (new_arg);
 }
 
-int	add_argument(t_arglist **args, char **line)
+int	add_argument(t_arglist **args, char **line, char **envp)
 {
 	int			len;
 	char		*new_line;
 	t_arglist	*tmp;
 
+	(void)envp;
 	len = count_arg_length(*line);
 	new_line = ft_substr(*line, 0, len);
-	*line += len;
 	if (new_line == NULL)
 		return (0);
+	*line += len;
 	if (*args == NULL)
 	{
 		*args = new_argument(new_line);

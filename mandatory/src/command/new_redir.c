@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   new_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 05:04:00 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/20 03:39:19 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "command.h"
+#include <stdlib.h>
 
-typedef enum e_errtype
+t_redir	*new_redir(t_rdtype t, char *filename)
 {
-	UNEXPECTED_TOKEN
-}	t_errtype;
+	t_redir	*redir;
 
-void	print_error(t_errtype t, char *arg1, char *arg2);
-char	*search_env(char *arg, char **envp);
-
-#endif
+	redir = (t_redir *)malloc(sizeof(t_redir));
+	if (redir == NULL)
+		return (NULL);
+	redir->t = t;
+	redir->filename = filename;
+	redir->next = NULL;
+	return (redir);
+}

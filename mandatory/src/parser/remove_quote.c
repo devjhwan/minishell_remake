@@ -1,24 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   remove_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 05:04:00 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/20 04:40:18 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "libft.h"
+#include <stdlib.h>
 
-typedef enum e_errtype
+char	*remove_quote(char *arg)
 {
-	UNEXPECTED_TOKEN
-}	t_errtype;
+	size_t	i;
 
-void	print_error(t_errtype t, char *arg1, char *arg2);
-char	*search_env(char *arg, char **envp);
-
-#endif
+	if (arg[0] == '\'')
+	{
+		i = 1;
+		while (arg[i] != '\0' && arg[i] != '\'')
+			i++;
+		if (arg[i] == '\'')
+			arg[i] = '\0';
+		arg = ft_strdup(arg + 1);
+	}
+	else if (arg[0] == '\"')
+	{
+		i = 1;
+		while (arg[i] != '\0' && arg[i] != '\"')
+			i++;
+		if (arg[i] == '\"')
+			arg[i] = '\0';
+		arg = ft_strdup(arg + 1);
+	}
+	return (arg);
+}

@@ -4,6 +4,7 @@
         "libft.h": "c",
         "command.h": "c",
         "error.h": "c",
-        "utils.h": "c"
+        "utils.h": "c",
+        "stdlib.h": "c"
     }
 }

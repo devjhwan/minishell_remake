@@ -6,3 +6,5 @@ minishell
 **/*.swp
 .DS_Store
 a.out
+/.vscode
+**/.a

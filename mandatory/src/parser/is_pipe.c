@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/19 16:47:22 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/20 02:07:13 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	is_pipe(char *arg)
 {
-	if (ft_strncmp(arg, "|", 2) == 0)
+	if (ft_strncmp(arg, "|", 1) == 0)
 		return (1);
 	return (0);
 }

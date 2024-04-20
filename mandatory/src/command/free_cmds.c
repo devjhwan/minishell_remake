@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/19 16:45:37 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/20 01:44:34 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,11 @@ void	free_cmds(t_cmd **cmds)
 	while (cmd != NULL)
 	{
 		*cmds = cmd->next;
-		free_cmd_arguments(cmd->args);
+		if (cmd->args != NULL)
+			free_cmd_arguments(cmd->args);
 		cmd->args = NULL;
-		free_cmd_redirections(cmd->redirs);
+		if (cmd->redirs != NULL)
+			free_cmd_redirections(cmd->redirs);
 		cmd->redirs = NULL;
 		cmd->next = NULL;
 		free(cmd);

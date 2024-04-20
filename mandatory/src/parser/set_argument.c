@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/19 17:16:48 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/20 02:01:02 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ char	**set_argument(t_arglist *arglist)
 		arglist = arglist->next;
 		i++;
 	}
+	args[i] = NULL;
 	return (args);
 }

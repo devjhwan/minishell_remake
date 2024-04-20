@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd_type.c                                     :+:      :+:    :+:   */
+/*   ft_putnbr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 02:07:29 by junghwle         ###   ########.fr       */
+/*   Created: 2023/05/04 21:43:03 by junghwle          #+#    #+#             */
+/*   Updated: 2023/05/09 15:26:19 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "command.h"
-#include "libft.h"
+#include <unistd.h>
 
-t_cmdtype	get_cmd_type(char **arg)
+static void	ft_putnbr_ret(int n)
 {
-	if (ft_strncmp(*arg, "|", 1) == 0)
-	{
-		*arg = *arg + 1;
-		return (P);
-	}
+	char	c;
+
+	if (n > 9)
+		ft_putnbr_ret(n / 10);
+	c = n % 10 + '0';
+	write(1, &c, 1);
+}
+
+void	ft_putnbr(int n)
+{
+	if (n == -2147483648)
+		write(1, "-2147483648", 11);
 	else
-		return (PIPE_ERR);
+	{
+		if (n < 0)
+		{
+			write(1, "-", 1);
+			n *= -1;
+		}
+		ft_putnbr_ret(n);
+	}
 }

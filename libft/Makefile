@@ -6,7 +6,7 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2024/04/20 01:57:31 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/20 02:41:59 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ OBJDIR			:=.objs
 SRCS			:=ft_bzero.c ft_memset.c ft_calloc.c ft_split.c ft_strchr.c \
 				  ft_strdup.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c \
 				  ft_strlen.c ft_strncmp.c ft_strnstr.c ft_strrchr.c \
-				  ft_strtrim.c ft_substr.c ft_putstr.c ft_putnbr.c
+				  ft_strtrim.c ft_substr.c ft_putstrerr.c ft_putnbr.c
 OBJS			:=$(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
 DEPS			:=$(OBJS:.o=.d)
 

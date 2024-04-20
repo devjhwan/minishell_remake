@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   is_arg.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 20:22:12 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/19 17:36:20 by junghwle         ###   ########.fr       */
+/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/20 03:19:59 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <unistd.h>
+#include "parser.h"
 
-void	ft_putstr(char *str)
+int	is_arg(char *line)
 {
-	write(1, str, ft_strlen(str));
+	if (*line == '\0' || is_redir(line) || is_pipe(line))
+		return (0);
+	return (1);
 }

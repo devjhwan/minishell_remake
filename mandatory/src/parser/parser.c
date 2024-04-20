@@ -6,18 +6,63 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 02:05:04 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/20 03:35:07 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "libft.h"
+#include "utils.h"
+
+static int	is_pipe_syntax_error(t_cmd *tmp, char *line)
+{
+	if ((tmp->args == NULL || tmp->args[0] == NULL) && tmp->redirs == NULL)
+		return (print_error(UNEXPECTED_TOKEN, "|", NULL), 1);
+	if (is_arg(line))
+		return (1);
+	line++;
+	while (*line == ' ')
+		line++;
+	if (*line == '\0')
+		return (print_error(UNEXPECTED_TOKEN, "newline", NULL), 1);
+	if (is_pipe(line))
+		return (print_error(UNEXPECTED_TOKEN, "|", NULL), 1);
+	return (0);
+}
+
+static int	parser_logic(char **line, t_cmd **tmp, t_arglist **args)
+{
+	if (is_redir(*line))
+	{
+		if (!set_redir(line, *tmp))
+			return (0);
+	}
+	else if (is_pipe(*line))
+	{
+		(*tmp)->args = set_argument(*args);
+		free_arguments(args);
+		if ((*tmp)->args == NULL)
+			return (0);
+		if (is_pipe_syntax_error(*tmp, *line))
+			return (0);
+		(*tmp)->next = new_cmd(get_cmd_type(line));
+		if ((*tmp)->next == NULL)
+			return (0);
+		*tmp = (*tmp)->next;
+		return (1);
+	}
+	else
+	{
+		if (!add_argument(args, line))
+			return (0);
+	}
+	return (1);
+}
 
 t_cmd	*parser(char *line)
 {
     t_cmd		*cmds;
 	t_cmd		*tmp;
-	int			i;
 	t_arglist	*args;
 
 	cmds = new_cmd(P);
@@ -27,29 +72,10 @@ t_cmd	*parser(char *line)
 	args = NULL;
 	while (*line != '\0')
 	{
-		i = 0;
-		while (line[i] == ' ')
-			i++;
-		line = &line[i];
-		if (is_redir(line))
-		{
-			if (!set_redir(&line, tmp))
-				return (free_cmds(&cmds), free_arguments(&args), NULL);
-		}
-		else if (is_pipe(line))
-		{
-			tmp->args = set_argument(args);
-			free_arguments(&args);
-			tmp->next = new_cmd(get_cmd_type(&line));
-			if (tmp->next == NULL)
-				return (free_cmds(&cmds), free_arguments(&args), NULL);
-			tmp = tmp->next;
-		}
-		else
-		{
-			if (!add_argument(&args, &line))
-				return (free_cmds(&cmds), free_arguments(&args), NULL);
-		}
+		while (*line == ' ')
+			line++;
+		if (!parser_logic(&line, &tmp, &args))
+			return (free_cmds(&cmds), free_arguments(&args), NULL);
 	}
 	tmp->args = set_argument(args);
 	free_arguments(&args);

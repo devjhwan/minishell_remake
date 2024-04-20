@@ -2,6 +2,8 @@
     "files.associations": {
         "parser.h": "c",
         "libft.h": "c",
-        "command.h": "c"
+        "command.h": "c",
+        "error.h": "c",
+        "utils.h": "c"
     }
 }

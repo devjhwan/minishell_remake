@@ -6,12 +6,12 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 02:12:20 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/20 02:35:32 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command.h"
-#include "libft.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 static void	print_args(char **args)
@@ -19,35 +19,32 @@ static void	print_args(char **args)
 	int	i;
 
 	i = 0;
-	ft_putstr("args: { ");
+	printf("args: { ");
 	while (args != NULL && args[i] != NULL)
 	{
-		ft_putstr(args[i++]);
+		printf("%s", args[i++]);
 		if (args[i] != NULL)
-			ft_putstr(", ");
+			printf(", ");
 	}
-	ft_putstr(" },\n");
+	printf(" },\n");
 }
 
 static void	print_redirs(t_redir *redir)
 {
 	if (redir == NULL)
-		ft_putstr("redirs: {  }\n");
+		printf("redirs: {  }\n");
 	else
 	{
-		ft_putstr("redirs: {\n");
+		printf("redirs: {\n");
 		while (redir != NULL)
 		{
-			ft_putstr("    { type: ");
-			ft_putnbr((int)redir->t);
-			ft_putstr(", filename: ");
-			ft_putstr(redir->filename);
-			ft_putstr(" }");
+			printf("    { type: %d, filename: %s }", \
+				redir->t, redir->filename);
 			redir = redir->next;
 			if (redir != NULL)
-				ft_putstr(",\n");
+				printf(",\n");
 		}
-		ft_putstr("\n}\n");
+		printf("\n}\n");
 	}
 }
 

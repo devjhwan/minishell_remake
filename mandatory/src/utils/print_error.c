@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 03:19:26 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/20 02:43:58 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "utils.h"
+#include "libft.h"
+#include <stdio.h>
 
-# include "command.h"
-# include <stdio.h>
-
-typedef struct s_arglist
+void	print_unexpected_token(char *arg)
 {
-	char				*arg;
-	struct s_arglist	*next;
-}	t_arglist;
+	ft_putstrerr("bash: syntax error near unexpected token `");
+	ft_putstrerr(arg);
+	ft_putstrerr("'\n");
+}
 
-t_cmd	*parser(char *arg);
-
-int		is_redir(char *arg);
-int		is_pipe(char *arg);
-int		is_arg(char *line);
-int		count_arg_length(char *arg);
-int		set_redir(char **line, t_cmd *cmd);
-char	**set_argument(t_arglist *arglist);
-int		add_argument(t_arglist **args, char **arg);
-void	free_arguments(t_arglist **args);
-
-#endif
+void	print_error(t_errtype t, char *arg1, char *arg2)
+{
+	(void)arg2;
+	if (t == UNEXPECTED_TOKEN)
+		print_unexpected_token(arg1);
+}

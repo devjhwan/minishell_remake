@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 20:50:36 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 22:08:53 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 01:05:39 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	print_ambiguous_redirection(t_ptree *node)
 	str = join_arguments(node);
 	if (str != NULL)
 		print_error(AMBIGUOUS_REDIRECT, str, NULL);
+	free(str);
 }
 
 int	expander(t_ptree *tree, char **envp)

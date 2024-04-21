@@ -6,19 +6,40 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 17:30:42 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 01:14:55 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minishell.h"
+#include <stdlib.h>
+#include <signal.h>
+#include <stdio.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
 int	main(int args, char **argv, char **envp)
 {
-	t_cmd	*cmds;
+	t_sehll	shell;
+	char	*str;
 
-	if (args < 2)
-		return (0);
-	cmds = parser(argv[1], envp);
-	free_cmds(&cmds);
-	return (0);
+	(void) args;
+	(void) argv;
+	while (1)
+	{
+		set_default_minishell_signal();
+		set_minishell_terminal();
+		str = readline("minishell: ");
+		if (str == NULL)
+			break ;
+		add_history(str);
+		shell.cmds = parser(str, envp);
+		free(str);
+		if (shell.cmds == NULL)
+			continue ;
+		rollback_terminal_setting();
+		set_execution_signal();
+		free_cmds(&shell.cmds);
+		shell.cmds = NULL;
+	}
+	return (rollback_terminal_setting(), 0);
 }

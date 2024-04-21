@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:30:53 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 00:00:07 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 01:11:49 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_ptree		*parse_command(t_ptoken *tokens);
 t_ptree		*parse_content(t_ptoken **tokens);
 t_ptree		*parse_argument(t_ptoken **tokens);
 t_ptree		*parse_redirection(t_ptoken **tokens);
+char		*join_tree_arguments(t_ptree *node);
 void		print_parser_tree(t_ptree *tree);
 void		free_tree(t_ptree *tree);
 

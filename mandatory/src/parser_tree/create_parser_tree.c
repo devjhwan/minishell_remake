@@ -6,12 +6,22 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:34:55 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 20:05:04 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/21 22:16:33 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser_tree.h"
 
+/**
+ * BNF TREE RESUME
+ * 
+ * <COMMAND>        ::= WORD <CONTENT_L> | WORD <CONTENT_L> <COMMAND>
+ * <CONTENT>        ::= <ARGUMENT> | <REDIRECTION> | 
+ *                      <ARGUMENT> <CONTENT> | 
+ *                      <REDIRECTION> <CONTENT>
+ * <ARGUMENT>       ::= WORD | WORD <ARGUMENT>
+ * <REDIRECTION>    ::= WORD <ARGUMENT>
+ */
 t_ptree	*create_parser_tree(t_ptoken *tokens)
 {
 	t_ptoken	*initial_token;

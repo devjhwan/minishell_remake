@@ -1,10 +1,9 @@
 **/.objs/
 **/*.o
 **/*.d
-minishell
-*.swp
 **/*.swp
-.DS_Store
-a.out
 **/*.a
 /.vscode
+.DS_Store
+minishell
+a.out

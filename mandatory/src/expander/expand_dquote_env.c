@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 21:53:07 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 22:25:05 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/21 23:45:58 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ char	*expand_dquote_env(char *arg, char **envp)
 		if (arg[i] == '$')
 		{
 			new_arg = replace_env(arg, i, envp);
+			free(arg);
 			if (new_arg == NULL)
-				return (free(arg), NULL);
+				return (NULL);
 			arg = new_arg;
 		}
 	}

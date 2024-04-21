@@ -6,25 +6,31 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2024/04/21 22:07:20 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/22 00:50:07 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			:=minishell
 
 SRCDIR			:=./mandatory/src
-SRCS			:=main.c \
-				  free_cmds.c free_redirections.c \
-				  expand_dquote_env.c expand_node.c expand_singular_env.c \
-				  lexer.c parser.c syntax_analyzer.c expander.c \
-				  append_token.c check_token1.c check_token2.c \
+
+MAIN_SRCS		:=main.c
+COMMAND_SRCS	:=create_new_cmd.c free_cmds.c free_redirections.c \
+				  get_cmd_type.c print_cmds.c
+EXPANDER_SRCS	:=expand_dquote_env.c expand_node.c expand_singular_env.c
+PARSER_SRCS		:=lexer.c parser.c syntax_analyzer.c expander.c
+P_TOKEN_SRCS	:=append_token.c check_token1.c check_token2.c \
 				  create_new_token.c free_tokens.c print_tokens.c \
-				  push_back_token.c substr_argument1.c substr_argument2.c \
-				  create_parser_tree.c create_new_node.c free_tree.c \
+				  push_back_token.c substr_argument1.c substr_argument2.c 
+P_TREE_SRCS		:=create_parser_tree.c create_new_node.c free_tree.c \
 				  print_parser_tree.c skip_space_tokens.c parse_command.c \
-				  parse_content.c parse_argument.c parse_redirection.c \
-				  free_strarr.c print_error.c remove_quote.c \
+				  parse_content.c parse_argument.c parse_redirection.c
+UTILS_SRCS		:=free_strarr.c print_error.c remove_quote.c \
 				  search_environment.c check_environment.c
+				  
+SRCS			:=$(MAIN_SRCS) $(COMMAND_SRCS) $(EXPANDER_SRCS) \
+				  $(PARSER_SRCS) $(P_TOKEN_SRCS) $(P_TREE_SRCS) \
+				  $(UTILS_SRCS)
 
 OBJDIR			:=.objs
 OBJS			:=$(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
@@ -38,10 +44,10 @@ CFLAGS			:=-Wall -Werror -Wextra
 
 DEBUG			:=-fsanitize="address,undefined" -g
 
-# LDFLAGS			:=-L/home/linuxbrew/.linuxbrew/opt/readline/lib
-# CPPFLAGS		:=-I/home/linuxbrew/.linuxbrew/opt/readline/include
-LDFLAGS			:=-L${HOME}/homebrew/opt/readline/lib
-CPPFLAGS		:=-I${HOME}/homebrew/opt/readline/include
+LDFLAGS			:=-L/home/linuxbrew/.linuxbrew/opt/readline/lib
+CPPFLAGS		:=-I/home/linuxbrew/.linuxbrew/opt/readline/include
+# LDFLAGS			:=-L${HOME}/homebrew/opt/readline/lib
+# CPPFLAGS		:=-I${HOME}/homebrew/opt/readline/include
 
 LIBFT			:=libft/libft.a
 

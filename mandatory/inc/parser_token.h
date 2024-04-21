@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 16:36:05 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 19:13:33 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/21 23:59:58 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,13 @@ typedef struct s_token
 }	t_ptoken;
 
 t_ptoken	*lexer(char *line);
-int		syntax_analyzer(t_ptoken *tokens);
+int			syntax_analyzer(t_ptoken *tokens);
 
 t_ptoken	*create_new_token(t_tokentype t, char *arg);
-void	push_back_token(t_ptoken **tokens, t_ptoken *new_token);
-int		append_token(t_ptoken **tokens, char **line, t_tokentype t);
-void	free_tokens(t_ptoken *tokens);
-void	print_tokens(t_ptoken *tokens);
+void		push_back_token(t_ptoken **tokens, t_ptoken *new_token);
+int			append_token(t_ptoken **tokens, char **line, t_tokentype t);
+void		free_tokens(t_ptoken *tokens);
+void		print_tokens(t_ptoken *tokens);
+t_ptoken	*skip_space_tokens(t_ptoken *tokens);
 
 #endif

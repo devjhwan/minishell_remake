@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:30:53 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 21:48:21 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 00:00:07 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int			expander(t_ptree *tree, char **envp);
 
 t_ptree		*create_parser_tree(t_ptoken *tokens);
 t_ptree		*create_new_node(t_nodetype	t, char *arg);
-t_ptoken	*skip_space_tokens(t_ptoken *tokens);
 t_ptree		*parse_command(t_ptoken *tokens);
 t_ptree		*parse_content(t_ptoken **tokens);
 t_ptree		*parse_argument(t_ptoken **tokens);

@@ -6,7 +6,7 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2024/04/22 01:15:14 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/22 01:19:32 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,15 @@ $(OBJDIR)/%.o: 	$(SRCDIR)/%.c $(LIBFT) Makefile
 					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $< $(CPPFLAGS)
 					echo "(MINISHELL) COMPILING $@"
 
-$(OBJDIR)/%.o: 	$(SRCDIR)/**/%.c $(LIBFT) Makefile
+$(OBJDIR)/%.o: 	$(SRCDIR)/parser/%.c $(LIBFT) Makefile
+					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $< $(CPPFLAGS)
+					echo "(MINISHELL) COMPILING $@"
+
+$(OBJDIR)/%.o: 	$(SRCDIR)/parser/**/%.c $(LIBFT) Makefile
+					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $< $(CPPFLAGS)
+					echo "(MINISHELL) COMPILING $@"
+
+$(OBJDIR)/%.o: 	$(SRCDIR)/utils/%.c $(LIBFT) Makefile
 					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $< $(CPPFLAGS)
 					echo "(MINISHELL) COMPILING $@"
 

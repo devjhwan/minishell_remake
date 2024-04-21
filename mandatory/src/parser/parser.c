@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 16:39:38 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 20:45:01 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/21 21:49:27 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ t_cmd	*parser(char *line, char **envp)
 	free_tokens(tokens);
 	if (parser_tree == NULL)
 		return (NULL);
+	print_parser_tree(parser_tree);
+	if (expander(parser_tree, envp) == 0)
+		return (free_tree(parser_tree), NULL);
+	printf("\n");
 	print_parser_tree(parser_tree);
 	return (NULL);
 }

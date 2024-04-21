@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   remove_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 22:01:52 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 21:06:42 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 21:06:56 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "libft.h"
 
-typedef enum e_errtype
+char	*remove_quote(char *arg)
 {
-	UNEXPECTED_TOKEN,
-	AMBIGUOUS_REDIRECT
-}	t_errtype;
+	char	*new_arg;
 
-char	*remove_quote(char *arg);
-int		check_environment(char *arg, char **envp);
-char	*search_environment(char *arg, char **envp);
-void	print_error(t_errtype t, char *arg1, char *arg2);
-void	free_strarr(char **strarr);
-
-#endif
+	new_arg = ft_substr(arg, 1, ft_strlen(arg) - 2);
+	return (new_arg);
+}

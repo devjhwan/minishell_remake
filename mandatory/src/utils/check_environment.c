@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   check_environment.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 22:01:52 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/21 21:56:48 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "libft.h"
 
-typedef enum e_errtype
+int	check_environment(char *arg, char **envp)
 {
-	UNEXPECTED_TOKEN,
-	AMBIGUOUS_REDIRECT
-}	t_errtype;
+	int	i;
+	int	arg_len;
 
-char	*remove_quote(char *arg);
-int		check_environment(char *arg, char **envp);
-char	*search_environment(char *arg, char **envp);
-void	print_error(t_errtype t, char *arg1, char *arg2);
-void	free_strarr(char **strarr);
-
-#endif
+	i = 0;
+	arg_len = ft_strlen(arg);
+	if (arg_len == 0)
+		return (1);
+	if (arg[0] == '\'' || arg[0] == '\"')
+		return (1);
+	while (envp[i] != NULL)
+	{
+		if (ft_strncmp(envp[i], arg, arg_len) == 0 && envp[i][arg_len] == '=')
+			return (1);
+		i++;
+	}
+	return (0);
+}

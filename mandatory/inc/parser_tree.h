@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:30:53 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 20:45:48 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/21 21:48:21 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@
 typedef enum s_nodetype
 {
 	COMMAND,
-	CONTENT_L,
 	CONTENT,
-	ARGUMENT_L,
-	ARGUMENT_STR,
 	ARGUMENT,
 	REDIRECTION
 }	t_nodetype;
@@ -34,6 +31,8 @@ typedef struct s_ptree
 	struct s_ptree	*left;
 	struct s_ptree	*right;
 }	t_ptree;
+
+int			expander(t_ptree *tree, char **envp);
 
 t_ptree		*create_parser_tree(t_ptoken *tokens);
 t_ptree		*create_new_node(t_nodetype	t, char *arg);

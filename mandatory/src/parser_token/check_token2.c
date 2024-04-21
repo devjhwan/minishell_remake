@@ -1,24 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   check_token2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 17:22:39 by junghwle          #+#    #+#             */
-/*   Updated: 2023/05/22 16:36:26 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 17:25:02 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 17:46:04 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+int	_isquote(char *line)
 {
-	void	*ptr;
+	if (*line == '\'')
+		return (1);
+	else
+		return (0);
+}
 
-	ptr = malloc(size * count);
-	if (ptr == NULL)
-		return (NULL);
-	ft_bzero(ptr, size * count);
-	return (ptr);
+int	_isdquote(char *line)
+{
+	if (*line == '\"')
+		return (1);
+	else
+		return (0);
+}
+
+int	_isspace(char *line)
+{
+	if (*line == ' ')
+		return (1);
+	else
+		return (0);
+}
+
+int	_isargument(char *line)
+{
+	if (ft_strchr("|$<> \'\"", *line) == NULL)
+		return (1);
+	else
+		return (0);
 }

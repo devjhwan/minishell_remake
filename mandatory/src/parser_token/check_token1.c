@@ -1,24 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   check_token1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 17:22:39 by junghwle          #+#    #+#             */
-/*   Updated: 2023/05/22 16:36:26 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 17:21:37 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 17:31:26 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+int	_ispipe(char *line)
 {
-	void	*ptr;
+	if (*line == '|')
+		return (1);
+	else
+		return (0);
+}
 
-	ptr = malloc(size * count);
-	if (ptr == NULL)
-		return (NULL);
-	ft_bzero(ptr, size * count);
-	return (ptr);
+int	_isredir(char *line)
+{
+	if (ft_strncmp(line, "<<", 2) == 0)
+		return (1);
+	else if (ft_strncmp(line, ">>", 2) == 0)
+		return (1);
+	else if (ft_strncmp(line, "<", 1) == 0)
+		return (1);
+	else if (ft_strncmp(line, ">", 1) == 0)
+		return (1);
+	else
+		return (0);
+}
+
+int	_isenv(char *line)
+{
+	if (*line == '$')
+		return (1);
+	else
+		return (0);
 }

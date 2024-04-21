@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   skip_space_tokens.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 17:22:39 by junghwle          #+#    #+#             */
-/*   Updated: 2023/05/22 16:36:26 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 20:00:53 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 20:01:02 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parser_tree.h"
 
-void	*ft_calloc(size_t count, size_t size)
+t_ptoken	*skip_space_tokens(t_ptoken *tokens)
 {
-	void	*ptr;
-
-	ptr = malloc(size * count);
-	if (ptr == NULL)
-		return (NULL);
-	ft_bzero(ptr, size * count);
-	return (ptr);
+	while (tokens != NULL)
+	{
+		if (tokens->t != SP)
+			return (tokens);
+		tokens = tokens->next;
+	}
+	return (NULL);
 }

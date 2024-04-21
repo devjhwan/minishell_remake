@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   search_environment.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 17:22:39 by junghwle          #+#    #+#             */
-/*   Updated: 2023/05/22 16:36:26 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 21:51:23 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 21:51:30 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+char	*search_environment(char *arg, char **envp)
 {
-	void	*ptr;
+	int	i;
+	int	arg_len;
 
-	ptr = malloc(size * count);
-	if (ptr == NULL)
-		return (NULL);
-	ft_bzero(ptr, size * count);
-	return (ptr);
+	i = 0;
+	arg_len = ft_strlen(arg);
+	if (arg_len == 0)
+		return (ft_strdup("$"));
+	while (envp[i] != NULL)
+	{
+		if (ft_strncmp(envp[i], arg, arg_len) == 0 && envp[i][arg_len] == '=')
+			return (ft_substr(envp[i], arg_len + 1, ft_strlen(envp[i])));
+		i++;
+	}
+	return (ft_strdup(""));
 }

@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 17:22:39 by junghwle          #+#    #+#             */
-/*   Updated: 2023/05/22 16:36:26 by junghwle         ###   ########.fr       */
+/*   Created: 2023/05/04 21:43:03 by junghwle          #+#    #+#             */
+/*   Updated: 2023/05/09 15:26:19 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <unistd.h>
 
-void	*ft_calloc(size_t count, size_t size)
+static void	ft_putnbr_ret(int n)
 {
-	void	*ptr;
+	char	c;
 
-	ptr = malloc(size * count);
-	if (ptr == NULL)
-		return (NULL);
-	ft_bzero(ptr, size * count);
-	return (ptr);
+	if (n > 9)
+		ft_putnbr_ret(n / 10);
+	c = n % 10 + '0';
+	write(1, &c, 1);
+}
+
+void	ft_putnbr(int n)
+{
+	if (n == -2147483648)
+		write(1, "-2147483648", 11);
+	else
+	{
+		if (n < 0)
+		{
+			write(1, "-", 1);
+			n *= -1;
+		}
+		ft_putnbr_ret(n);
+	}
 }

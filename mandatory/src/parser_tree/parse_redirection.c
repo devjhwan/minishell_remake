@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   parse_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 17:22:39 by junghwle          #+#    #+#             */
-/*   Updated: 2023/05/22 16:36:26 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 20:08:35 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 20:44:23 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parser_tree.h"
 
-void	*ft_calloc(size_t count, size_t size)
+t_ptree	*parse_redirection(t_ptoken **tokens)
 {
-	void	*ptr;
+	t_ptree	*redirection;
 
-	ptr = malloc(size * count);
-	if (ptr == NULL)
+	redirection = create_new_node(REDIRECTION, (*tokens)->arg);
+	if (redirection == NULL)
 		return (NULL);
-	ft_bzero(ptr, size * count);
-	return (ptr);
+	*tokens = skip_space_tokens((*tokens)->next);
+	redirection->left = parse_argument(tokens);
+	if (redirection->left == NULL)
+		return (free_tree(redirection), NULL);
+	return (redirection);
 }

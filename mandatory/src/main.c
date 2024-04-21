@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 17:22:39 by junghwle          #+#    #+#             */
-/*   Updated: 2023/05/22 16:36:26 by junghwle         ###   ########.fr       */
+/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 17:30:42 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parser.h"
 
-void	*ft_calloc(size_t count, size_t size)
+int	main(int args, char **argv, char **envp)
 {
-	void	*ptr;
+	t_cmd	*cmds;
 
-	ptr = malloc(size * count);
-	if (ptr == NULL)
-		return (NULL);
-	ft_bzero(ptr, size * count);
-	return (ptr);
+	if (args < 2)
+		return (0);
+	cmds = parser(argv[1], envp);
+	free_cmds(&cmds);
+	return (0);
 }

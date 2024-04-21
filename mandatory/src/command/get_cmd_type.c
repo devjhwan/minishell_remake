@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   get_cmd_type.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 17:22:39 by junghwle          #+#    #+#             */
-/*   Updated: 2023/05/22 16:36:26 by junghwle         ###   ########.fr       */
+/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/22 00:23:19 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "command.h"
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+t_cmdtype	get_cmd_type(char *arg)
 {
-	void	*ptr;
-
-	ptr = malloc(size * count);
-	if (ptr == NULL)
-		return (NULL);
-	ft_bzero(ptr, size * count);
-	return (ptr);
+	if (ft_strncmp(arg, "|", 2) == 0)
+		return (P);
+	else
+		return (ERR);
 }

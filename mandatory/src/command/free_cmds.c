@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   free_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 17:22:39 by junghwle          #+#    #+#             */
-/*   Updated: 2023/05/22 16:36:26 by junghwle         ###   ########.fr       */
+/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 16:45:35 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "command.h"
+#include "utils.h"
+#include <stdlib.h>
 
-void	*ft_calloc(size_t count, size_t size)
+void	free_cmds(t_cmd **cmds)
 {
-	void	*ptr;
+	t_cmd	*cmd;
 
-	ptr = malloc(size * count);
-	if (ptr == NULL)
-		return (NULL);
-	ft_bzero(ptr, size * count);
-	return (ptr);
+	cmd = *cmds;
+	while (cmd != NULL)
+	{
+		*cmds = cmd->next;
+		if (cmd->args != NULL)
+			free_strarr(cmd->args);
+		cmd->args = NULL;
+		if (cmd->redirs != NULL)
+			free_redirections(cmd->redirs);
+		cmd->redirs = NULL;
+		cmd->next = NULL;
+		free(cmd);
+		cmd = *cmds;
+	}
 }

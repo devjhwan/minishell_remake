@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   create_new_node.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 17:22:39 by junghwle          #+#    #+#             */
-/*   Updated: 2023/05/22 16:36:26 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 18:45:41 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 20:20:10 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "parser_tree.h"
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+t_ptree	*create_new_node(t_nodetype	t, char *arg)
 {
-	void	*ptr;
+	t_ptree	*new_node;
 
-	ptr = malloc(size * count);
-	if (ptr == NULL)
+	new_node = (t_ptree *)malloc(sizeof(t_ptree));
+	if (new_node == NULL)
 		return (NULL);
-	ft_bzero(ptr, size * count);
-	return (ptr);
+	new_node->t = t;
+	if (arg == NULL)
+		new_node->arg = NULL;
+	else
+	{
+		new_node->arg = ft_strdup(arg);
+		if (new_node->arg == NULL)
+			return (free(new_node), NULL);
+	}
+	new_node->left = NULL;
+	new_node->right = NULL;
+	return (new_node);
 }

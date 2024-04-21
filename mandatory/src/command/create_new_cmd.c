@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   create_new_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 17:22:39 by junghwle          #+#    #+#             */
-/*   Updated: 2023/05/22 16:36:26 by junghwle         ###   ########.fr       */
+/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 23:55:38 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "command.h"
+#include <stdlib.h>
 
-void	*ft_calloc(size_t count, size_t size)
+t_cmd	*create_new_cmd(t_cmdtype t)
 {
-	void	*ptr;
+	t_cmd	*cmd;
 
-	ptr = malloc(size * count);
-	if (ptr == NULL)
+	if (t == ERR)
 		return (NULL);
-	ft_bzero(ptr, size * count);
-	return (ptr);
+	cmd = (t_cmd *)malloc(sizeof(t_cmd));
+	if (cmd == NULL)
+		return (NULL);
+	cmd->t = t;
+	cmd->args = NULL;
+	cmd->redirs = NULL;
+	cmd->next = NULL;
+	return (cmd);
 }

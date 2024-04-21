@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   free_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 17:22:39 by junghwle          #+#    #+#             */
-/*   Updated: 2023/05/22 16:36:26 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 18:50:43 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 18:52:04 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parser_tree.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	free_tree(t_ptree *tree)
 {
-	void	*ptr;
-
-	ptr = malloc(size * count);
-	if (ptr == NULL)
-		return (NULL);
-	ft_bzero(ptr, size * count);
-	return (ptr);
+	if (tree != NULL)
+	{
+		if (tree->left != NULL)
+			free_tree(tree->left);
+		tree->left = NULL;
+		if (tree->right != NULL)
+			free_tree(tree->right);
+		tree->right = NULL;
+		free(tree->arg);
+		tree->arg = NULL;
+		free(tree);
+	}
 }

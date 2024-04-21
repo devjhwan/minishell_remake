@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   push_back_token.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 17:22:39 by junghwle          #+#    #+#             */
-/*   Updated: 2023/05/22 16:36:26 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 17:15:44 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 18:37:45 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parser_token.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	push_back_token(t_ptoken **tokens, t_ptoken *new_token)
 {
-	void	*ptr;
+	t_ptoken	*tmp;
 
-	ptr = malloc(size * count);
-	if (ptr == NULL)
-		return (NULL);
-	ft_bzero(ptr, size * count);
-	return (ptr);
+	if (*tokens == NULL)
+		*tokens = new_token;
+	else
+	{
+		tmp = *tokens;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new_token;
+		new_token->prev = tmp;
+	}
 }

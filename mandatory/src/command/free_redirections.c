@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   free_redirections.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 17:22:39 by junghwle          #+#    #+#             */
-/*   Updated: 2023/05/22 16:36:26 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 16:45:41 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 17:26:38 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "command.h"
+#include <stdlib.h>
 
-void	*ft_calloc(size_t count, size_t size)
+void	free_redirections(t_redir *redir)
 {
-	void	*ptr;
+	t_redir	*tmp;
 
-	ptr = malloc(size * count);
-	if (ptr == NULL)
-		return (NULL);
-	ft_bzero(ptr, size * count);
-	return (ptr);
+	tmp = redir;
+	while (tmp != NULL)
+	{
+		redir = tmp->next;
+		free(tmp->filename);
+		tmp->filename = NULL;
+		tmp->next = NULL;
+		free(tmp);
+		tmp = redir;
+	}
 }

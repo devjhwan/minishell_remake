@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 17:22:39 by junghwle          #+#    #+#             */
-/*   Updated: 2023/05/22 16:36:26 by junghwle         ###   ########.fr       */
+/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 22:01:52 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef UTILS_H
+# define UTILS_H
 
-void	*ft_calloc(size_t count, size_t size)
+typedef enum e_errtype
 {
-	void	*ptr;
+	UNEXPECTED_TOKEN,
+	AMBIGUOUS_REDIRECT
+}	t_errtype;
 
-	ptr = malloc(size * count);
-	if (ptr == NULL)
-		return (NULL);
-	ft_bzero(ptr, size * count);
-	return (ptr);
-}
+char	*remove_quote(char *arg);
+int		check_environment(char *arg, char **envp);
+char	*search_environment(char *arg, char **envp);
+void	print_error(t_errtype t, char *arg1, char *arg2);
+void	free_strarr(char **strarr);
+
+#endif

@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   expand_singular_env.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 17:22:39 by junghwle          #+#    #+#             */
-/*   Updated: 2023/05/22 16:36:26 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 21:52:18 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 21:52:43 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "utils.h"
+#include <stdlib.h>
 
-void	*ft_calloc(size_t count, size_t size)
+char	*expand_singular_env(char *arg, char **envp)
 {
-	void	*ptr;
-
-	ptr = malloc(size * count);
-	if (ptr == NULL)
+	if (arg == NULL)
 		return (NULL);
-	ft_bzero(ptr, size * count);
-	return (ptr);
+	if (arg[1] == '\'' || arg[1] == '\"')
+		return (remove_quote(arg + 1));
+	else
+		return (search_environment(arg + 1, envp));
 }

@@ -1,10 +1,11 @@
-**/objs/
+**/.objs/
 **/*.o
 **/*.d
-minishell
-*.swp
 **/*.swp
+**/*.a
+/.vscode
 .DS_Store
+minishell
 a.out
 /.vscode
 **/.a

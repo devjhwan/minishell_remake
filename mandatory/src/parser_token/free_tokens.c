@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_arguments.c                                   :+:      :+:    :+:   */
+/*   free_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/19 17:32:34 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 16:50:43 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 18:37:45 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include <stdlib.h>
+#include "parser_token.h"
 
-void	free_arguments(t_arglist **args)
+void	free_tokens(t_ptoken *tokens)
 {
-	t_arglist	*arg;
+	t_ptoken	*deltoken;
 
-	arg = *args;
-	while (arg != NULL)
+	while (tokens != NULL)
 	{
-		*args = arg->next;
-		free(arg->arg);
-		arg->arg = NULL;
-		free(arg);
-		arg = *args;
+		deltoken = tokens;
+		tokens = tokens->next;
+		free(deltoken->arg);
+		deltoken->arg = NULL;
+		deltoken->next = NULL;
+		free(deltoken);
 	}
 }

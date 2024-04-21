@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd_type.c                                     :+:      :+:    :+:   */
+/*   push_back_token.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 02:07:29 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 17:15:44 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 18:37:45 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "command.h"
-#include "libft.h"
+#include "parser_token.h"
 
-t_cmdtype	get_cmd_type(char **arg)
+void	push_back_token(t_ptoken **tokens, t_ptoken *new_token)
 {
-	if (ft_strncmp(*arg, "|", 1) == 0)
-	{
-		*arg = *arg + 1;
-		return (P);
-	}
+	t_ptoken	*tmp;
+
+	if (*tokens == NULL)
+		*tokens = new_token;
 	else
-		return (PIPE_ERR);
+	{
+		tmp = *tokens;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new_token;
+		new_token->prev = tmp;
+	}
 }

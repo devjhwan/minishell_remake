@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_arg.c                                           :+:      :+:    :+:   */
+/*   parse_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 03:19:59 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 20:08:35 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 20:44:23 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "parser_tree.h"
 
-int	is_arg(char *line)
+t_ptree	*parse_redirection(t_ptoken **tokens)
 {
-	if (*line == '\0' || is_redir(line) || is_pipe(line))
-		return (0);
-	return (1);
+	t_ptree	*redirection;
+
+	redirection = create_new_node(REDIRECTION, (*tokens)->arg);
+	if (redirection == NULL)
+		return (NULL);
+	*tokens = skip_space_tokens((*tokens)->next);
+	redirection->left = parse_argument(tokens);
+	if (redirection->left == NULL)
+		return (free_tree(redirection), NULL);
+	return (redirection);
 }

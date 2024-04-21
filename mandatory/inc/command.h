@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 05:05:26 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/21 16:45:56 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 
 typedef enum e_rdtype
 {
-	IN, OUT, IN2, OUT2, RD_ERR
+	IN,
+	OUT,
+	IN2,
+	OUT2
 }	t_rdtype;
 
 typedef struct s_redir
@@ -27,7 +30,7 @@ typedef struct s_redir
 
 typedef enum e_cmdtype
 {
-	P, PIPE_ERR
+	P
 }	t_cmdtype;
 
 typedef struct s_cmd
@@ -38,10 +41,7 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }	t_cmd;
 
-t_cmd		*new_cmd(t_cmdtype	t);
-t_cmdtype	get_cmd_type(char **arg);
-void		free_cmds(t_cmd **cmds);
-void		print_command(t_cmd *cmds);
-t_redir		*new_redir(t_rdtype t, char *filename);
+void	free_redirections(t_redir *redir);
+void	free_cmds(t_cmd **cmds);
 
 #endif

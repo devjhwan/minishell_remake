@@ -6,19 +6,23 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2024/04/20 14:52:09 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/21 20:35:36 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			:=minishell
 
 SRCDIR			:=./mandatory/src
-SRCS			:=main.c parser.c new_cmd.c get_cmd_type.c free_cmds.c \
-				  is_pipe.c is_redir.c add_argument.c count_arg_length.c \
-				  free_arguments.c set_argument.c set_redir.c print_command.c \
-				  print_error.c is_arg.c remove_quote.c print_redir_error.c \
-				  expand_env.c search_env.c new_redir.c check_env.c \
-				  free_split.c
+SRCS			:=main.c \
+				  lexer.c parser.c syntax_analyzer.c\
+				  free_cmds.c free_redirections.c \
+				  append_token.c check_token1.c check_token2.c \
+				  create_new_token.c free_tokens.c print_tokens.c \
+				  push_back_token.c substr_argument1.c substr_argument2.c \
+				  create_parser_tree.c create_new_node.c free_tree.c \
+				  print_parser_tree.c skip_space_tokens.c parse_command.c \
+				  parse_content.c parse_argument.c parse_redirection.c \
+				  free_strarr.c print_error.c
 
 OBJDIR			:=.objs
 OBJS			:=$(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
@@ -30,12 +34,12 @@ INC				:=-I./mandatory/inc -I./libft
 CC				:=cc
 CFLAGS			:=-Wall -Werror -Wextra
 
-# DEBUG			:=-fsanitize="address,undefined" -g
+DEBUG			:=-fsanitize="address,undefined" -g
 
-LDFLAGS			:=-L/home/linuxbrew/.linuxbrew/opt/readline/lib
-CPPFLAGS		:=-I/home/linuxbrew/.linuxbrew/opt/readline/include
-# LDFLAGS			:=-L${HOME}/homebrew/opt/readline/lib
-# CPPFLAGS		:=-I${HOME}/homebrew/opt/readline/include
+# LDFLAGS			:=-L/home/linuxbrew/.linuxbrew/opt/readline/lib
+# CPPFLAGS		:=-I/home/linuxbrew/.linuxbrew/opt/readline/include
+LDFLAGS			:=-L${HOME}/homebrew/opt/readline/lib
+CPPFLAGS		:=-I${HOME}/homebrew/opt/readline/include
 
 LIBFT			:=libft/libft.a
 

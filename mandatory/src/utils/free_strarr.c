@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_env.c                                        :+:      :+:    :+:   */
+/*   free_strarr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 15:00:23 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 16:42:36 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 17:27:55 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
 
-int	check_env(char *arg, char **envp)
+void	free_strarr(char **strarr)
 {
 	int	i;
-	int	arg_len;
 
 	i = 0;
-	arg_len = ft_strlen(arg);
-	if (arg_len == 0)
-		return (1);
-	if (arg[0] == '\'' || arg[0] == '\"')
-		return (1);
-	while (envp[i] != NULL)
+	while (strarr[i] != NULL)
 	{
-		if (ft_strncmp(envp[i], arg, arg_len) == 0 && envp[i][arg_len] == '=')
-			return (1);
+		free(strarr[i]);
+		strarr[i] = NULL;
 		i++;
 	}
-	return (0);
+	free(strarr);
 }

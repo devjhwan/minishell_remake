@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_split.c                                       :+:      :+:    :+:   */
+/*   skip_space_tokens.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 14:43:42 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 20:00:53 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 20:01:02 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "parser_tree.h"
 
-void	free_split(char **split)
+t_ptoken	*skip_space_tokens(t_ptoken *tokens)
 {
-	int	i;
-
-	i = 0;
-	while (split[i] != NULL)
-		free(split[i++]);
-	free(split);
+	while (tokens != NULL)
+	{
+		if (tokens->t != SP)
+			return (tokens);
+		tokens = tokens->next;
+	}
+	return (NULL);
 }

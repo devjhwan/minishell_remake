@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parse_argument.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/21 16:39:38 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 20:45:01 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 20:08:35 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 20:29:20 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include "parser_token.h"
 #include "parser_tree.h"
 
-t_cmd	*parser(char *line, char **envp)
+t_ptree	*parse_argument(t_ptoken **tokens)
 {
-	t_ptoken	*tokens;
-	t_ptree	*parser_tree;
+	t_ptree	*argument;
 
-	(void)envp;
-	tokens = lexer(line);
-	if (tokens == NULL)
+	argument = create_new_node(ARGUMENT, (*tokens)->arg);
+	if (argument == NULL)
 		return (NULL);
-	if (syntax_analyzer(tokens) == 0)
-		return (free_tokens(tokens), NULL);
-	print_tokens(tokens);
-	parser_tree = create_parser_tree(tokens);
-	free_tokens(tokens);
-	if (parser_tree == NULL)
-		return (NULL);
-	print_parser_tree(parser_tree);
-	return (NULL);
+	*tokens = (*tokens)->next;
+	if (*tokens != NULL && ((*tokens)->t == ARG || (*tokens)->t == ENV || \
+							(*tokens)->t == SQ || (*tokens)->t == DQ))
+	{
+		argument->right = parse_argument(tokens);
+		if (argument->right == NULL)
+			return (free_tree(argument), NULL);
+	}
+	return (argument);
 }

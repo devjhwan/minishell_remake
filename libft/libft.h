@@ -6,14 +6,14 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:33:17 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 02:41:55 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/21 18:29:14 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-#include <stdlib.h>
+# include <stdlib.h>
 
 void	ft_putstrerr(char *str);
 void	ft_putnbr(int nb);

@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_redir.c                                         :+:      :+:    :+:   */
+/*   free_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 02:08:04 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 18:50:43 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 18:52:04 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include "libft.h"
+#include "parser_tree.h"
 
-int	is_redir(char *arg)
+void	free_tree(t_ptree *tree)
 {
-	if (ft_strncmp(arg, "<<", 2) == 0 || ft_strncmp(arg, ">>", 2) == 0 || \
-		ft_strncmp(arg, "<", 1) == 0 || ft_strncmp(arg, ">", 1) == 0)
-		return (1);
-	return (0);
+	if (tree != NULL)
+	{
+		if (tree->left != NULL)
+			free_tree(tree->left);
+		tree->left = NULL;
+		if (tree->right != NULL)
+			free_tree(tree->right);
+		tree->right = NULL;
+		free(tree->arg);
+		tree->arg = NULL;
+		free(tree);
+	}
 }

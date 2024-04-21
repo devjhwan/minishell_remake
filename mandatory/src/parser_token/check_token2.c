@@ -1,27 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_redir.c                                        :+:      :+:    :+:   */
+/*   check_token2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 03:39:19 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 17:25:02 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 17:46:04 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "command.h"
-#include <stdlib.h>
+#include "libft.h"
 
-t_redir	*new_redir(t_rdtype t, char *filename)
+int	_isquote(char *line)
 {
-	t_redir	*redir;
+	if (*line == '\'')
+		return (1);
+	else
+		return (0);
+}
 
-	redir = (t_redir *)malloc(sizeof(t_redir));
-	if (redir == NULL)
-		return (NULL);
-	redir->t = t;
-	redir->filename = filename;
-	redir->next = NULL;
-	return (redir);
+int	_isdquote(char *line)
+{
+	if (*line == '\"')
+		return (1);
+	else
+		return (0);
+}
+
+int	_isspace(char *line)
+{
+	if (*line == ' ')
+		return (1);
+	else
+		return (0);
+}
+
+int	_isargument(char *line)
+{
+	if (ft_strchr("|$<> \'\"", *line) == NULL)
+		return (1);
+	else
+		return (0);
 }

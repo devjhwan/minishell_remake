@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search_env.c                                       :+:      :+:    :+:   */
+/*   create_new_node.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 13:56:44 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 18:45:41 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 20:20:10 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "parser_tree.h"
 #include "libft.h"
-#include <stdio.h>
-#include <stdlib.h>
 
-char	*search_env(char *arg, char **envp)
+t_ptree	*create_new_node(t_nodetype	t, char *arg)
 {
-	int	i;
-	int	arg_len;
+	t_ptree	*new_node;
 
-	i = 0;
-	printf("%s\n", arg);
-	arg_len = ft_strlen(arg);
-	if (arg_len == 0)
-		return (ft_strdup("$"));
-	while (envp[i] != NULL)
+	new_node = (t_ptree *)malloc(sizeof(t_ptree));
+	if (new_node == NULL)
+		return (NULL);
+	new_node->t = t;
+	if (arg == NULL)
+		new_node->arg = NULL;
+	else
 	{
-		if (ft_strncmp(envp[i], arg, arg_len) == 0 && envp[i][arg_len] == '=')
-			return (ft_substr(envp[i], arg_len + 1, ft_strlen(envp[i])));
-		i++;
+		new_node->arg = ft_strdup(arg);
+		if (new_node->arg == NULL)
+			return (free(new_node), NULL);
 	}
-	return (ft_strdup(""));
+	new_node->left = NULL;
+	new_node->right = NULL;
+	return (new_node);
 }

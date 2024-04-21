@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_pipe.c                                          :+:      :+:    :+:   */
+/*   free_redirections.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 02:07:13 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 16:45:41 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 17:26:38 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include "libft.h"
+#include "command.h"
+#include <stdlib.h>
 
-int	is_pipe(char *arg)
+void	free_redirections(t_redir *redir)
 {
-	if (ft_strncmp(arg, "|", 1) == 0)
-		return (1);
-	return (0);
+	t_redir	*tmp;
+
+	tmp = redir;
+	while (tmp != NULL)
+	{
+		redir = tmp->next;
+		free(tmp->filename);
+		tmp->filename = NULL;
+		tmp->next = NULL;
+		free(tmp);
+		tmp = redir;
+	}
 }

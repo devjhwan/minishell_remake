@@ -1,39 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   remove_quote.c                                     :+:      :+:    :+:   */
+/*   check_token1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/20 04:40:18 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 17:21:37 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/21 17:31:26 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*remove_quote(char *arg)
+int	_ispipe(char *line)
 {
-	size_t	i;
+	if (*line == '|')
+		return (1);
+	else
+		return (0);
+}
 
-	if (arg[0] == '\'')
-	{
-		i = 1;
-		while (arg[i] != '\0' && arg[i] != '\'')
-			i++;
-		if (arg[i] == '\'')
-			arg[i] = '\0';
-		arg = ft_strdup(arg + 1);
-	}
-	else if (arg[0] == '\"')
-	{
-		i = 1;
-		while (arg[i] != '\0' && arg[i] != '\"')
-			i++;
-		if (arg[i] == '\"')
-			arg[i] = '\0';
-		arg = ft_strdup(arg + 1);
-	}
-	return (arg);
+int	_isredir(char *line)
+{
+	if (ft_strncmp(line, "<<", 2) == 0)
+		return (1);
+	else if (ft_strncmp(line, ">>", 2) == 0)
+		return (1);
+	else if (ft_strncmp(line, "<", 1) == 0)
+		return (1);
+	else if (ft_strncmp(line, ">", 1) == 0)
+		return (1);
+	else
+		return (0);
+}
+
+int	_isenv(char *line)
+{
+	if (*line == '$')
+		return (1);
+	else
+		return (0);
 }

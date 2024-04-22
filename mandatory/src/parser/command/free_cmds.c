@@ -6,13 +6,12 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 16:45:35 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 02:01:57 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command.h"
 #include "utils.h"
-#include <stdlib.h>
 
 void	free_cmds(t_cmd **cmds)
 {

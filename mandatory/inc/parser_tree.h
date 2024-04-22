@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:30:53 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 01:11:49 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 01:59:59 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "parser_token.h"
 # include "libft.h"
+# include <stdlib.h>
 
 typedef enum s_nodetype
 {

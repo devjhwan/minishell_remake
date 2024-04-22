@@ -6,12 +6,11 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 16:45:41 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 17:26:38 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 02:01:56 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command.h"
-#include <stdlib.h>
 
 void	free_redirections(t_redir *redir)
 {

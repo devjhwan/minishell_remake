@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_new_cmd.c                                   :+:      :+:    :+:   */
+/*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 02:01:59 by junghwle         ###   ########.fr       */
+/*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/22 02:07:38 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "command.h"
+#ifndef EXECUTOR_H
+# define EXECUTOR_H
 
-t_cmd	*create_new_cmd(t_cmdtype t)
+# include "command.h"
+# include <stdlib.h>
+
+typedef struct s_executor
 {
-	t_cmd	*cmd;
+	char	*args;
+	t_redir	*in;
+	t_redir	*out;
+}	t_executor;
 
-	if (t == ERR)
-		return (NULL);
-	cmd = (t_cmd *)malloc(sizeof(t_cmd));
-	if (cmd == NULL)
-		return (NULL);
-	cmd->t = t;
-	cmd->args = NULL;
-	cmd->redirs = NULL;
-	cmd->next = NULL;
-	return (cmd);
-}
+void	free_executor(t_executor **exec)
+
+#endif

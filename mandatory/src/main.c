@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 01:14:55 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 01:31:12 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@
 
 int	main(int args, char **argv, char **envp)
 {
-	t_sehll	shell;
+	t_shell	shell;
 	char	*str;
 
 	(void) args;
 	(void) argv;
+	shell.env = envp;
 	while (1)
 	{
 		set_default_minishell_signal();
@@ -38,6 +39,7 @@ int	main(int args, char **argv, char **envp)
 			continue ;
 		rollback_terminal_setting();
 		set_execution_signal();
+		execute(&shell);
 		free_cmds(&shell.cmds);
 		shell.cmds = NULL;
 	}

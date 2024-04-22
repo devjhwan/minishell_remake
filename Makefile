@@ -6,7 +6,7 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2024/04/22 01:19:32 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/22 01:45:31 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,11 @@ P_TREE_SRCS		:=create_parser_tree.c create_new_node.c free_tree.c \
 				  join_tree_arguments.c parse_tree_to_cmds.c
 UTILS_SRCS		:=free_strarr.c print_error.c remove_quote.c \
 				  search_environment.c check_environment.c
+EXECUTOR_SRCS	:=execute.c
 				  
 SRCS			:=$(MAIN_SRCS) $(COMMAND_SRCS) $(EXPANDER_SRCS) \
 				  $(PARSER_SRCS) $(P_TOKEN_SRCS) $(P_TREE_SRCS) \
-				  $(UTILS_SRCS)
+				  $(UTILS_SRCS) $(EXECUTOR_SRCS)
 
 OBJDIR			:=.objs
 OBJS			:=$(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
@@ -44,7 +45,7 @@ INC				:=-I./mandatory/inc -I./libft
 CC				:=cc
 CFLAGS			:=-Wall -Werror -Wextra
 
-DEBUG			:=-fsanitize="address,undefined" -g
+# DEBUG			:=-fsanitize="address,undefined" -g
 
 LDFLAGS			:=-L/home/linuxbrew/.linuxbrew/opt/readline/lib
 CPPFLAGS		:=-I/home/linuxbrew/.linuxbrew/opt/readline/include
@@ -73,6 +74,10 @@ $(OBJDIR)/%.o: 	$(SRCDIR)/parser/**/%.c $(LIBFT) Makefile
 					echo "(MINISHELL) COMPILING $@"
 
 $(OBJDIR)/%.o: 	$(SRCDIR)/utils/%.c $(LIBFT) Makefile
+					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $< $(CPPFLAGS)
+					echo "(MINISHELL) COMPILING $@"
+
+$(OBJDIR)/%.o: 	$(SRCDIR)/executor/%.c $(LIBFT) Makefile
 					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $< $(CPPFLAGS)
 					echo "(MINISHELL) COMPILING $@"
 

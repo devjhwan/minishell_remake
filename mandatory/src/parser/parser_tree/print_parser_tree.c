@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 19:14:32 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 21:48:48 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 11:58:33 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,5 @@ static void	print_node(t_ptree *node, int depth)
 void	print_parser_tree(t_ptree *tree)
 {
 	print_node(tree, 0);
+	printf("\n");
 }

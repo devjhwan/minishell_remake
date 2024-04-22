@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 02:07:33 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 11:32:47 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_executor(t_executor **exec)
 {
 	if (*exec != NULL)
 	{
-		free_strarr((*exec)->args);
+		free_strarray((*exec)->args);
 		(*exec)->args = NULL;
 		free_redirections((*exec)->in);
 		(*exec)->in = NULL;

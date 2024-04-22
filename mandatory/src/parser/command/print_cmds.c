@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 00:48:29 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 11:58:44 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,5 @@ void	print_command(t_cmd *cmds)
 		print_redirections(cmds->redirs);
 		cmds = cmds->next;
 	}
+	printf("\n");
 }

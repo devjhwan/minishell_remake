@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/19 17:42:11 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 11:40:48 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	execute(t_shell *shell)
 		exec = create_new_executor(cmds, shell->env);
 		if (exec != NULL)
 		{
+			print_executor(exec);
 			free_executor(&exec);
 		}
 		cmds = cmds->next;

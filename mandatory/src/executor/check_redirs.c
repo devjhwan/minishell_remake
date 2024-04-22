@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 11:20:03 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 11:59:21 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ static int	check_file_in(char *filename)
 		return (print_error(NO_FILE, filename, NULL), 0);
 	if (access(filename, R_OK) != 0)
 		return (print_error(PERMISSION_DENIED, filename, NULL), 0);
+	return (1);
 }
 
 static int	check_file_heredoc(char *endstr)
 {
 	int		fd;
 	char	*buffer;
-	int		endstr_len;
+	size_t	endstr_len;
 
 	fd = creat(".heredoc", 0664);
 	if (fd >= 0)
@@ -40,7 +41,9 @@ static int	check_file_heredoc(char *endstr)
 		endstr_len = ft_strlen(endstr);
 		write(STDIN_FILENO, "> ", 2);
 		buffer = get_next_line(STDIN_FILENO);
-		while (buffer != NULL || ft_strncmp(buffer, endstr, endstr_len) == 0)
+		while (buffer != NULL && \
+				(ft_strncmp(buffer, endstr, endstr_len) != 0 ||
+				buffer[endstr_len] != '\n'))
 		{
 			if (write(fd, buffer, ft_strlen(buffer)) < 0)
 				return (close(fd), 0);
@@ -48,7 +51,7 @@ static int	check_file_heredoc(char *endstr)
 			write(STDIN_FILENO, "> ", 2);
 			buffer = get_next_line(STDIN_FILENO);
 		}
-		return (close(fd), 1);
+		return (free(buffer), close(fd), 1);
 	}
 	else
 		return (0);
@@ -65,9 +68,10 @@ static int	check_file_out(char *filename)
 			return (print_error(PERMISSION_DENIED, filename, NULL), 0);
 		else if (errno == EISDIR)
 			return (print_error(IS_DIRECTORY, filename, NULL), 0);
+		return (0);
 	}
 	else
-		close(fd);
+		return (close(fd), 1);
 }
 
 static int check_file_out_append(char *filename)

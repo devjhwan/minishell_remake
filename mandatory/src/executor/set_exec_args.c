@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/19 18:06:38 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 11:44:18 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ char	**set_exec_args(char **args, char **envp)
 	new_args = copy_strarray(args);
 	if (new_args == NULL)
 		return (NULL);
+	if (args[0] == NULL)
+		return (new_args);
 	arg = get_path_from_env(args[0], envp);
 	if (arg == NULL)
 		return (free_strarray(new_args), NULL);

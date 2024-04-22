@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:34:09 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 20:48:46 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 11:58:20 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ void	print_tokens(t_ptoken *tokens)
 			printf("\n");
 		tokens = tokens->next;
 	}
+	printf("\n");
 }

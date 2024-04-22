@@ -6,7 +6,7 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2024/04/22 11:09:51 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/22 11:49:55 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,11 @@ P_TREE_SRCS		:=create_parser_tree.c create_new_node.c free_tree.c \
 				  print_parser_tree.c skip_space_tokens.c parse_command.c \
 				  parse_content.c parse_argument.c parse_redirection.c \
 				  join_tree_arguments.c parse_tree_to_cmds.c
-UTILS_SRCS		:=free_strarr.c print_error.c remove_quote.c \
-				  search_environment.c check_environment.c
-EXECUTOR_SRCS	:=execute.c
+UTILS_SRCS		:=free_strarray.c print_error.c remove_quote.c \
+				  search_environment.c check_environment.c copy_strarray.c
+EXECUTOR_SRCS	:=execute.c create_new_executor.c free_executor.c \
+				  set_exec_args.c check_redirs.c set_exec_redirections.c \
+				  print_executor.c
 				  
 SRCS			:=$(MAIN_SRCS) $(COMMAND_SRCS) $(EXPANDER_SRCS) \
 				  $(PARSER_SRCS) $(P_TOKEN_SRCS) $(P_TREE_SRCS) \
@@ -45,7 +47,7 @@ INC				:=-I./mandatory/inc -I./libft -I./libft/gnl
 CC				:=cc
 CFLAGS			:=-Wall -Werror -Wextra
 
-# DEBUG			:=-fsanitize="address,undefined" -g
+DEBUG			:=-fsanitize="address,undefined" -g
 
 LDFLAGS			:=-L/home/linuxbrew/.linuxbrew/opt/readline/lib
 CPPFLAGS		:=-I/home/linuxbrew/.linuxbrew/opt/readline/include

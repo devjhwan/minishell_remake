@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 12:07:51 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 12:42:21 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "executor.h"
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdio.h>
 
-typedef enum e_errtype
+pid_t	execute_command(t_executor *exec, char **envp)
 {
-	UNEXPECTED_TOKEN,
-	AMBIGUOUS_REDIRECT,
-	NO_FILE,
-	PERMISSION_DENIED,
-	IS_DIRECTORY
-}	t_errtype;
+	int		p[2];
+	pid_t	pid;
 
-char	*remove_quote(char *arg);
-int		check_environment(char *arg, char **envp);
-char	*search_environment(char *arg, char **envp);
-void	print_error(t_errtype t, char *arg1, char *arg2);
-char	**copy_strarray(char **args);
-void	free_strarray(char **strarr);
-int		isbuiltin(char *arg);
-
-#endif
+	pipe(p);
+	pid = fork();
+	if (pid == 0)
+	{
+		if (execve(exec->args[0], exec->args, envp) < 0)
+		{
+			perror("minishell: ");
+			exit(1);
+		}
+	}
+	return (pid);
+}

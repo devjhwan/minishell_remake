@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 11:30:21 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 12:59:48 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ int	main(int args, char **argv, char **envp)
 	t_shell	shell;
 	char	*str;
 
-	(void) args;
-	(void) argv;
-	shell.env = envp;
+	init_shell_struct(&shell, args, argv, envp);
 	while (1)
 	{
 		set_default_minishell_signal();
@@ -34,7 +32,7 @@ int	main(int args, char **argv, char **envp)
 		if (str == NULL)
 			break ;
 		add_history(str);
-		shell.cmds = parser(str, envp);
+		shell.cmds = parser(str, &shell);
 		free(str);
 		if (shell.cmds == NULL)
 			continue ;
@@ -45,5 +43,6 @@ int	main(int args, char **argv, char **envp)
 		free_cmds(&shell.cmds);
 		shell.cmds = NULL;
 	}
+	free_shell_struct(&shell);
 	return (rollback_terminal_setting(), 0);
 }

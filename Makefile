@@ -6,7 +6,7 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2024/04/22 11:49:55 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/22 12:57:06 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME			:=minishell
 
 SRCDIR			:=./mandatory/src
 
-MAIN_SRCS		:=main.c signal_handler.c terminal_setting.c
+MAIN_SRCS		:=main.c signal_handler.c terminal_setting.c \
+				  init_shell_struct.c free_shell_struct.c
 COMMAND_SRCS	:=create_new_cmd.c free_cmds.c free_redirections.c \
 				  get_cmd_type.c print_cmds.c get_redir_type.c \
 				  parse_to_cmd.c
@@ -28,10 +29,11 @@ P_TREE_SRCS		:=create_parser_tree.c create_new_node.c free_tree.c \
 				  parse_content.c parse_argument.c parse_redirection.c \
 				  join_tree_arguments.c parse_tree_to_cmds.c
 UTILS_SRCS		:=free_strarray.c print_error.c remove_quote.c \
-				  search_environment.c check_environment.c copy_strarray.c
+				  search_environment.c check_environment.c copy_strarray.c \
+				  isbuiltin.c
 EXECUTOR_SRCS	:=execute.c create_new_executor.c free_executor.c \
 				  set_exec_args.c check_redirs.c set_exec_redirections.c \
-				  print_executor.c
+				  print_executor.c execute_command.c
 				  
 SRCS			:=$(MAIN_SRCS) $(COMMAND_SRCS) $(EXPANDER_SRCS) \
 				  $(PARSER_SRCS) $(P_TOKEN_SRCS) $(P_TREE_SRCS) \

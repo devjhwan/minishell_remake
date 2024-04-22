@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 16:39:38 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 11:58:49 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 13:00:00 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 t_cmd	*parse_tree_to_cmds(t_ptree *tree);
 
-t_cmd	*parser(char *line, char **envp)
+t_cmd	*parser(char *line, t_shell *shell)
 {
 	t_ptoken	*tokens;
 	t_ptree		*parser_tree;
@@ -33,7 +33,7 @@ t_cmd	*parser(char *line, char **envp)
 	if (parser_tree == NULL)
 		return (NULL);
 	// print_parser_tree(parser_tree);
-	if (expander(parser_tree, envp) == 0)
+	if (expander(parser_tree, shell->env) == 0)
 		return (free_tree(parser_tree), NULL);
 	// print_parser_tree(parser_tree);
 	cmds = parse_tree_to_cmds(parser_tree);

@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.h                                         :+:      :+:    :+:   */
+/*   free_shell_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 12:24:57 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 12:57:48 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTOR_H
-# define EXECUTOR_H
+#include "minishell.h"
+#include "utils.h"
+#include <unistd.h>
 
-# include "command.h"
-# include <stdlib.h>
-
-typedef struct s_executor
+void	free_shell_struct(t_shell *shell)
 {
-	char	**args;
-	t_redir	*in;
-	t_redir	*out;
-}	t_executor;
-
-pid_t		execute_command(t_executor *exec, char **envp);
-t_executor	*create_new_executor(t_cmd *cmd, char **envp);
-void		free_executor(t_executor **exec);
-void		print_executor(t_executor *exec);
-
-#endif
+	if (shell->cmds != NULL)
+		free_cmds(&shell->cmds);
+	shell->cmds = NULL;
+	if (shell->env != NULL)
+		free_strarray(shell->env);
+	shell->env = NULL;
+	close(shell->stdinfd_cpy);
+	close(shell->stdoutfd_cpy);
+	close(shell->fdin);
+	close(shell->fdout);
+}

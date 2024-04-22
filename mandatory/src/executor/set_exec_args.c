@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 11:44:18 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 12:10:46 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static char	*find_path(char *arg, char **path_split)
 		if (access(new_arg, F_OK) == 0)
 			return (new_arg);
 		errno = 0;
+		free(new_arg);
 		i++;
 	}
 	return (ft_strdup(arg));
@@ -47,6 +48,10 @@ static char	*get_path_from_env(char *arg, char **envp)
 	while (envp[i] != NULL && ft_strncmp(envp[i], "PATH=", 5) != 0)
 		i++;
 	if (envp[i] == NULL)
+		return (ft_strdup(arg));
+	else if (isbuiltin(arg))
+		return (ft_strdup(arg));
+	else if (ft_strlen(arg) == 0)
 		return (ft_strdup(arg));
 	path = &envp[i][5];
 	path_split = ft_split(path, ":");

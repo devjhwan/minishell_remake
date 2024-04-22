@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_cmds.c                                        :+:      :+:    :+:   */
+/*   copy_strarray.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 11:09:14 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:04:46 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "command.h"
+#include "libft.h"
 #include "utils.h"
 
-void	free_cmds(t_cmd **cmds)
+char	**copy_strarray(char **args)
 {
-	t_cmd	*cmd;
+	char	**new_args;
+	int		i;
 
-	cmd = *cmds;
-	while (cmd != NULL)
+	new_args = (char **)malloc(sizeof(args));
+	if (new_args == NULL)
+		return (NULL);
+	i = 0;
+	while (args[i] != NULL)
 	{
-		*cmds = cmd->next;
-		if (cmd->args != NULL)
-			free_strarray(cmd->args);
-		cmd->args = NULL;
-		if (cmd->redirs != NULL)
-			free_redirections(cmd->redirs);
-		cmd->redirs = NULL;
-		cmd->next = NULL;
-		free(cmd);
-		cmd = *cmds;
+		new_args[i] = ft_strdup(args[i]);
+		if (new_args[i] == NULL)
+			return (free_strarray(new_args), NULL);
+		i++;
 	}
+	new_args[i] = NULL;
+	return (new_args);
 }

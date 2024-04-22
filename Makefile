@@ -6,7 +6,7 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2024/04/22 01:45:31 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/22 11:09:51 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ OBJS			:=$(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
 DEPS			:=$(OBJS:.o=.d)
 DEPFLAGS		:=-MMD
 
-INC				:=-I./mandatory/inc -I./libft
+INC				:=-I./mandatory/inc -I./libft -I./libft/gnl
 CC				:=cc
 CFLAGS			:=-Wall -Werror -Wextra
 
@@ -52,32 +52,32 @@ CPPFLAGS		:=-I/home/linuxbrew/.linuxbrew/opt/readline/include
 # LDFLAGS			:=-L${HOME}/homebrew/opt/readline/lib
 # CPPFLAGS		:=-I${HOME}/homebrew/opt/readline/include
 
-LIBFT			:=libft/libft.a
+LIBS			:=libft/libft.a libft/gnl/gnl.a
 
 all: 			$(OBJDIR) libft $(NAME)
 
-$(NAME): 		$(OBJS) $(LIBFT) Makefile
-					$(CC) $(DEBUG) $(CFLAGS) -o $@ $(OBJS) $(LIBFT) \
+$(NAME): 		$(OBJS) $(LIBS) Makefile
+					$(CC) $(DEBUG) $(CFLAGS) -o $@ $(OBJS) $(LIBS) \
 						-lreadline $(LDFLAGS)
 					echo "(MINISHELL) COMPILING $@"
 
-$(OBJDIR)/%.o: 	$(SRCDIR)/%.c $(LIBFT) Makefile
+$(OBJDIR)/%.o: 	$(SRCDIR)/%.c $(LIBS) Makefile
 					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $< $(CPPFLAGS)
 					echo "(MINISHELL) COMPILING $@"
 
-$(OBJDIR)/%.o: 	$(SRCDIR)/parser/%.c $(LIBFT) Makefile
+$(OBJDIR)/%.o: 	$(SRCDIR)/parser/%.c $(LIBS) Makefile
 					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $< $(CPPFLAGS)
 					echo "(MINISHELL) COMPILING $@"
 
-$(OBJDIR)/%.o: 	$(SRCDIR)/parser/**/%.c $(LIBFT) Makefile
+$(OBJDIR)/%.o: 	$(SRCDIR)/parser/**/%.c $(LIBS) Makefile
 					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $< $(CPPFLAGS)
 					echo "(MINISHELL) COMPILING $@"
 
-$(OBJDIR)/%.o: 	$(SRCDIR)/utils/%.c $(LIBFT) Makefile
+$(OBJDIR)/%.o: 	$(SRCDIR)/utils/%.c $(LIBS) Makefile
 					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $< $(CPPFLAGS)
 					echo "(MINISHELL) COMPILING $@"
 
-$(OBJDIR)/%.o: 	$(SRCDIR)/executor/%.c $(LIBFT) Makefile
+$(OBJDIR)/%.o: 	$(SRCDIR)/executor/%.c $(LIBS) Makefile
 					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $< $(CPPFLAGS)
 					echo "(MINISHELL) COMPILING $@"
 
@@ -86,9 +86,11 @@ $(OBJDIR): 		Makefile
 
 libft:
 					make -C libft
+					make -C libft/gnl
 
 clean:
 					make -C libft fclean
+					make -C libft/gnl fclean
 					rm -rf $(OBJDIR)
 
 fclean: clean

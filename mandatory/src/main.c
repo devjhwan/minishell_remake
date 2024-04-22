@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 01:31:12 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/22 11:19:03 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(int args, char **argv, char **envp)
 		rollback_terminal_setting();
 		set_execution_signal();
 		execute(&shell);
+		unlink(".heredoc");
 		free_cmds(&shell.cmds);
 		shell.cmds = NULL;
 	}

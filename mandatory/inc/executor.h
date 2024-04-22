@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 02:07:38 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:07:16 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_executor
 	t_redir	*out;
 }	t_executor;
 
-void	free_executor(t_executor **exec)
+t_executor	*create_new_executor(t_cmd *cmd, char **envp);
+void		free_executor(t_executor **exec);
 
 #endif

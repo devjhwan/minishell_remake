@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/24 00:00:36 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/24 00:49:08 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,27 @@
 char	*convert_envarg_to_export(char *arg)
 {
 	char	*new_arg;
-	char	**split;
+	int		i;
 
-	split = ft_split(arg, "=");
-	if (split == NULL)
+	new_arg = (char *)malloc(sizeof(char) * (ft_strlen(arg) + 14));
+	if (new_arg == NULL)
 		return (NULL);
-	new_arg = ft_strjoin(5, "declare -x ", split[0], "=\"", split[1], "\"");
-	return (free_strarray(split), new_arg);
+	ft_strlcpy(new_arg, "declare -x ", 12);
+	i = 0;
+	while (arg[i] != '\0' && arg[i - 1] != '=')
+	{
+		new_arg[i + 11] = arg[i];
+		i++;
+	}
+	new_arg[i + 11] = '\"';
+	while (arg[i] != '\0')
+	{
+		new_arg[i + 12] = arg[i];
+		i++;
+	}
+	new_arg[i + 12] = '\"';
+	new_arg[i + 13] = '\0';
+	return (new_arg);
 }
 
 char	**create_export(char **ep)

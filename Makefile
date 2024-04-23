@@ -6,7 +6,7 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2024/04/24 00:02:40 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/24 00:50:09 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ UTILS_SRCS		:=free_strarray.c print_error.c remove_quote.c \
 EXECUTOR_SRCS	:=execute.c create_new_executor.c free_executor.c \
 				  set_exec_args.c check_redirs.c set_exec_redirections.c \
 				  print_executor.c execute_command.c
-BUILTIN_SRCS	:=execute_builtin.c exec_echo.c exec_env.c
+BUILTIN_SRCS	:=execute_builtin.c exec_echo.c exec_env.c exec_export.c
 				  
 SRCS			:=$(MAIN_SRCS) $(COMMAND_SRCS) $(EXPANDER_SRCS) \
 				  $(PARSER_SRCS) $(P_TOKEN_SRCS) $(P_TREE_SRCS) \

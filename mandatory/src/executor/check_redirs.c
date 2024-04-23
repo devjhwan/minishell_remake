@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 11:59:21 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/23 22:58:40 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	check_file_heredoc(char *endstr)
 	char	*buffer;
 	size_t	endstr_len;
 
-	fd = creat(".heredoc", 0664);
+	fd = creat(".heredoc", 0644);
 	if (fd >= 0)
 	{
 		endstr_len = ft_strlen(endstr);
@@ -97,26 +97,21 @@ static int check_file_out_append(char *filename)
 
 int	check_redirs(t_redir *redir)
 {
-	if (redir->t == IN)
-	{
-		if (check_file_in(redir->filename) == 0)
+	if (redir->t == IN && check_file_in(redir->filename) == 0)
 			return (0);
-	}
 	else if (redir->t == IN2)
 	{
 		if (check_file_heredoc(redir->filename) == 0)
 			return (0);
-	}
-	else if (redir->t == OUT)
-	{
-		if (check_file_out(redir->filename) == 0)
+		free(redir->filename);
+		redir->filename = ft_strdup(".heredoc");
+		if (redir->filename == NULL)
 			return (0);
 	}
-	else if (redir->t == OUT2)
-	{
-		if (check_file_out_append(redir->filename) == 0)
+	else if (redir->t == OUT && check_file_out(redir->filename) == 0)
 			return (0);
-	}
+	else if (redir->t == OUT2 && check_file_out_append(redir->filename) == 0)
+			return (0);
 	if (redir->next != NULL)
 		return (check_redirs(redir->next));
 	return (1);

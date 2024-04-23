@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 12:59:42 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/23 22:39:57 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ typedef struct	s_shell
 	int		stdinfd_cpy;
 	int		stdoutfd_cpy;
 	int		fdin;
-	int		fdout;
 	int		exit_code;
 }	t_shell;
 
 t_cmd	*parser(char *line, t_shell *shell);
-void	execute(t_shell *shell);
 
 void	set_minishell_terminal(void);
 void	rollback_terminal_setting(void);

@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 11:29:52 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/23 22:21:15 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,8 @@ t_executor	*create_new_executor(t_cmd *cmd, char **envp)
 		if (set_exec_rdout(cmd->redirs, &exec->out) == 0)
 			return (free_executor(&exec), NULL);
 	}
+	exec->islast = 0;
+	if (cmd->next == NULL)
+		exec->islast = 1;
 	return (exec);
 }

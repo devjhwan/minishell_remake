@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 12:39:20 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/23 23:02:16 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+void	wait_all_pipe(pid_t last_pid, t_shell *shell);
+
 void	execute(t_shell *shell)
 {
 	t_cmd		*cmds;
 	t_executor	*exec;
 	pid_t		pid;
-	int			exit_status;
 
 	pid = -1;
 	cmds = shell->cmds;
@@ -30,21 +31,25 @@ void	execute(t_shell *shell)
 		exec = create_new_executor(cmds, shell->env);
 		if (exec != NULL)
 		{
-			print_executor(exec);
-			pid = execute_command(exec, shell->env);
+			// print_executor(exec);
+			pid = execute_command(exec, shell);
 			free_executor(&exec);
 			if (pid == -1)
 				break;
 		}
 		cmds = cmds->next;
 	}
-	if (pid > 0)
+	wait_all_pipe(pid, shell);
+}
+
+void	wait_all_pipe(pid_t last_pid, t_shell *shell)
+{
+	if (last_pid > 0)
 	{
-		waitpid(pid, &exit_status, 0);
-		if (WIFEXITED(exit_status))
-			printf("%d\n", WEXITSTATUS(exit_status));
-		else if (WIFSIGNALED(exit_status))
-			printf("%d\n", WTERMSIG(exit_status));
+		waitpid(last_pid, &shell->exit_code, 0);
+		if (WIFEXITED(shell->exit_code))
+			printf("%d\n", WEXITSTATUS(shell->exit_code));
+		else if (WIFSIGNALED(shell->exit_code))
+			printf("%d\n", WTERMSIG(shell->exit_code));
 	}
-	// finished all commands. Time to wait to finish all pipes.
 }

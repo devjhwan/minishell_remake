@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/23 22:39:57 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/23 23:36:42 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct	s_shell
 {
 	t_cmd	*cmds;
 	char	**env;
+	char	**export;
 	int		stdinfd_cpy;
 	int		stdoutfd_cpy;
 	int		fdin;

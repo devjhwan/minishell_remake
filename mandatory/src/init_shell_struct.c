@@ -6,13 +6,47 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/23 21:22:49 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/24 00:00:36 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "utils.h"
+#include "libft.h"
 #include <unistd.h>
+
+char	*convert_envarg_to_export(char *arg)
+{
+	char	*new_arg;
+	char	**split;
+
+	split = ft_split(arg, "=");
+	if (split == NULL)
+		return (NULL);
+	new_arg = ft_strjoin(5, "declare -x ", split[0], "=\"", split[1], "\"");
+	return (free_strarray(split), new_arg);
+}
+
+char	**create_export(char **ep)
+{
+	int		i;
+	char	**export;
+
+	i = 0;
+	while (ep[i] != NULL)
+		i++;
+	export = (char **)malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (ep[i] != NULL)
+	{
+		export[i] = convert_envarg_to_export(ep[i]);
+		if (export[i] == NULL)
+			return (free_strarray(export), NULL);
+		i++;
+	}
+	export[i] = NULL;
+	return (export);
+}
 
 int	init_shell_struct(t_shell *shell, int as, char **av, char **ep)
 {
@@ -20,8 +54,9 @@ int	init_shell_struct(t_shell *shell, int as, char **av, char **ep)
 	(void)av;
 	shell->cmds = NULL;
 	shell->env = copy_strarray(ep);
-	if (shell->env == NULL)
-		return (0);
+	shell->export = create_export(ep);
+	if (shell->env == NULL || shell->export == NULL)
+		return (free_strarray(shell->env), free_strarray(shell->export), 0);
 	shell->stdinfd_cpy = dup(STDIN_FILENO);
 	shell->stdoutfd_cpy = dup(STDOUT_FILENO);
 	shell->fdin = dup(STDIN_FILENO);

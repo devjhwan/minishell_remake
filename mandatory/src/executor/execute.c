@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/23 23:02:16 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/24 00:05:00 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	execute(t_shell *shell)
 		cmds = cmds->next;
 	}
 	wait_all_pipe(pid, shell);
+	unlink(".heredoc");
 }
 
 void	wait_all_pipe(pid_t last_pid, t_shell *shell)

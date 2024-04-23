@@ -6,7 +6,7 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2024/04/22 12:57:06 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/23 23:27:19 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,10 +34,11 @@ UTILS_SRCS		:=free_strarray.c print_error.c remove_quote.c \
 EXECUTOR_SRCS	:=execute.c create_new_executor.c free_executor.c \
 				  set_exec_args.c check_redirs.c set_exec_redirections.c \
 				  print_executor.c execute_command.c
+BUILTIN_SRCS	:=execute_builtin.c exec_echo.c
 				  
 SRCS			:=$(MAIN_SRCS) $(COMMAND_SRCS) $(EXPANDER_SRCS) \
 				  $(PARSER_SRCS) $(P_TOKEN_SRCS) $(P_TREE_SRCS) \
-				  $(UTILS_SRCS) $(EXECUTOR_SRCS)
+				  $(UTILS_SRCS) $(EXECUTOR_SRCS) $(BUILTIN_SRCS)
 
 OBJDIR			:=.objs
 OBJS			:=$(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
@@ -69,19 +70,11 @@ $(OBJDIR)/%.o: 	$(SRCDIR)/%.c $(LIBS) Makefile
 					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $< $(CPPFLAGS)
 					echo "(MINISHELL) COMPILING $@"
 
-$(OBJDIR)/%.o: 	$(SRCDIR)/parser/%.c $(LIBS) Makefile
+$(OBJDIR)/%.o: 	$(SRCDIR)/**/%.c $(LIBS) Makefile
 					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $< $(CPPFLAGS)
 					echo "(MINISHELL) COMPILING $@"
 
-$(OBJDIR)/%.o: 	$(SRCDIR)/parser/**/%.c $(LIBS) Makefile
-					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $< $(CPPFLAGS)
-					echo "(MINISHELL) COMPILING $@"
-
-$(OBJDIR)/%.o: 	$(SRCDIR)/utils/%.c $(LIBS) Makefile
-					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $< $(CPPFLAGS)
-					echo "(MINISHELL) COMPILING $@"
-
-$(OBJDIR)/%.o: 	$(SRCDIR)/executor/%.c $(LIBS) Makefile
+$(OBJDIR)/%.o: 	$(SRCDIR)/**/**/%.c $(LIBS) Makefile
 					$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $< $(CPPFLAGS)
 					echo "(MINISHELL) COMPILING $@"
 

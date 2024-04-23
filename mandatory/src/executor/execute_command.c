@@ -6,12 +6,13 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/23 22:54:09 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/23 23:26:51 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "executor.h"
+#include "utils.h"
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -69,11 +70,11 @@ pid_t	execute_command(t_executor *exec, t_shell *shell)
 	{
 		if (manage_child_redirection(p, exec, shell) == 0)
 			exit(1);
-		if (execve(exec->args[0], exec->args, shell->env) < 0)
-		{
+		if (isbuiltin(exec->args[0]))
+			execute_builtin(exec, shell);
+		else if (execve(exec->args[0], exec->args, shell->env) < 0)
 			perror("minishell: ");
-			exit(1);
-		}
+		exit(1);
 	}
 	else if (manage_parent_redirection(p, exec, shell) == 0)
 			return (-1);

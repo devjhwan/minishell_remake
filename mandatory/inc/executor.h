@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/23 22:28:04 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/23 23:26:41 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ typedef struct s_executor
 
 void		execute(t_shell *shell);
 pid_t		execute_command(t_executor *exec, t_shell *shell);
+void		execute_builtin(t_executor *exec, t_shell *shell);
+void		exec_echo(char **args);
+
 t_executor	*create_new_executor(t_cmd *cmd, char **envp);
 void		free_executor(t_executor **exec);
 void		print_executor(t_executor *exec);

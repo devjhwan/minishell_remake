@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 16:55:20 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 18:37:45 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:05:32 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*_substr_argument(char **line);
 
 int	append_token(t_ptoken **tokens, char **line, t_tokentype t)
 {
-	char	*arg;
+	char		*arg;
 	t_ptoken	*new_token;
 
 	arg = NULL;

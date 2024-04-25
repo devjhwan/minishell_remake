@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/23 22:58:40 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:03:56 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	check_file_heredoc(char *endstr)
 		write(STDIN_FILENO, "> ", 2);
 		buffer = get_next_line(STDIN_FILENO);
 		while (buffer != NULL && \
-				(ft_strncmp(buffer, endstr, endstr_len) != 0 ||
+				(ft_strncmp(buffer, endstr, endstr_len) != 0 || \
 				buffer[endstr_len] != '\n'))
 		{
 			if (write(fd, buffer, ft_strlen(buffer)) < 0)
@@ -74,7 +74,7 @@ static int	check_file_out(char *filename)
 		return (close(fd), 1);
 }
 
-static int check_file_out_append(char *filename)
+static int	check_file_out_append(char *filename)
 {
 	int			fd;
 	struct stat	path_stat;
@@ -98,7 +98,7 @@ static int check_file_out_append(char *filename)
 int	check_redirs(t_redir *redir)
 {
 	if (redir->t == IN && check_file_in(redir->filename) == 0)
-			return (0);
+		return (0);
 	else if (redir->t == IN2)
 	{
 		if (check_file_heredoc(redir->filename) == 0)
@@ -109,9 +109,9 @@ int	check_redirs(t_redir *redir)
 			return (0);
 	}
 	else if (redir->t == OUT && check_file_out(redir->filename) == 0)
-			return (0);
+		return (0);
 	else if (redir->t == OUT2 && check_file_out_append(redir->filename) == 0)
-			return (0);
+		return (0);
 	if (redir->next != NULL)
 		return (check_redirs(redir->next));
 	return (1);

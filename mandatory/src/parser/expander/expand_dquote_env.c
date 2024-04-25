@@ -6,13 +6,14 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 21:53:07 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 23:45:58 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:05:14 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "utils.h"
 #include <stdio.h>
+
 static char	*replace_env(char *arg, int i, char **envp)
 {
 	int		env_len;
@@ -21,7 +22,8 @@ static char	*replace_env(char *arg, int i, char **envp)
 	char	*tmp3;
 
 	env_len = 1;
-	while (arg[i + env_len] != '\0' && ft_strchr(" $\'\"", arg[i + env_len]) == NULL)
+	while (arg[i + env_len] != '\0' && \
+			ft_strchr(" $\'\"", arg[i + env_len]) == NULL)
 		env_len++;
 	tmp1 = ft_substr(arg, 0, i);
 	tmp3 = ft_substr(arg, i + env_len, ft_strlen(arg));

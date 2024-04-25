@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 16:39:38 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 01:12:20 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:04:46 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	append_argument(char **args, t_ptree *node)
 			return (0);
 		if (node->right != NULL && \
 			append_argument(&(args[1]), node->right) == 0)
-				return (0);
+			return (0);
 	}
 	else if (node->right != NULL && append_argument(args, node->right) == 0)
 		return (0);

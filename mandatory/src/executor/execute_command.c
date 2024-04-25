@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/23 23:26:51 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:04:18 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	manage_child_redirection(int p[2], t_executor *exec, t_shell *shell)
 	int	fd;
 
 	if (exec->in == NULL && dup2(shell->fdin, STDIN_FILENO) < 0)
-			return (0);
+		return (0);
 	else if (exec->in != NULL)
 	{
 		fd = open(exec->in->filename, O_RDONLY, 0644);
@@ -77,6 +77,6 @@ pid_t	execute_command(t_executor *exec, t_shell *shell)
 		exit(1);
 	}
 	else if (manage_parent_redirection(p, exec, shell) == 0)
-			return (-1);
+		return (-1);
 	return (pid);
 }

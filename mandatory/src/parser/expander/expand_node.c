@@ -6,20 +6,21 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 21:54:14 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 22:13:42 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:05:24 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser_tree.h"
 #include "utils.h"
 #include <stdio.h>
+
 char	*expand_singular_env(char *arg, char **envp);
 char	*expand_dquote_env(char *arg, char **envp);
 
 int	expand_node(t_ptree *node, char **envp)
 {
 	char	*new_arg;
-	
+
 	if (node->arg != NULL && ft_strchr(node->arg, '$') != NULL)
 	{
 		if (node->arg[0] == '$')

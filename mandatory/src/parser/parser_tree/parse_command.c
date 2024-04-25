@@ -6,12 +6,12 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 19:05:02 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 20:38:29 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:06:06 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser_tree.h"
-#include <unistd.h>
+
 t_ptree	*parse_command(t_ptoken *tokens)
 {
 	t_ptree	*command;

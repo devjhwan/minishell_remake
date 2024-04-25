@@ -6,12 +6,12 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 16:36:05 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 23:59:58 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:21:12 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKEN_H
-# define TOKEN_H
+#ifndef PARSER_TOKEN_H
+# define PARSER_TOKEN_H
 
 # include <stdlib.h>
 

@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/24 00:50:32 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:02:51 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct s_executor
 	t_redir	*out;
 	int		islast;
 }	t_executor;
-
 
 void		execute(t_shell *shell);
 pid_t		execute_command(t_executor *exec, t_shell *shell);

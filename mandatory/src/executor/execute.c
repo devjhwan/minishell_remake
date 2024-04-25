@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/24 00:39:57 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:04:06 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	execute(t_shell *shell)
 			pid = execute_command(exec, shell);
 			free_executor(&exec);
 			if (pid == -1)
-				break;
+				break ;
 		}
 		cmds = cmds->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/23 23:36:42 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:02:58 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "command.h"
 
-typedef struct	s_shell
+typedef struct s_shell
 {
 	t_cmd	*cmds;
 	char	**env;

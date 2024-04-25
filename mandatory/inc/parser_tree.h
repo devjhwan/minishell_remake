@@ -6,12 +6,12 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:30:53 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 01:59:59 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:03:20 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TREE_H
-# define TREE_H
+#ifndef PARSER_TREE_H
+# define PARSER_TREE_H
 
 # include "parser_token.h"
 # include "libft.h"

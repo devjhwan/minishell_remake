@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 13:32:37 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:54:06 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,55 @@
 #include "utils.h"
 #include "libft.h"
 #include <unistd.h>
+#include <stdio.h>
+char	*convert_envarg_to_export(char *arg)
+{
+	char	*new_arg;
+	int		i;
 
-// char	*convert_envarg_to_export(char *arg)
-// {
-// 	char	*new_arg;
-// 	int		i;
+	new_arg = (char *)malloc(sizeof(char) * (ft_strlen(arg) + 14));
+	if (new_arg == NULL)
+		return (NULL);
+	ft_strlcpy(new_arg, "declare -x ", 12);
+	i = 0;
+	while (arg[i] != '\0')
+	{
+		new_arg[i + 11] = arg[i];
+		i++;
+		if (arg[i - 1] != '=')
+			break;
+	}
+	new_arg[i + 11] = '\"';
+	while (arg[i] != '\0')
+	{
+		new_arg[i + 12] = arg[i];
+		i++;
+	}
+	new_arg[i + 12] = '\"';
+	new_arg[i + 13] = '\0';
+	return (new_arg);
+}
 
-// 	new_arg = (char *)malloc(sizeof(char) * (ft_strlen(arg) + 14));
-// 	if (new_arg == NULL)
-// 		return (NULL);
-// 	ft_strlcpy(new_arg, "declare -x ", 12);
-// 	i = 0;
-// 	while (arg[i] != '\0' && arg[i - 1] != '=')
-// 	{
-// 		new_arg[i + 11] = arg[i];
-// 		i++;
-// 	}
-// 	new_arg[i + 11] = '\"';
-// 	while (arg[i] != '\0')
-// 	{
-// 		new_arg[i + 12] = arg[i];
-// 		i++;
-// 	}
-// 	new_arg[i + 12] = '\"';
-// 	new_arg[i + 13] = '\0';
-// 	return (new_arg);
-// }
+char	**create_export(char **ep)
+{
+	int		i;
+	char	**export;
 
-// char	**create_export(char **ep)
-// {
-// 	int		i;
-// 	char	**export;
-
-// 	i = 0;
-// 	while (ep[i] != NULL)
-// 		i++;
-// 	export = (char **)malloc(sizeof(char *) * (i + 1));
-// 	i = 0;
-// 	while (ep[i] != NULL)
-// 	{
-// 		export[i] = convert_envarg_to_export(ep[i]);
-// 		if (export[i] == NULL)
-// 			return (free_strarray(export), NULL);
-// 		i++;
-// 	}
-// 	export[i] = NULL;
-// 	return (export);
-// }
+	i = 0;
+	while (ep[i] != NULL)
+		i++;
+	export = (char **)malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (ep[i] != NULL)
+	{
+		export[i] = convert_envarg_to_export(ep[i]);
+		if (export[i] == NULL)
+			return (free_strarray(export), NULL);
+		i++;
+	}
+	export[i] = NULL;
+	return (export);
+}
 
 int	init_shell_struct(t_shell *shell, int as, char **av, char **ep)
 {
@@ -68,7 +70,7 @@ int	init_shell_struct(t_shell *shell, int as, char **av, char **ep)
 	(void)av;
 	shell->cmds = NULL;
 	shell->env = copy_strarray(ep);
-	//shell->export = create_export(ep);
+	shell->export = create_export(ep);
 	if (shell->env == NULL || shell->export == NULL)
 		return (free_strarray(shell->env), free_strarray(shell->export), 0);
 	shell->stdinfd_cpy = dup(STDIN_FILENO);

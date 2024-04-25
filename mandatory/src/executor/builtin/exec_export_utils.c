@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:30:48 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 19:14:46 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:49:11 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,22 @@ int	contains_export(char *arg, char **strarr)
 	while (strarr[i] != NULL)
 	{
 		if (ft_strncmp(strarr[i] + 11, arg, len) == 0)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+int		contains_env(char *arg, char **strarr)
+{
+	int		i;
+	int		len;
+
+	i = 0;
+	len = ft_strlen(arg);
+	while (strarr[i] != NULL)
+	{
+		if (ft_strncmp(strarr[i], arg, len) == 0)
 			return (i);
 		i++;
 	}

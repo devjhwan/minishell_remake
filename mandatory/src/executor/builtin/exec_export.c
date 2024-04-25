@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 22:44:12 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:57:12 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	*create_new_export_arg(char *var_name, char *content);
 int		split_argument(char *arg, char **var_name, \
 						char **content, int *append_f);
 int		contains_export(char *arg, char **strarr);
+int		contains_env(char *arg, char **strarr);
 
 int	append_to_export(char *var_name, char *new_content, t_shell *shell)
 {
@@ -77,11 +78,58 @@ int	add_to_export(char *var_name, char *new_content, \
 	return (1);
 }
 
+int	append_to_env(char *var_name, char *new_content, t_shell *shell)
+{
+	char	*new_arg;
+	int		count;
+	char	**tmp;
+	
+	new_arg = ft_strjoin(3, var_name, "=", new_content);
+	if (new_arg == NULL)
+		return (free(var_name), free(new_content), 0);
+	count = 0;
+	while (shell->env[count] != NULL)
+		count++;
+	tmp = (char **)malloc(sizeof(char *) * (count + 2));
+	if (tmp == NULL)
+		return (free(new_arg), free(var_name), free(new_content),  0);
+	count = 0;
+	while (shell->env[count] != NULL)
+	{
+		tmp[count] = shell->env[count];
+		count++;
+	}
+	tmp[count++] = new_arg;
+	tmp[count] = NULL;
+	free(shell->env);
+	shell->env = tmp;
+	return (free(var_name), free(new_content), 1);
+}
+
 int	add_to_env(char *var_name, char *new_content, \
 					int append_f, t_shell *shell)
 {
-	(void) append_f;
-	(void) shell;
+	int		pos;
+	char	*prev_content;
+	char	*new_arg;
+
+	pos = contains_env(var_name, shell->env);
+	if (pos != -1 && new_content != NULL)
+	{
+		prev_content = ft_strchr(shell->env[pos], '=');
+		if (prev_content == NULL)
+			return (free(var_name), free(new_content), 1);
+		if (append_f)
+			new_arg = ft_strjoin(3, var_name, prev_content, new_content);
+		else
+			new_arg = ft_strjoin(3, var_name, "=", new_content);
+		if (new_arg == NULL)
+			return (free(var_name), free(new_content), 0);
+		free(shell->env[pos]);
+		shell->env[pos] = new_arg;
+	}
+	else if (pos == -1)
+		return (append_to_env(var_name, new_content, shell));
 	return (free(var_name), free(new_content), 1);
 }
 

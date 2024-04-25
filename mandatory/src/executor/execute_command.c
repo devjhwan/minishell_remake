@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 15:48:43 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:35:10 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,15 @@ pid_t	execute_command(t_executor *exec, t_shell *shell)
 	if (pid == 0)
 	{
 		if (manage_child_redirection(p, exec, shell) == 0)
-			exit(1);
+			shell->is_exit = 1;
 		if (isbuiltin(exec->args[0]))
+		{
 			execute_builtin(exec, shell);
-		else if (check_command_path(exec->args[0]) == 0)
-			exit(1);
-		else if (execve(exec->args[0], exec->args, shell->env) < 0)
-			perror("minishell");
-		exit(1);
+			shell->is_exit = 1;
+		}
+		else if (check_command_path(exec->args[0]) == 0 || \
+				execve(exec->args[0], exec->args, shell->env) < 0)
+			shell->is_exit = 1;
 	}
 	else if (manage_parent_redirection(p, exec, shell) == 0)
 		return (-1);

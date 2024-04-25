@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 19:18:31 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:44:12 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int	add_to_export(char *var_name, char *new_content, \
 		if (prev_content != NULL)
 			(prev_content)[ft_strlen(prev_content) - 1] = '\0';
 		if (append_f && prev_content != NULL)
-			new_arg = ft_strjoin(6, "declare -x ", var_name, \
-									++prev_content, new_content, "\"");
+			new_arg = ft_strjoin(5, "declare -x ", var_name, \
+									prev_content, new_content, "\"");
 		else
 			new_arg = ft_strjoin(5, "declare -x ", var_name, \
 									"=\"", new_content, "\"");

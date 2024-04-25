@@ -6,7 +6,7 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2024/04/25 15:40:55 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/25 22:42:11 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ EXECUTOR_SRCS	:=execute.c create_new_executor.c free_executor.c \
 				  set_exec_args.c check_redirs.c set_exec_redirections.c \
 				  print_executor.c execute_command.c
 BUILTIN_SRCS	:=execute_builtin.c exec_echo.c exec_env.c exec_export.c \
-				  exec_export_utils.c
+				  exec_export_utils.c exec_exit.c
 				  
 SRCS			:=$(MAIN_SRCS) $(COMMAND_SRCS) $(EXPANDER_SRCS) \
 				  $(PARSER_SRCS) $(P_TOKEN_SRCS) $(P_TREE_SRCS) \
@@ -53,10 +53,10 @@ CFLAGS			:=-Wall -Werror -Wextra
 
 DEBUG			:=-fsanitize="address,undefined" -g
 
-# LDFLAGS			:=-L/home/linuxbrew/.linuxbrew/opt/readline/lib
-# CPPFLAGS		:=-I/home/linuxbrew/.linuxbrew/opt/readline/include
-LDFLAGS			:=-L${HOME}/homebrew/opt/readline/lib
-CPPFLAGS		:=-I${HOME}/homebrew/opt/readline/include
+LDFLAGS			:=-L/home/linuxbrew/.linuxbrew/opt/readline/lib
+CPPFLAGS		:=-I/home/linuxbrew/.linuxbrew/opt/readline/include
+# LDFLAGS			:=-L${HOME}/homebrew/opt/readline/lib
+# CPPFLAGS		:=-I${HOME}/homebrew/opt/readline/include
 
 LIBS			:=libft/libft.a libft/gnl/gnl.a
 

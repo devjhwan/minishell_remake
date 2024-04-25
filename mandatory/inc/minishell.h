@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 13:02:58 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:33:55 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_shell
 	int		stdoutfd_cpy;
 	int		fdin;
 	int		exit_code;
+	int		is_exit;
 }	t_shell;
 
 t_cmd	*parser(char *line, t_shell *shell);

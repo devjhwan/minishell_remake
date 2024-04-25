@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 17:14:18 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:45:33 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	execute_multiple_command(t_cmd *cmd, t_shell *shell)
 	pid_t		pid;
 
 	pid = -1;
-	while (cmd != NULL)
+	while (cmd != NULL && !shell->is_exit)
 	{
 		exec = create_new_executor(cmd, shell->env);
 		if (exec != NULL)

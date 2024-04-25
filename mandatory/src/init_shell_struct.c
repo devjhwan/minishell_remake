@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 15:48:12 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:36:46 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ int	init_shell_struct(t_shell *shell, int as, char **av, char **ep)
 		shell->fdin < 0)
 		return (free_shell_struct(shell), 0);
 	shell->exit_code = 0;
+	shell->is_exit = 0;
 	return (1);
 }

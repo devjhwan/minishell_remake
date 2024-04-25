@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 13:02:51 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:22:07 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void		execute_builtin(t_executor *exec, t_shell *shell);
 void		exec_echo(char **args);
 void		exec_env(char **env);
 void		exec_export(char **args, t_shell *shell);
+void		exec_exit(char **args, t_executor *exec, t_shell *shell);
 
 t_executor	*create_new_executor(t_cmd *cmd, char **envp);
 void		free_executor(t_executor **exec);

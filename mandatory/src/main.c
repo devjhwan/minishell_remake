@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/24 00:39:52 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:41:35 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ int	main(int args, char **argv, char **envp)
 {
 	t_shell	shell;
 	char	*str;
+	int		exit_code;
 
 	init_shell_struct(&shell, args, argv, envp);
-	while (1)
+	while (!shell.is_exit)
 	{
+		free_cmds(&shell.cmds);
 		set_default_minishell_signal();
 		set_minishell_terminal();
 		str = readline("minishell: ");
@@ -34,14 +36,13 @@ int	main(int args, char **argv, char **envp)
 		add_history(str);
 		shell.cmds = parser(str, &shell);
 		free(str);
-		if (shell.cmds == NULL)
+		if (shell.cmds == NULL || shell.is_exit)
 			continue ;
 		rollback_terminal_setting();
 		set_execution_signal();
 		execute(&shell);
-		free_cmds(&shell.cmds);
-		shell.cmds = NULL;
 	}
+	exit_code = shell.exit_code;
 	free_shell_struct(&shell);
-	return (rollback_terminal_setting(), 0);
+	return (rollback_terminal_setting(), exit_code);
 }

@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.h                                            :+:      :+:    :+:   */
+/*   exec_pwd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 01:32:59 by junghwle         ###   ########.fr       */
+/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/26 01:26:59 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHELL_H
-# define SHELL_H
+#include "shell.h"
+#include <stdio.h>
 
-# include "command.h"
-
-typedef struct s_shell
+void	exec_pwd(t_shell *shell)
 {
-	t_cmd	*cmds;
-	char	**env;
-	char	**export;
-	char	*pwd;
-	char	*oldpwd;
-	int		stdinfd_cpy;
-	int		stdoutfd_cpy;
-	int		fdin;
-	int		exit_code;
-	int		is_exit;
-}	t_shell;
-
-int		init_shell_struct(t_shell *shell, int as, char **av, char **ep);
-void	free_shell_struct(t_shell *shell);
-
-#endif
+	printf("%s\n", shell->pwd);
+}

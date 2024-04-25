@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:58:30 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 01:26:24 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,14 @@ void		execute(t_shell *shell);
 pid_t		execute_command(t_executor *exec, t_shell *shell);
 void		execute_builtin(t_executor *exec, t_shell *shell);
 void		exec_echo(char **args);
-void		exec_env(char **env);
+void		exec_env(char **args, char **env);
 void		exec_export(char **args, t_shell *shell);
 void		exec_exit(char **args, t_shell *shell);
 void		exec_unset(char **args, t_shell *shell);
+void		exec_pwd(t_shell *shell);
+
+int			contains_export(char *arg, char **strarr);
+int			contains_env(char *arg, char **strarr);
 
 t_executor	*create_new_executor(t_cmd *cmd, char **envp);
 void		free_executor(t_executor **exec);

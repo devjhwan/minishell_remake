@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:30:48 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:52:41 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 01:07:47 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	_split_argument(char *arg, char **var_name, char **content, int *append_f)
 	return (1);
 }
 
-int	_contains_export(char *arg, char **strarr)
+int	contains_export(char *arg, char **strarr)
 {
 	int		i;
 	int		len;
@@ -82,7 +82,7 @@ int	_contains_export(char *arg, char **strarr)
 	return (-1);
 }
 
-int	_contains_env(char *arg, char **strarr)
+int	contains_env(char *arg, char **strarr)
 {
 	int		i;
 	int		len;

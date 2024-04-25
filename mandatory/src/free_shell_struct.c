@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:08:04 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 01:19:15 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,6 @@ void	free_shell_struct(t_shell *shell)
 	close(shell->stdinfd_cpy);
 	close(shell->stdoutfd_cpy);
 	close(shell->fdin);
+	free(shell->pwd);
+	free(shell->oldpwd);
 }

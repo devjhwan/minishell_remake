@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:08:51 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 00:49:09 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	execute_builtin(t_executor *exec, t_shell *shell)
 	// 	exec_pwd(exec->args, shell);
 	else if (ft_strncmp(exec->args[0], "export", 7) == 0)
 		exec_export(exec->args, shell);
-	// else if (ft_strncmp(exec->args[0], "unset", 6) == 0)
-	// 	exec_unset(shell->env, shell);
+	else if (ft_strncmp(exec->args[0], "unset", 6) == 0)
+		exec_unset(exec->args, shell);
 	else if (ft_strncmp(exec->args[0], "env", 4) == 0)
 		exec_env(shell->env);
 	else if (ft_strncmp(exec->args[0], "exit", 5) == 0)

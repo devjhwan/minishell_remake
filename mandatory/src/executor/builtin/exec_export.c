@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:13:10 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 01:01:20 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ int	add_to_env(char *var_name, char *new_content, \
 	char	*prev_content;
 	char	*new_arg;
 
+	if (new_content == NULL)
+		return (free(var_name), free(new_content), 1);
 	pos = _contains_env(var_name, shell->env);
 	if (pos != -1 && new_content != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/23 23:55:13 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:21:31 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ typedef enum e_errtype
 	AMBIGUOUS_REDIRECT,
 	NO_FILE,
 	PERMISSION_DENIED,
-	IS_DIRECTORY
+	IS_DIRECTORY,
+	COMMAND_NOT_FOUND
 }	t_errtype;
 
 char	*remove_quote(char *arg);

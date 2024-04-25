@@ -6,12 +6,13 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 13:04:06 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:14:18 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "executor.h"
+#include "utils.h"
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -19,27 +20,55 @@
 
 void	wait_all_pipe(pid_t last_pid, t_shell *shell);
 
-void	execute(t_shell *shell)
+int	execute_one_command(t_cmd *cmd, t_shell *shell)
 {
-	t_cmd		*cmds;
+	pid_t	pid;
+	t_executor	*exec;
+
+	pid = -1;
+	exec = create_new_executor(cmd, shell->env);
+	if (exec != NULL)
+	{
+		if (isbuiltin(exec->args[0]))
+			execute_builtin(exec, shell);
+		else
+			pid = execute_command(exec, shell);
+		free_executor(&exec);
+	}
+	return (pid);
+}
+
+int	execute_multiple_command(t_cmd *cmd, t_shell *shell)
+{
 	t_executor	*exec;
 	pid_t		pid;
 
 	pid = -1;
-	cmds = shell->cmds;
-	while (cmds != NULL)
+	while (cmd != NULL)
 	{
-		exec = create_new_executor(cmds, shell->env);
+		exec = create_new_executor(cmd, shell->env);
 		if (exec != NULL)
 		{
-			// print_executor(exec);
 			pid = execute_command(exec, shell);
 			free_executor(&exec);
 			if (pid == -1)
 				break ;
 		}
-		cmds = cmds->next;
+		cmd = cmd->next;
 	}
+	return (pid);
+}
+
+void	execute(t_shell *shell)
+{
+	t_cmd		*cmds;
+	pid_t		pid;
+
+	cmds = shell->cmds;
+	if (cmds->next == NULL)
+		pid = execute_one_command(cmds, shell);
+	else
+		pid = execute_multiple_command(cmds, shell);
 	wait_all_pipe(pid, shell);
 	unlink(".heredoc");
 }

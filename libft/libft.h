@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:33:17 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 18:29:14 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:43:32 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <stdlib.h>
 
+int		ft_isalpha(int ch);
+int		ft_isalnum(int ch);
+int		ft_isdigit(int ch);
 void	ft_putstrerr(char *str);
 void	ft_putnbr(int nb);
 void	*ft_calloc(size_t count, size_t size);

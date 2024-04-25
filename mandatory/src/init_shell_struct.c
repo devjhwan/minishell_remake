@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 13:54:06 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:48:12 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "libft.h"
 #include <unistd.h>
 #include <stdio.h>
+
 char	*convert_envarg_to_export(char *arg)
 {
 	char	*new_arg;
@@ -29,7 +30,7 @@ char	*convert_envarg_to_export(char *arg)
 	{
 		new_arg[i + 11] = arg[i];
 		i++;
-		if (arg[i - 1] != '=')
+		if (arg[i - 1] == '=')
 			break;
 	}
 	new_arg[i + 11] = '\"';

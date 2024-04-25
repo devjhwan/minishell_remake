@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 10:48:27 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:21:11 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ void	print_is_directory(char *arg)
 	ft_putstrerr(": Is a directory\n");
 }
 
+void	print_command_not_found(char *arg)
+{
+	ft_putstrerr("minishell: ");
+	ft_putstrerr(arg);
+	ft_putstrerr(": command not found\n");
+}
+
 void	print_error(t_errtype t, char *arg1, char *arg2)
 {
 	(void)arg2;
@@ -62,4 +69,6 @@ void	print_error(t_errtype t, char *arg1, char *arg2)
 		print_permission_denied(arg1);
 	else if (t == IS_DIRECTORY)
 		print_is_directory(arg1);
+	else if (t == COMMAND_NOT_FOUND)
+		print_command_not_found(arg1);
 }

@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_shell_struct.c                                :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:08:04 by junghwle         ###   ########.fr       */
+/*   Created: 2023/05/31 11:56:21 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/26 00:04:50 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
-#include "utils.h"
-#include <unistd.h>
-
-void	free_shell_struct(t_shell *shell)
+int	ft_abs(int n)
 {
-	if (shell->cmds != NULL)
-		free_cmds(&shell->cmds);
-	shell->cmds = NULL;
-	if (shell->env != NULL)
-		free_strarray(shell->env);
-	if (shell->export != NULL)
-		free_strarray(shell->export);
-	shell->env = NULL;
-	close(shell->stdinfd_cpy);
-	close(shell->stdoutfd_cpy);
-	close(shell->fdin);
+	if (n < 0)
+		return (~n + 1);
+	return (n);
 }

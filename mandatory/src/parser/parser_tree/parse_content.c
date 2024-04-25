@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 19:31:04 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 13:20:55 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/25 23:48:10 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ t_ptree	*parse_content(t_ptoken **tokens)
 	t_ptree	*content;
 
 	content = create_and_parse_content(tokens);
+	*tokens = skip_space_tokens(*tokens);
 	if (*tokens != NULL)
 	{
-		*tokens = skip_space_tokens(*tokens);
 		if (*tokens == NULL)
-			return (free_tree(content), NULL);
+			return (content);
 		if ((*tokens)->t != PIPE)
 		{
 			content->right = parse_content(tokens);

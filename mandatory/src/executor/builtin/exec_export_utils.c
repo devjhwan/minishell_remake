@@ -6,13 +6,13 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:30:48 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 22:49:11 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 00:13:14 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	is_valid_argument(char *arg)
+int	_is_valid_argument(char *arg)
 {
 	int	i;
 
@@ -29,7 +29,7 @@ int	is_valid_argument(char *arg)
 	return (1);
 }
 
-char	*create_new_export_arg(char *var_name, char *content)
+char	*_create_new_export_arg(char *var_name, char *content)
 {
 	if (content == NULL)
 		return (ft_strjoin(2, "declare -x ", var_name));
@@ -37,7 +37,7 @@ char	*create_new_export_arg(char *var_name, char *content)
 		return (ft_strjoin(5, "declare -x ", var_name, "=\"", content, "\""));
 }
 
-int	split_argument(char *arg, char **var_name, char **content, int *append_f)
+int	_split_argument(char *arg, char **var_name, char **content, int *append_f)
 {
 	char	*tmp;
 
@@ -66,7 +66,7 @@ int	split_argument(char *arg, char **var_name, char **content, int *append_f)
 	return (1);
 }
 
-int	contains_export(char *arg, char **strarr)
+int	_contains_export(char *arg, char **strarr)
 {
 	int		i;
 	int		len;
@@ -82,7 +82,7 @@ int	contains_export(char *arg, char **strarr)
 	return (-1);
 }
 
-int		contains_env(char *arg, char **strarr)
+int	_contains_env(char *arg, char **strarr)
 {
 	int		i;
 	int		len;

@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:33:17 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 15:43:32 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 00:05:01 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 
+int		ft_abs(int n);
 int		ft_isalpha(int ch);
 int		ft_isalnum(int ch);
 int		ft_isdigit(int ch);
@@ -35,4 +36,5 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(int count, ...);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char *set);
+char	*ft_itoa(int nb);
 #endif

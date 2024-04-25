@@ -6,20 +6,20 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 22:57:12 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 00:13:10 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 #include "utils.h"
 #include "libft.h"
 
-int		is_valid_argument(char *arg);
-char	*create_new_export_arg(char *var_name, char *content);
-int		split_argument(char *arg, char **var_name, \
+int		_is_valid_argument(char *arg);
+char	*_create_new_export_arg(char *var_name, char *content);
+int		_split_argument(char *arg, char **var_name, \
 						char **content, int *append_f);
-int		contains_export(char *arg, char **strarr);
-int		contains_env(char *arg, char **strarr);
+int		_contains_export(char *arg, char **strarr);
+int		_contains_env(char *arg, char **strarr);
 
 int	append_to_export(char *var_name, char *new_content, t_shell *shell)
 {
@@ -27,7 +27,7 @@ int	append_to_export(char *var_name, char *new_content, t_shell *shell)
 	int		count;
 	char	**tmp;
 	
-	new_arg = create_new_export_arg(var_name, new_content);
+	new_arg = _create_new_export_arg(var_name, new_content);
 	if (new_arg == NULL)
 		return (free(var_name), free(new_content), 0);
 	count = 0;
@@ -56,7 +56,7 @@ int	add_to_export(char *var_name, char *new_content, \
 	char	*prev_content;
 	char	*new_arg;
 	
-	pos = contains_export(var_name, shell->export);
+	pos = _contains_export(var_name, shell->export);
 	if (pos != -1 && new_content != NULL)
 	{
 		prev_content = ft_strchr(shell->export[pos], '=');
@@ -113,7 +113,7 @@ int	add_to_env(char *var_name, char *new_content, \
 	char	*prev_content;
 	char	*new_arg;
 
-	pos = contains_env(var_name, shell->env);
+	pos = _contains_env(var_name, shell->env);
 	if (pos != -1 && new_content != NULL)
 	{
 		prev_content = ft_strchr(shell->env[pos], '=');
@@ -147,9 +147,9 @@ void	exec_export(char **args, t_shell *shell)
 		i = 1;
 		while (args[i] != NULL)
 		{
-			if (is_valid_argument(args[i]))
+			if (_is_valid_argument(args[i]))
 			{
-				if (split_argument(args[i], &var_name, &content, &append_f) == 0 || \
+				if (_split_argument(args[i], &var_name, &content, &append_f) == 0 || \
 					add_to_export(var_name, content, append_f, shell) == 0 || \
 					add_to_env(var_name, content, append_f, shell) == 0)
 					break ;

@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_shell_struct.c                                :+:      :+:    :+:   */
+/*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:08:04 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 00:29:14 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
-#include "utils.h"
-#include <unistd.h>
+#ifndef SHELL_H
+# define SHELL_H
 
-void	free_shell_struct(t_shell *shell)
+# include "command.h"
+
+typedef struct s_shell
 {
-	if (shell->cmds != NULL)
-		free_cmds(&shell->cmds);
-	shell->cmds = NULL;
-	if (shell->env != NULL)
-		free_strarray(shell->env);
-	if (shell->export != NULL)
-		free_strarray(shell->export);
-	shell->env = NULL;
-	close(shell->stdinfd_cpy);
-	close(shell->stdoutfd_cpy);
-	close(shell->fdin);
-}
+	t_cmd	*cmds;
+	char	**env;
+	char	**export;
+	int		stdinfd_cpy;
+	int		stdoutfd_cpy;
+	int		fdin;
+	int		exit_code;
+	int		is_exit;
+}	t_shell;
+
+int		init_shell_struct(t_shell *shell, int as, char **av, char **ep);
+void	free_shell_struct(t_shell *shell);
+
+#endif

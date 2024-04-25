@@ -6,15 +6,14 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 22:36:46 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 00:10:49 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 #include "utils.h"
 #include "libft.h"
 #include <unistd.h>
-#include <stdio.h>
 
 char	*convert_envarg_to_export(char *arg)
 {

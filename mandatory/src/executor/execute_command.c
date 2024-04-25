@@ -6,19 +6,19 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 22:35:10 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 00:17:18 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 #include "executor.h"
 #include "utils.h"
 #include <sys/types.h>
 #include <unistd.h>
-#include <stdio.h>
 #include <fcntl.h>
 
-static int	manage_child_redirection(int p[2], t_executor *exec, t_shell *shell)
+static int	manage_child_redirection(int p[2], t_executor *exec, \
+												t_shell *shell)
 {
 	int	fd;
 
@@ -45,7 +45,8 @@ static int	manage_child_redirection(int p[2], t_executor *exec, t_shell *shell)
 	return (close(p[0]), close(p[1]), close(shell->fdin), 1);
 }
 
-static int	manage_parent_redirection(int p[2], t_executor *exec, t_shell *shell)
+static int	manage_parent_redirection(int p[2], t_executor *exec, \
+												t_shell *shell)
 {
 	close(p[1]);
 	close(shell->fdin);

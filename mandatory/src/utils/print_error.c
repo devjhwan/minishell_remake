@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 14:21:11 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 00:25:50 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,24 @@ void	print_command_not_found(char *arg)
 	ft_putstrerr(": command not found\n");
 }
 
+void	print_too_many_arguments(char *arg)
+{
+	ft_putstrerr("minishell: ");
+	ft_putstrerr(arg);
+	ft_putstrerr(": too many arguments\n");
+}
+
+void	print_numeric_argument_requiered(char *arg1, char *arg2)
+{
+	ft_putstrerr("minishell: ");
+	ft_putstrerr(arg1);
+	ft_putstrerr(": ");
+	ft_putstrerr(arg2);
+	ft_putstrerr(": numeric argument required\n");
+}
+
 void	print_error(t_errtype t, char *arg1, char *arg2)
 {
-	(void)arg2;
 	if (t == UNEXPECTED_TOKEN)
 		print_unexpected_token(arg1);
 	else if (t == AMBIGUOUS_REDIRECT)
@@ -71,4 +86,8 @@ void	print_error(t_errtype t, char *arg1, char *arg2)
 		print_is_directory(arg1);
 	else if (t == COMMAND_NOT_FOUND)
 		print_command_not_found(arg1);
+	else if (t == TOO_MANY_ARGUMENTS)
+		print_too_many_arguments(arg1);
+	else if (t == NUMERIC_ARGUMENT)
+		print_numeric_argument_requiered(arg1, arg2);
 }

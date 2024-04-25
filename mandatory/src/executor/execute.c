@@ -6,19 +6,16 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 22:45:33 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 00:46:18 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "shell.h"
 #include "executor.h"
 #include "utils.h"
-#include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
-
-void	wait_all_pipe(pid_t last_pid, t_shell *shell);
 
 int	execute_one_command(t_cmd *cmd, t_shell *shell)
 {
@@ -69,18 +66,9 @@ void	execute(t_shell *shell)
 		pid = execute_one_command(cmds, shell);
 	else
 		pid = execute_multiple_command(cmds, shell);
-	wait_all_pipe(pid, shell);
+	if (pid > 0)
+		waitpid(pid, &shell->exit_code, 0);
+	if (shell->exit_code >= 256)
+		shell->exit_code /= 256;
 	unlink(".heredoc");
-}
-
-void	wait_all_pipe(pid_t last_pid, t_shell *shell)
-{
-	if (last_pid > 0)
-	{
-		waitpid(last_pid, &shell->exit_code, 0);
-		if (WIFEXITED(shell->exit_code))
-			printf("%d\n", WEXITSTATUS(shell->exit_code));
-		else if (WIFSIGNALED(shell->exit_code))
-			printf("%d\n", WTERMSIG(shell->exit_code));
-	}
 }

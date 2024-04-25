@@ -6,13 +6,14 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:30:53 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 13:03:20 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 00:07:07 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_TREE_H
 # define PARSER_TREE_H
 
+# include "shell.h"
 # include "parser_token.h"
 # include "libft.h"
 # include <stdlib.h>
@@ -33,7 +34,7 @@ typedef struct s_ptree
 	struct s_ptree	*right;
 }	t_ptree;
 
-int			expander(t_ptree *tree, char **envp);
+int			expander(t_ptree *tree, t_shell *shell);
 
 t_ptree		*create_parser_tree(t_ptoken *tokens);
 t_ptree		*create_new_node(t_nodetype	t, char *arg);

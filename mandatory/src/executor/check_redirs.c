@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 13:03:56 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 00:14:16 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static int	check_file_out_append(char *filename)
 	return (1);
 }
 
-int	check_redirs(t_redir *redir)
+int	_check_redirs(t_redir *redir)
 {
 	if (redir->t == IN && check_file_in(redir->filename) == 0)
 		return (0);
@@ -113,6 +113,6 @@ int	check_redirs(t_redir *redir)
 	else if (redir->t == OUT2 && check_file_out_append(redir->filename) == 0)
 		return (0);
 	if (redir->next != NULL)
-		return (check_redirs(redir->next));
+		return (_check_redirs(redir->next));
 	return (1);
 }

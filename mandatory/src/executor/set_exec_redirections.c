@@ -6,14 +6,14 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 11:46:49 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 00:14:25 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command.h"
 #include "libft.h"
 
-int	set_exec_rdin(t_redir *redirs, t_redir **rdin)
+int	_set_exec_rdin(t_redir *redirs, t_redir **rdin)
 {
 	t_redir	*tmp;
 	t_redir	*tmp2;
@@ -39,7 +39,7 @@ int	set_exec_rdin(t_redir *redirs, t_redir **rdin)
 	return (1);
 }
 
-int	set_exec_rdout(t_redir *redirs, t_redir **rdout)
+int	_set_exec_rdout(t_redir *redirs, t_redir **rdout)
 {
 	t_redir	*tmp;
 	t_redir	*tmp2;

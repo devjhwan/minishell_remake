@@ -6,12 +6,11 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:20:27 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 18:01:05 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 00:11:54 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 char	*_substr_quote(char **line)
 {

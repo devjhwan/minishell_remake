@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:17:18 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 01:58:18 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ pid_t	execute_command(t_executor *exec, t_shell *shell)
 	int		p[2];
 	pid_t	pid;
 
-	pipe(p);
+	if (pipe(p) < 0)
+		return (-1);
 	pid = fork();
 	if (pid == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 02:57:12 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:52:27 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ typedef enum e_errtype
 	IS_DIRECTORY,
 	COMMAND_NOT_FOUND,
 	TOO_MANY_ARGUMENTS,
-	NUMERIC_ARGUMENT
+	NUMERIC_ARGUMENT,
+	HOME_NOT_SET,
+	NO_FILE2,
+	NOT_A_DIRECTORY,
+	PERMISSION_DENIED2
 }	t_errtype;
 
 char	*remove_quote(char *arg);
@@ -36,5 +40,6 @@ void	print_strarray(char **args);
 char	**copy_strarray(char **args);
 void	free_strarray(char **strarr);
 int		isbuiltin(char *arg);
+int		isdir(char *filepath);
 
 #endif

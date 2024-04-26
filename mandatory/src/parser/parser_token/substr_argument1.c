@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:19:37 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 01:07:09 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:05:01 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*_substr_env(char **line)
 
 	len = 1;
 	while ((*line)[len] != '\0' && \
-			ft_strchr("|$ <>\'\"", (*line)[len]) == NULL)
+			ft_strchr("|$ <>\'\"/", (*line)[len]) == NULL)
 		len++;
 	str = ft_substr(*line, 0, len);
 	*line += len;

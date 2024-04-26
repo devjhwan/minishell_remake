@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 02:29:59 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:30:45 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	*get_username(t_shell *shell)
 		username[ft_strlen(username) - 1] = '\0';
 	return (close(p[0]), close(p[1]), username);
 }
-#include <stdio.h>
+
 static char	*get_userpasswd(int fd, t_shell *shell)
 {
 	char	*username;

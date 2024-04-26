@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 03:19:05 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:59:16 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,25 +67,28 @@ static char	**create_export(char **ep)
 
 static int	manage_pwd(t_shell *shell)
 {
+	char	*pwd;
 	char	*tmp;
 
-	shell->pwd = (char *)malloc(sizeof(char) * 1024);
-	shell->oldpwd = search_environment("OLDPWD", shell);
-	if (shell->oldpwd == NULL || shell->pwd == NULL)
-		return (0);
-	if (shell->oldpwd[0] == '\0')
-	{
-		free(shell->oldpwd);
-		shell->oldpwd = NULL;
+	if (contains_export("OLDPWD", shell->export) == -1)
 		exec_export((char *[]){"export", "OLDPWD", NULL}, shell);
+	else
+	{
+		tmp = search_environment("OLDPWD", shell);
+		if (tmp == NULL || !isdir(tmp))
+			exec_unset((char *[]){"unset", "OLDPWD", NULL}, shell);
+		free(tmp);
 	}
-	if (shell->pwd == NULL || getcwd(shell->pwd, 1024) == NULL)
-		return (free_shell_struct(shell), 0);
-	tmp = ft_strjoin(2, "PWD=", shell->pwd);
-	if (tmp == NULL)
+	pwd = (char *)malloc(sizeof(char) * 1024);
+	if (pwd == NULL)
 		return (0);
+	if (getcwd(pwd, 1024) == NULL)
+		return (free(pwd), 0);
+	tmp = ft_strjoin(2, "PWD=", pwd);
+	if (tmp == NULL)
+		return (free(pwd), 0);
 	exec_export((char *[]){"export", tmp, NULL}, shell);
-	return (free(tmp), 1);
+	return (free(pwd), free(tmp), 1);
 }
 
 int	init_shell_struct(t_shell *shell, int as, char **av, char **ep)

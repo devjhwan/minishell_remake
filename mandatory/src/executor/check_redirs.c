@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:14:16 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:49:17 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,10 @@ static int	check_file_out(char *filename)
 static int	check_file_out_append(char *filename)
 {
 	int			fd;
-	struct stat	path_stat;
 
 	if (access(filename, F_OK) != 0)
 	{
-		stat(filename, &path_stat);
-		if (!S_ISREG(path_stat.st_mode))
+		if (isdir(filename))
 			return (print_error(IS_DIRECTORY, filename, NULL), 0);
 		else if (access(filename, W_OK) != 0)
 			return (print_error(PERMISSION_DENIED, filename, NULL), 0);

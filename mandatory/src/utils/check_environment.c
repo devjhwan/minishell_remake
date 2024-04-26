@@ -6,13 +6,14 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 13:06:36 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:17:06 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "shell.h"
 #include "libft.h"
 
-int	check_environment(char *arg, char **envp)
+int	check_environment(char *arg, t_shell *shell)
 {
 	int	i;
 	int	arg_len;
@@ -23,9 +24,10 @@ int	check_environment(char *arg, char **envp)
 		return (1);
 	if (arg[0] == '\'' || arg[0] == '\"')
 		return (1);
-	while (envp[i] != NULL)
+	while (shell->env[i] != NULL)
 	{
-		if (ft_strncmp(envp[i], arg, arg_len) == 0 && envp[i][arg_len] == '=')
+		if (ft_strncmp(shell->env[i], arg, arg_len) == 0 && \
+						shell->env[i][arg_len] == '=')
 			return (1);
 		i++;
 	}

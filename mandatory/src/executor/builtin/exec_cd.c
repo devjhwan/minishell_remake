@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 19:23:52 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:25:06 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	cd_env_home(t_shell *shell)
 {
 	char	*homepath;
 
-	if (check_environment("HOME", shell) == 0)
+	if (check_environment("HOME") == 0)
 		print_error(HOME_NOT_SET, "cd", NULL);
 	else
 	{
-		homepath = search_environment("HOME", shell);
+		homepath = search_environment("HOME");
 		if (homepath != NULL)
 		{
 			change_directory(homepath, shell);

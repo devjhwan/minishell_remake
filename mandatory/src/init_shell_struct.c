@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:07:41 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:24:53 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	manage_pwd(t_shell *shell)
 		exec_export((char *[]){"export", "OLDPWD", NULL}, shell);
 	else
 	{
-		tmp = search_environment("OLDPWD", shell);
+		tmp = search_environment("OLDPWD");
 		if (tmp == NULL || !isdir(tmp))
 			exec_unset((char *[]){"unset", "OLDPWD", NULL}, shell);
 		free(tmp);
@@ -99,7 +99,7 @@ t_shell	*init_shell_struct(int as, char **av, char **ep)
 
 	(void)as;
 	(void)av;
-	shell = (t_shell*)malloc(sizeof(t_shell));
+	shell = get_shell_struct();
 	if (shell == NULL)
 		return (NULL);
 	shell->cmds = NULL;

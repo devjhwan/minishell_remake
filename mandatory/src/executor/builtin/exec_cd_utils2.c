@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 19:21:55 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:25:04 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	update_oldpwd(t_shell *shell)
 	char	*tmp;
 	char	*tmp2;
 
-	tmp = search_environment("PWD", shell);
+	tmp = search_environment("PWD");
 	if (tmp == NULL || ft_strlen(tmp) == 0)
 	{
 		exec_unset((char *[]){"unset", "OLDPWD", NULL}, shell);

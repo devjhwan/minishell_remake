@@ -6,14 +6,12 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 18:12:21 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:24:47 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
-
-# include "shell.h"
 
 typedef enum e_errtype
 {
@@ -36,9 +34,9 @@ typedef enum e_errtype
 char	*remove_quote(char *arg);
 int		contains_export(char *arg, char **strarr);
 int		contains_env(char *arg, char **strarr);
-int		check_environment(char *arg, t_shell *shell);
+int		check_environment(char *arg);
 char	*get_path_from_env(char *arg, char **envp);
-char	*search_environment(char *arg, t_shell *shell);
+char	*search_environment(char *arg);
 void	print_error(t_errtype t, char *arg1, char *arg2);
 void	print_strarray(char **args);
 char	**copy_strarray(char **args);

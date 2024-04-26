@@ -6,12 +6,13 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 20:47:17 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:08:32 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:23:38 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 t_shell	*get_shell_struct(void)
 {
@@ -22,6 +23,8 @@ t_shell	*get_shell_struct(void)
 		shell = (t_shell *)malloc(sizeof(t_shell));
 		if (shell == NULL)
 			return (NULL);
+		printf("Create shell\n");
 	}
+	printf("%p\n", shell);
 	return (shell);
 }

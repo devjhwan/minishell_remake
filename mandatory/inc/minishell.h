@@ -6,16 +6,16 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:06:37 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:15:07 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "shell.h"
+# include "command.h"
 
-t_cmd	*parser(char *line, t_shell *shell);
+t_cmd	*parser(char *line);
 
 void	set_minishell_terminal(void);
 void	rollback_terminal_setting(void);

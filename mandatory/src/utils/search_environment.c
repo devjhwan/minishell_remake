@@ -6,20 +6,23 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 21:51:23 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:09:09 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:24:36 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 #include "libft.h"
+#include <stdio.h>
 
-char	*search_environment(char *arg, t_shell *shell)
+char	*search_environment(char *arg)
 {
-	int	i;
-	int	arg_len;
+	int		i;
+	int		arg_len;
+	t_shell	*shell;
 
 	i = 0;
 	arg_len = ft_strlen(arg);
+	shell = get_shell_struct();
 	if (arg_len == 0)
 		return (ft_strdup("$"));
 	if (arg[0] == '?')

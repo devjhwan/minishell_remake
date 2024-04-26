@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:09:52 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:10:13 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int args, char **argv, char **envp)
 		if (str == NULL)
 			break ;
 		add_history(str);
-		shell->cmds = parser(str, shell);
+		shell->cmds = parser(str);
 		free(str);
 		if (shell->cmds == NULL || shell->is_exit)
 			continue ;

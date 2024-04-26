@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 01:58:18 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 03:02:56 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,16 @@ static int	manage_parent_redirection(int p[2], t_executor *exec, \
 	else
 	{
 		close(p[0]);
-		shell->fdin = dup(shell->stdinfd_cpy);
+		shell->fdin = dup(STDIN_FILENO);
 	}
 	return (1);
 }
 
 static int	check_command_path(char *path)
 {
-	if (access(path, F_OK) == -1)
+	if (path == NULL)
+		return (0);
+	else if (access(path, F_OK) == -1)
 		return (print_error(COMMAND_NOT_FOUND, path, NULL), 0);
 	else if (access(path, X_OK) == -1)
 		return (print_error(PERMISSION_DENIED, path, NULL), 0);
@@ -73,12 +75,14 @@ pid_t	execute_command(t_executor *exec, t_shell *shell)
 {
 	int		p[2];
 	pid_t	pid;
+	char	*path;
 
 	if (pipe(p) < 0)
 		return (-1);
 	pid = fork();
 	if (pid == 0)
 	{
+		path = get_path_from_env(exec->args[0], shell->env);
 		if (manage_child_redirection(p, exec, shell) == 0)
 			shell->is_exit = 1;
 		if (isbuiltin(exec->args[0]))
@@ -86,9 +90,10 @@ pid_t	execute_command(t_executor *exec, t_shell *shell)
 			execute_builtin(exec, shell);
 			shell->is_exit = 1;
 		}
-		else if (check_command_path(exec->args[0]) == 0 || \
-				execve(exec->args[0], exec->args, shell->env) < 0)
+		else if (check_command_path(path) == 0 || \
+				execve(path, exec->args, shell->env) < 0)
 			shell->is_exit = 1;
+		free(path);
 	}
 	else if (manage_parent_redirection(p, exec, shell) == 0)
 		return (-1);

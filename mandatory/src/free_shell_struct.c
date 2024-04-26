@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 01:19:15 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 03:04:03 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	free_shell_struct(t_shell *shell)
 	if (shell->export != NULL)
 		free_strarray(shell->export);
 	shell->env = NULL;
-	close(shell->stdinfd_cpy);
-	close(shell->stdoutfd_cpy);
 	close(shell->fdin);
 	free(shell->pwd);
 	free(shell->oldpwd);

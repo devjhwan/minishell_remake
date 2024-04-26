@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:46:18 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 03:03:51 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	execute_one_command(t_cmd *cmd, t_shell *shell)
 	t_executor	*exec;
 
 	pid = -1;
-	exec = create_new_executor(cmd, shell->env);
+	exec = create_new_executor(cmd);
 	if (exec != NULL)
 	{
 		if (isbuiltin(exec->args[0]))
@@ -43,7 +43,7 @@ int	execute_multiple_command(t_cmd *cmd, t_shell *shell)
 	pid = -1;
 	while (cmd != NULL && !shell->is_exit)
 	{
-		exec = create_new_executor(cmd, shell->env);
+		exec = create_new_executor(cmd);
 		if (exec != NULL)
 		{
 			pid = execute_command(exec, shell);

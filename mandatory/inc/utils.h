@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:24:28 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 02:57:12 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef enum e_errtype
 
 char	*remove_quote(char *arg);
 int		check_environment(char *arg, t_shell *shell);
+char	*get_path_from_env(char *arg, char **envp);
 char	*search_environment(char *arg, t_shell *shell);
 void	print_error(t_errtype t, char *arg1, char *arg2);
 void	print_strarray(char **args);

@@ -6,7 +6,7 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2024/04/26 02:27:16 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/26 02:57:45 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,10 +30,10 @@ P_TREE_SRCS		:=create_parser_tree.c create_new_node.c free_tree.c \
 				  join_tree_arguments.c parse_tree_to_cmds.c
 UTILS_SRCS		:=free_strarray.c print_error.c remove_quote.c \
 				  search_environment.c check_environment.c copy_strarray.c \
-				  isbuiltin.c print_strarray.c
+				  isbuiltin.c print_strarray.c get_path_from_env.c
 EXECUTOR_SRCS	:=execute.c create_new_executor.c free_executor.c \
-				  set_exec_args.c check_redirs.c set_exec_redirections.c \
-				  print_executor.c execute_command.c
+				  check_redirs.c set_exec_redirections.c print_executor.c \
+				  execute_command.c
 BUILTIN_SRCS	:=execute_builtin.c exec_echo.c exec_env.c exec_export.c \
 				  exec_export_utils.c exec_exit.c exec_unset.c exec_pwd.c \
 				  exec_cd.c exec_cd_utils.c

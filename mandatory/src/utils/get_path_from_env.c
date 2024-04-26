@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_exec_args.c                                    :+:      :+:    :+:   */
+/*   get_path_from_env.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:13:58 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 02:56:32 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*find_path(char *arg, char **path_split)
 	return (ft_strdup(arg));
 }
 
-static char	*get_path_from_env(char *arg, char **envp)
+char	*get_path_from_env(char *arg, char **envp)
 {
 	char	**path_split;
 	char	*path;
@@ -59,22 +59,4 @@ static char	*get_path_from_env(char *arg, char **envp)
 		return (NULL);
 	new_arg = find_path(arg, path_split);
 	return (free_strarray(path_split), new_arg);
-}
-
-char	**_set_exec_args(char **args, char **envp)
-{
-	char	**new_args;
-	char	*arg;
-
-	new_args = copy_strarray(args);
-	if (new_args == NULL)
-		return (NULL);
-	if (args[0] == NULL)
-		return (new_args);
-	arg = get_path_from_env(args[0], envp);
-	if (arg == NULL)
-		return (free_strarray(new_args), NULL);
-	free(new_args[0]);
-	new_args[0] = arg;
-	return (new_args);
 }

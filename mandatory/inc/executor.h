@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 02:26:09 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 03:03:40 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int			contains_export(char *arg, char **strarr);
 int			contains_env(char *arg, char **strarr);
 char		*get_homepath(t_shell *shell);
 
-t_executor	*create_new_executor(t_cmd *cmd, char **envp);
+t_executor	*create_new_executor(t_cmd *cmd);
 void		free_executor(t_executor **exec);
 void		print_executor(t_executor *exec);
 

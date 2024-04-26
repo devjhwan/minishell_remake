@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 01:35:24 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 03:04:02 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,7 @@ int	init_shell_struct(t_shell *shell, int as, char **av, char **ep)
 		return (free_strarray(shell->env), free_strarray(shell->export), 0);
 	if (manage_pwd(shell) == 0)
 		return (free_shell_struct(shell), 0);
-	shell->stdinfd_cpy = dup(STDIN_FILENO);
-	shell->stdoutfd_cpy = dup(STDOUT_FILENO);
 	shell->fdin = dup(STDIN_FILENO);
-	if (shell->stdinfd_cpy < 0 || shell->stdoutfd_cpy < 0 || shell->fdin < 0)
-		return (free_shell_struct(shell), 0);
 	shell->exit_code = 0;
 	shell->is_exit = 0;
 	return (1);

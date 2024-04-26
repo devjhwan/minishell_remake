@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 01:32:59 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 03:04:04 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ typedef struct s_shell
 	char	**export;
 	char	*pwd;
 	char	*oldpwd;
-	int		stdinfd_cpy;
-	int		stdoutfd_cpy;
 	int		fdin;
 	int		exit_code;
 	int		is_exit;

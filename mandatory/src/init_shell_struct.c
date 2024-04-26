@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 17:33:18 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:37:00 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	init_shell_struct(t_shell *shell, int as, char **av, char **ep)
 {
 	(void)as;
 	(void)av;
+	shell->cmds = NULL;
 	shell->pwd = NULL;
 	shell->oldpwd = NULL;
 	shell->env = copy_strarray(ep);

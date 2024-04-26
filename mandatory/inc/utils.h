@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 14:52:27 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:59:21 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ typedef enum e_errtype
 	HOME_NOT_SET,
 	NO_FILE2,
 	NOT_A_DIRECTORY,
-	PERMISSION_DENIED2
+	PERMISSION_DENIED2,
+	NOT_A_VALID_IDENTIFIER
 }	t_errtype;
 
 char	*remove_quote(char *arg);

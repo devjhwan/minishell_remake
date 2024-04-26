@@ -6,7 +6,7 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2024/04/26 15:14:34 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/26 17:55:57 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,12 +52,12 @@ INC				:=-I./mandatory/inc -I./libft -I./libft/gnl
 CC				:=cc
 CFLAGS			:=-Wall -Werror -Wextra
 
-DEBUG			:=-fsanitize="address,undefined" -g
+# DEBUG			:=-fsanitize="address,undefined" -g
 
-LDFLAGS			:=-L/home/linuxbrew/.linuxbrew/opt/readline/lib
-CPPFLAGS		:=-I/home/linuxbrew/.linuxbrew/opt/readline/include
-# LDFLAGS			:=-L${HOME}/homebrew/opt/readline/lib
-# CPPFLAGS		:=-I${HOME}/homebrew/opt/readline/include
+# LDFLAGS			:=-L/home/linuxbrew/.linuxbrew/opt/readline/lib
+# CPPFLAGS		:=-I/home/linuxbrew/.linuxbrew/opt/readline/include
+LDFLAGS			:=-L${HOME}/homebrew/opt/readline/lib
+CPPFLAGS		:=-I${HOME}/homebrew/opt/readline/include
 
 LIBS			:=libft/libft.a libft/gnl/gnl.a
 

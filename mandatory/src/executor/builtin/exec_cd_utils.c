@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 17:33:44 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:55:13 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,7 @@ static char	*get_username(t_shell *shell)
 		call_whoami(p, shell);
 	else if (pid > 0)
 	{
-		username = (char *)malloc(sizeof(char) * 256);
-		if (username == NULL)
-			return (close(p[0]), close(p[1]), NULL);
-		if (read(p[0], username, 256) < 0)
-			return (close(p[0]), close(p[1]), free(username), NULL);
+		username = get_next_line(p[0]);
 		waitpid(pid, &shell->exit_code, 0);
 	}
 	if (username != NULL)
@@ -55,6 +51,7 @@ static char	*get_username(t_shell *shell)
 	return (close(p[0]), close(p[1]), username);
 }
 
+/*
 static char	*get_userpasswd(int fd, t_shell *shell)
 {
 	char	*username;
@@ -76,23 +73,16 @@ static char	*get_userpasswd(int fd, t_shell *shell)
 	}
 	return (free(username), NULL);
 }
+*/
 
 char	*get_homepath(t_shell *shell)
 {
-	int		fd;
-	char	*userpasswd;
-	char	**split;
-	char	*home;
+	char	*username;
+	char	*homepath;
 
-	fd = open("/etc/passwd", O_RDONLY, 0644);
-	if (fd < 0)
+	username = get_username(shell);
+	if (username == NULL)
 		return (NULL);
-	userpasswd = get_userpasswd(fd, shell);
-	if (userpasswd == NULL)
-		return (close(fd), NULL);
-	split = ft_split(userpasswd, ":");
-	if (split == NULL)
-		return (close(fd), free(userpasswd), NULL);
-	home = ft_strdup(split[5]);
-	return (close(fd), free(userpasswd), free_strarray(split), home);
+	homepath = ft_strjoin(2, "/Users/", username);
+	return (free(username), homepath);
 }

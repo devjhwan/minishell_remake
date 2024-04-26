@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 17:34:31 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:59:11 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,9 @@ void	exec_export(char **args, t_shell *shell)
 		i = 1;
 		while (args[i] != NULL)
 		{
-			if (_is_valid_argument(args[i]))
+			if (!_is_valid_argument(args[i]))
+				print_error(NOT_A_VALID_IDENTIFIER, "export", args[i]);
+			else
 			{
 				if (_split_argument(args[i], &var_name, \
 									&content, &append_f) == 0 || \

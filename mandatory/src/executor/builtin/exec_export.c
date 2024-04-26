@@ -6,19 +6,18 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 17:59:11 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 18:22:52 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 #include "utils.h"
 #include "libft.h"
-#include "executor.h"
 
 int		_is_valid_argument(char *arg);
 char	*_create_new_export_arg(char *var_name, char *content);
-int		_split_argument(char *arg, char **var_name, \
-						char **content, int *append_f);
+int		_split_argument(char *arg, char **v_name, char **cntnt, int *append_f);
+int		_export_pwd_management(char *var_name, char *content, t_shell *shell);
 
 int	append_to_export(char *var_name, char *new_content, t_shell *shell)
 {
@@ -150,14 +149,12 @@ void	exec_export(char **args, t_shell *shell)
 		{
 			if (!_is_valid_argument(args[i]))
 				print_error(NOT_A_VALID_IDENTIFIER, "export", args[i]);
-			else
-			{
-				if (_split_argument(args[i], &var_name, \
+			else if (_split_argument(args[i], &var_name, \
 									&content, &append_f) == 0 || \
+					_export_pwd_management(var_name, content, shell) == 0 || \
 					add_to_export(var_name, content, append_f, shell) == 0 || \
 					add_to_env(var_name, content, append_f, shell) == 0)
 					break ;
-			}
 			i++;
 		}
 	}

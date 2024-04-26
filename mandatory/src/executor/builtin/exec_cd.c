@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 17:55:24 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 18:07:55 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ void	cd_home(t_shell *shell)
 
 void	cd_back(t_shell *shell)
 {
+	if (shell->oldpwd != NULL)
+	{
+		if (change_directory(shell->oldpwd, shell) != 0)
+			printf("%s\n", shell->pwd);
+	}
+	else
+		print_error(OLDPWD_NOT_SET, "cd", NULL);
 	(void)shell;
 }
 

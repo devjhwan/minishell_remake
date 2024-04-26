@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 17:59:21 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 18:12:21 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,13 @@ typedef enum e_errtype
 	NO_FILE2,
 	NOT_A_DIRECTORY,
 	PERMISSION_DENIED2,
-	NOT_A_VALID_IDENTIFIER
+	NOT_A_VALID_IDENTIFIER,
+	OLDPWD_NOT_SET
 }	t_errtype;
 
 char	*remove_quote(char *arg);
+int		contains_export(char *arg, char **strarr);
+int		contains_env(char *arg, char **strarr);
 int		check_environment(char *arg, t_shell *shell);
 char	*get_path_from_env(char *arg, char **envp);
 char	*search_environment(char *arg, t_shell *shell);

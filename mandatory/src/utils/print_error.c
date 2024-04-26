@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 18:00:35 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 18:07:39 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,12 @@ void	print_not_a_valid_identifier(char *arg1, char *arg2)
 	ft_putstrerr("': not a valid identifier\n");
 }
 
+void	print_oldpwd_not_set(char *arg)
+{
+	ft_putstrerr(arg);
+	ft_putstrerr(": OLDPWD not set\n");
+}
+
 void	print_error(t_errtype t, char *arg1, char *arg2)
 {
 	ft_putstrerr("minishell: ");
@@ -132,4 +138,6 @@ void	print_error(t_errtype t, char *arg1, char *arg2)
 		print_permission_denied2(arg1, arg2);
 	else if (t == NOT_A_VALID_IDENTIFIER)
 		print_not_a_valid_identifier(arg1, arg2);
+	else if (t == OLDPWD_NOT_SET)
+		print_oldpwd_not_set(arg1);
 }

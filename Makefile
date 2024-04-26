@@ -6,7 +6,7 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2024/04/26 17:55:57 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/26 18:16:24 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ EXECUTOR_SRCS	:=execute.c create_new_executor.c free_executor.c \
 				  execute_command.c
 BUILTIN_SRCS	:=execute_builtin.c exec_echo.c exec_env.c exec_export.c \
 				  exec_export_utils.c exec_exit.c exec_unset.c exec_pwd.c \
-				  exec_cd.c exec_cd_utils.c exec_cd_utils2.c
+				  exec_cd.c exec_cd_utils.c exec_cd_utils2.c contains_env.c \
+				  contains_export.c
 				  
 SRCS			:=$(MAIN_SRCS) $(COMMAND_SRCS) $(EXPANDER_SRCS) \
 				  $(PARSER_SRCS) $(P_TOKEN_SRCS) $(P_TREE_SRCS) \

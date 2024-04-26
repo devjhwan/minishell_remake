@@ -6,10 +6,11 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:30:48 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 15:31:54 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 18:25:03 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "shell.h"
 #include "libft.h"
 
 int	_is_valid_argument(char *arg)
@@ -66,34 +67,23 @@ int	_split_argument(char *arg, char **var_name, char **content, int *append_f)
 	return (1);
 }
 
-int	contains_export(char *arg, char **strarr)
+int	_export_pwd_management(char *var_name, char *content, t_shell *shell)
 {
-	int		i;
-	int		len;
-
-	i = 0;
-	len = ft_strlen(arg);
-	while (strarr[i] != NULL)
+	if (content == NULL)
+		return (1);
+	if (ft_strncmp(var_name, "PWD", 4) == 0)
 	{
-		if (ft_strncmp(strarr[i] + 11, arg, len) == 0)
-			return (i);
-		i++;
+		free(shell->pwd);
+		shell->pwd = ft_strdup(content);
+		if (shell->pwd == NULL)
+			return (0);
 	}
-	return (-1);
-}
-
-int	contains_env(char *arg, char **strarr)
-{
-	int		i;
-	int		len;
-
-	i = 0;
-	len = ft_strlen(arg);
-	while (strarr[i] != NULL)
+	else if (ft_strncmp(var_name, "OLDPWD", 7) == 0)
 	{
-		if (ft_strncmp(strarr[i], arg, len) == 0)
-			return (i);
-		i++;
+		free(shell->oldpwd);
+		shell->oldpwd = ft_strdup(content);
+		if (shell->oldpwd == NULL)
+			return (0);
 	}
-	return (-1);
+	return (1);
 }

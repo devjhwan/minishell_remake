@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:31:14 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 22:24:57 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	main_loop(t_shell *shell)
 	while (!shell->is_exit)
 	{
 		free_cmds(&shell->cmds);
+		shell->new_exit_code = 0;
 		set_default_minishell_signal();
 		set_minishell_terminal();
 		str = readline("minishell: ");

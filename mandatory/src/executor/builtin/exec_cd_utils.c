@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cd_utils2.c                                   :+:      :+:    :+:   */
+/*   exec_cd_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:25:04 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 22:53:14 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,43 @@ static void	update_pwd(char *path, t_shell *shell)
 	free(tmp);
 }
 
-int	change_directory(char *path, t_shell *shell)
+static int	check_parent_dir(char *path)
 {
+	char	*tmp;
+	int		i;
+
+	tmp = ft_strtrim(path, " ");
+	if (tmp == NULL)
+		return (0);
+	i = ft_strlen(tmp) - 1;
+	while (i >= 0 && tmp[i] != '/')
+		i--;
+	if (i < 0)
+		return (free(tmp), 1);
+	tmp[i + 1] = '\0';
+	if (!isdir(tmp))
+		return (free(tmp), 0);
+	else
+		return (free(tmp), 1);
+}
+
+static int	check_exception(char *path)
+{
+	if (check_parent_dir(path) == 0)
+		return (print_error(NOT_A_DIRECTORY, "cd", path), 0);
 	if (access(path, F_OK) == -1)
 		return (print_error(NO_FILE2, "cd", path), 0);
 	else if (!isdir(path))
 		return (print_error(NOT_A_DIRECTORY, "cd", path), 0);
 	else if (access(path, X_OK) == -1)
 		return (print_error(PERMISSION_DENIED2, "cd", path), 0);
-	else if (chdir(path) == 0)
+	else
+		return (1);
+}
+
+int	change_directory(char *path, t_shell *shell)
+{
+	if (check_exception(path) && chdir(path) == 0)
 	{
 		if (contains_export("OLDPWD", shell->export) != -1)
 			update_oldpwd(shell);

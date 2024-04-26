@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 17:33:22 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 22:24:47 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ void	execute(t_shell *shell)
 	else
 		pid = execute_multiple_command(cmds, shell);
 	if (pid > 0)
-		waitpid(pid, &shell->exit_code, 0);
-	if (shell->exit_code >= 256)
-		shell->exit_code /= 256;
+		waitpid(pid, &shell->new_exit_code, 0);
+	if (shell->new_exit_code >= 256)
+		shell->new_exit_code /= 256;
+	shell->exit_code = shell->new_exit_code;
 	unlink(".heredoc");
 }

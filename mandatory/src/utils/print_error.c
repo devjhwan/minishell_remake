@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:50:58 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 22:57:35 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ void	print_no_file(char *arg)
 {
 	ft_putstrerr(arg);
 	ft_putstrerr(": No such file or directory\n");
+	get_shell_struct()->new_exit_code = 1;
 }
 
 void	print_permission_denied(char *arg)
 {
 	ft_putstrerr(arg);
 	ft_putstrerr(": Permission denied\n");
+	get_shell_struct()->new_exit_code = 1;
 }
 
 void	print_is_directory(char *arg)
@@ -50,13 +52,14 @@ void	print_command_not_found(char *arg)
 {
 	ft_putstrerr(arg);
 	ft_putstrerr(": command not found\n");
-	get_shell_struct()->exit_code = 127;
+	get_shell_struct()->new_exit_code = 127;
 }
 
 void	print_too_many_arguments(char *arg)
 {
 	ft_putstrerr(arg);
 	ft_putstrerr(": too many arguments\n");
+	get_shell_struct()->new_exit_code = 1;
 }
 
 void	print_numeric_argument_requiered(char *arg1, char *arg2)
@@ -65,6 +68,7 @@ void	print_numeric_argument_requiered(char *arg1, char *arg2)
 	ft_putstrerr(": ");
 	ft_putstrerr(arg2);
 	ft_putstrerr(": numeric argument required\n");
+	get_shell_struct()->new_exit_code = 255;
 }
 
 void	print_home_not_set(char *arg)
@@ -79,6 +83,7 @@ void	print_no_file2(char *arg1, char *arg2)
 	ft_putstrerr(": ");
 	ft_putstrerr(arg2);
 	ft_putstrerr(": No such file or directory\n");
+	get_shell_struct()->new_exit_code = 1;
 }
 
 void	print_not_a_directory(char *arg1, char *arg2)
@@ -87,6 +92,7 @@ void	print_not_a_directory(char *arg1, char *arg2)
 	ft_putstrerr(": ");
 	ft_putstrerr(arg2);
 	ft_putstrerr(": Not a directory\n");
+	get_shell_struct()->new_exit_code = 1;
 }
 
 void	print_permission_denied2(char *arg1, char *arg2)
@@ -95,6 +101,7 @@ void	print_permission_denied2(char *arg1, char *arg2)
 	ft_putstrerr(": ");
 	ft_putstrerr(arg2);
 	ft_putstrerr(": Permission denied\n");
+	get_shell_struct()->new_exit_code = 1;
 }
 
 void	print_not_a_valid_identifier(char *arg1, char *arg2)
@@ -103,13 +110,22 @@ void	print_not_a_valid_identifier(char *arg1, char *arg2)
 	ft_putstrerr(": `");
 	ft_putstrerr(arg2);
 	ft_putstrerr("': not a valid identifier\n");
-	get_shell_struct()->exit_code = 1;
+	get_shell_struct()->new_exit_code = 1;
 }
 
 void	print_oldpwd_not_set(char *arg)
 {
 	ft_putstrerr(arg);
 	ft_putstrerr(": OLDPWD not set\n");
+}
+
+void	print_filename_too_long(char *arg1, char *arg2)
+{
+	ft_putstrerr(arg1);
+	ft_putstrerr(": ");
+	ft_putstrerr(arg2);
+	ft_putstrerr(": File name too long\n");
+	get_shell_struct()->new_exit_code = 1;
 }
 
 void	print_error(t_errtype t, char *arg1, char *arg2)
@@ -143,4 +159,6 @@ void	print_error(t_errtype t, char *arg1, char *arg2)
 		print_not_a_valid_identifier(arg1, arg2);
 	else if (t == OLDPWD_NOT_SET)
 		print_oldpwd_not_set(arg1);
+	else if (t == FILENAME_TOO_LONG)
+		print_filename_too_long(arg1, arg2);
 }

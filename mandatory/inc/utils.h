@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:36:35 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 22:55:38 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ typedef enum e_errtype
 	NOT_A_DIRECTORY,
 	PERMISSION_DENIED2,
 	NOT_A_VALID_IDENTIFIER,
-	OLDPWD_NOT_SET
+	OLDPWD_NOT_SET,
+	FILENAME_TOO_LONG
 }	t_errtype;
 
 char	*remove_quote(char *arg);

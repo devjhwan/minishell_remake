@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 17:33:51 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 22:58:34 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,54 @@
 #include "libft.h"
 #include <stdlib.h>
 
+static int	check_digit(char *arg, char *nb)
+{
+	int	i;
+
+	while (arg[0] == ' ')
+		arg++;
+	if (*arg == '\0')
+		return (0);
+	i = 0;
+	while (arg[i] != '\0' && ft_isdigit(arg[i]))
+		i++;
+	while (arg[i] == ' ')
+		i++;
+	if (arg[i] != '\0')
+		return (0);
+	while (arg[0] == '0')
+		arg++;
+	i = 0;
+	while (arg[i] != '\0' && i < 19)
+		i++;
+	if (i < 19)
+		return (1);
+	i--;
+	while (i >= 0 && arg[i] <= nb[i])
+		i--;
+	return (i < 0);
+}
+
 static int	isnumeric(char *arg)
 {
-	int		i;
 	char	*nb;
 
-	i = 0;
 	nb = ft_strdup("9223372036854775807");
 	if (nb == NULL)
 		return (0);
-	if (arg[i] == '+')
+	if (arg[0] == '+')
 		arg++;
-	else if (arg[i] == '-')
+	else if (arg[0] == '-')
 	{
 		arg++;
 		nb[18] = '8';
 	}
-	while (arg[i] != '\0' && ft_isdigit(arg[i]) && i < 19)
-		i++;
-	if (arg[i] != '\0' && !ft_isdigit(arg[i]))
+	if (arg[0] == '\0')
 		return (free(nb), 0);
-	if (i < 19)
+	if (check_digit(arg, nb))
 		return (free(nb), 1);
-	while (i >= 0 && arg[i] < nb[i])
-		i--;
-	if (i >= 0)
+	else
 		return (free(nb), 0);
-	return (free(nb), 1);
 }
 
 static char	atoc(char *arg)
@@ -58,11 +79,13 @@ static char	atoc(char *arg)
 		++arg;
 		nf = 1;
 	}
+	while (*arg == ' ')
+		arg++;
 	if (nf)
-		while (*arg != '\0')
+		while (ft_isdigit(*arg))
 			nb = nb * 10 - (*arg++ - '0');
 	else
-		while (*arg != '\0')
+		while (ft_isdigit(*arg))
 			nb = nb * 10 + (*arg++ - '0');
 	return (nb);
 }
@@ -71,12 +94,20 @@ void	exec_exit(char **args, t_shell *shell)
 {
 	ft_putstrerr("exit\n");
 	if (args[1] == NULL)
+	{
+		shell->new_exit_code = shell->exit_code;
 		shell->is_exit = 1;
+	}
+	else if (!isnumeric(args[1]))
+	{
+		print_error(NUMERIC_ARGUMENT, args[0], args[1]);
+		shell->is_exit = 1;
+	}
 	else if (args[2] != NULL)
 		print_error(TOO_MANY_ARGUMENTS, args[0], NULL);
-	else if (!isnumeric(args[1]))
-		print_error(NUMERIC_ARGUMENT, args[0], args[1]);
 	else
-		shell->exit_code = atoc(args[1]);
-	shell->is_exit = 1;
+	{
+		shell->new_exit_code = atoc(args[1]);
+		shell->is_exit = 1;
+	}
 }

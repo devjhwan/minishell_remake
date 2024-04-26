@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:37:12 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 22:56:54 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	cd_path(char *arg, t_shell *shell)
 {
 	char	*tmp;
 
-	if (ft_strncmp(arg, ".", 2) == 0 && !access(".", F_OK))
+	if (ft_strncmp(arg, ".", 2) == 0 && access(".", F_OK) < 0)
 	{
 		ft_putstrerr("cd: error retrieving current directory: ");
 		ft_putstrerr("getcwd: cannot access parent directories: ");
@@ -79,6 +79,8 @@ void	cd_path(char *arg, t_shell *shell)
 		}
 		shell->pwd = ft_strdup(shell->pwd_save);
 	}
+	else if (ft_strlen(arg) > 255)
+		print_error(FILENAME_TOO_LONG, "cd", arg);
 	else
 		change_directory(arg, shell);
 }
@@ -87,19 +89,17 @@ void	exec_cd(char **args, t_shell *shell)
 {
 	int	i;
 
-	if (args[1] != NULL && ft_strncmp(args[1], "--", 3) == 0)
-	{
-		free(args[1]);
-		i = 1;
-		while (args[i++] != NULL)
-			args[i - 1] = args[i];
-	}
-	if (args[1] == NULL)
+	i = 1;
+	if (args[i] != NULL && ft_strncmp(args[i], "--", 3) == 0)
+		i++;
+	while (args[i] != NULL && args[i][0] == '\0')
+		return ;
+	if (args[i] == NULL)
 		cd_env_home(shell);
-	else if (ft_strncmp(args[1], "~", 2) == 0)
+	else if (ft_strncmp(args[i], "~", 2) == 0)
 		cd_home(shell);
-	else if (ft_strncmp(args[1], "-", 2) == 0)
+	else if (ft_strncmp(args[i], "-", 2) == 0)
 		cd_back(shell);
 	else
-		cd_path(args[1], shell);
+		cd_path(args[i], shell);
 }

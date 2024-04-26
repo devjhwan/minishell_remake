@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:32:15 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:50:58 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	print_not_a_valid_identifier(char *arg1, char *arg2)
 	ft_putstrerr(": `");
 	ft_putstrerr(arg2);
 	ft_putstrerr("': not a valid identifier\n");
+	get_shell_struct()->exit_code = 1;
 }
 
 void	print_oldpwd_not_set(char *arg)

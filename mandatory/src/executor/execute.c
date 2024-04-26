@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 03:03:51 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:33:22 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 int	execute_one_command(t_cmd *cmd, t_shell *shell)
 {
-	pid_t	pid;
+	pid_t		pid;
 	t_executor	*exec;
 
 	pid = -1;

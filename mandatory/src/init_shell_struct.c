@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 16:11:16 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:33:18 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	*convert_envarg_to_export(char *arg)
 		new_arg[i + 11] = arg[i];
 		i++;
 		if (arg[i - 1] == '=')
-			break;
+			break ;
 	}
 	new_arg[i + 11] = '\"';
 	while (arg[i] != '\0')

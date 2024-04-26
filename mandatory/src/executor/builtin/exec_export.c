@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 01:08:17 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:34:31 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	append_to_export(char *var_name, char *new_content, t_shell *shell)
 	char	*new_arg;
 	int		count;
 	char	**tmp;
-	
+
 	new_arg = _create_new_export_arg(var_name, new_content);
 	if (new_arg == NULL)
 		return (free(var_name), free(new_content), 0);
@@ -34,7 +34,7 @@ int	append_to_export(char *var_name, char *new_content, t_shell *shell)
 		count++;
 	tmp = (char **)malloc(sizeof(char *) * (count + 2));
 	if (tmp == NULL)
-		return (free(new_arg), free(var_name), free(new_content),  0);
+		return (free(new_arg), free(var_name), free(new_content), 0);
 	count = 0;
 	while (shell->export[count] != NULL)
 	{
@@ -54,7 +54,7 @@ int	add_to_export(char *var_name, char *new_content, \
 	int		pos;
 	char	*prev_content;
 	char	*new_arg;
-	
+
 	pos = contains_export(var_name, shell->export);
 	if (pos != -1 && new_content != NULL)
 	{
@@ -82,7 +82,7 @@ int	append_to_env(char *var_name, char *new_content, t_shell *shell)
 	char	*new_arg;
 	int		count;
 	char	**tmp;
-	
+
 	new_arg = ft_strjoin(3, var_name, "=", new_content);
 	if (new_arg == NULL)
 		return (free(var_name), free(new_content), 0);
@@ -91,7 +91,7 @@ int	append_to_env(char *var_name, char *new_content, t_shell *shell)
 		count++;
 	tmp = (char **)malloc(sizeof(char *) * (count + 2));
 	if (tmp == NULL)
-		return (free(new_arg), free(var_name), free(new_content),  0);
+		return (free(new_arg), free(var_name), free(new_content), 0);
 	count = 0;
 	while (shell->env[count] != NULL)
 	{
@@ -150,7 +150,8 @@ void	exec_export(char **args, t_shell *shell)
 		{
 			if (_is_valid_argument(args[i]))
 			{
-				if (_split_argument(args[i], &var_name, &content, &append_f) == 0 || \
+				if (_split_argument(args[i], &var_name, \
+									&content, &append_f) == 0 || \
 					add_to_export(var_name, content, append_f, shell) == 0 || \
 					add_to_env(var_name, content, append_f, shell) == 0)
 					break ;

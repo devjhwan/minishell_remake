@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 15:58:41 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:33:31 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	cd_back(t_shell *shell)
 {
 	(void)shell;
 }
+
 void	exec_cd(char **args, t_shell *shell)
 {
 	if (args[1] == NULL)

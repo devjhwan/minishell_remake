@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 14:30:45 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:33:44 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static char	*get_userpasswd(int fd, t_shell *shell)
 	int		len;
 	char	*line;
 
-
 	username = get_username(shell);
 	if (username == NULL)
 		return (NULL);
@@ -84,7 +83,7 @@ char	*get_homepath(t_shell *shell)
 	char	*userpasswd;
 	char	**split;
 	char	*home;
-	
+
 	fd = open("/etc/passwd", O_RDONLY, 0644);
 	if (fd < 0)
 		return (NULL);

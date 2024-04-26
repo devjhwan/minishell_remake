@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 17:55:19 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:21:55 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,13 @@ int	change_directory(char *path, t_shell *shell)
 		free(shell->oldpwd);
 		shell->oldpwd = shell->pwd;
 		shell->pwd = (char *)malloc(sizeof(char) * 1024);
+		if (shell->pwd == NULL)
+			return (0);
 		getcwd(shell->pwd, 1024);
+		free(shell->pwd_save);
+		shell->pwd_save = ft_strdup(shell->pwd);
+		if (shell->pwd_save == NULL)
+			return (0);
 		return (1);
 	}
 	return (0);

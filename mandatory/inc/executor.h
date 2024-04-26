@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 18:11:58 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:24:31 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		exec_env(char **args, char **env);
 void		exec_export(char **args, t_shell *shell);
 void		exec_exit(char **args, t_shell *shell);
 void		exec_unset(char **args, t_shell *shell);
-void		exec_pwd(void);
+void		exec_pwd(t_shell *shell);
 void		exec_cd(char **args, t_shell *shell);
 
 char		*get_homepath(t_shell *shell);

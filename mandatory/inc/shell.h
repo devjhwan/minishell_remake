@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 03:04:04 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:18:43 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_shell
 	t_cmd	*cmds;
 	char	**env;
 	char	**export;
+	char	*pwd_save;
 	char	*pwd;
 	char	*oldpwd;
 	int		fdin;

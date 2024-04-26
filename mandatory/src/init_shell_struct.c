@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 18:15:54 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:19:44 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,9 @@ static int	manage_pwd(t_shell *shell)
 		return (0);
 	if (getcwd(shell->pwd, 1024) == NULL)
 		return (0);
+	shell->pwd_save = ft_strdup(shell->pwd);
+	if (shell->pwd_save == NULL)
+		return (0);
 	tmp = ft_strjoin(2, "PWD=", shell->pwd);
 	if (tmp == NULL)
 		return (0);
@@ -95,6 +98,7 @@ int	init_shell_struct(t_shell *shell, int as, char **av, char **ep)
 	(void)as;
 	(void)av;
 	shell->cmds = NULL;
+	shell->pwd_save = NULL;
 	shell->pwd = NULL;
 	shell->oldpwd = NULL;
 	shell->env = copy_strarray(ep);

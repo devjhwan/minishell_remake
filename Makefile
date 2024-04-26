@@ -6,7 +6,7 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2024/04/26 18:16:24 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/26 21:08:41 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME			:=minishell
 SRCDIR			:=./mandatory/src
 
 MAIN_SRCS		:=main.c signal_handler.c terminal_setting.c \
-				  init_shell_struct.c free_shell_struct.c
+				  init_shell_struct.c free_shell_struct.c get_shell_struct.c
 COMMAND_SRCS	:=create_new_cmd.c free_cmds.c free_redirections.c \
 				  get_cmd_type.c print_cmds.c get_redir_type.c \
 				  parse_to_cmd.c

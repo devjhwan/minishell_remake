@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.h                                            :+:      :+:    :+:   */
+/*   get_shell_struct.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:08:27 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/26 20:47:17 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/26 21:08:32 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHELL_H
-# define SHELL_H
+#include "shell.h"
+#include <stdlib.h>
 
-# include "command.h"
-
-typedef struct s_shell
+t_shell	*get_shell_struct(void)
 {
-	t_cmd	*cmds;
-	char	**env;
-	char	**export;
-	char	*pwd_save;
-	char	*pwd;
-	char	*oldpwd;
-	int		fdin;
-	int		exit_code;
-	int		is_exit;
-}	t_shell;
-
-t_shell	*get_shell_struct();
-t_shell	*init_shell_struct(int as, char **av, char **ep);
-void	free_shell_struct(t_shell **shell);
-
-#endif
+	static t_shell	*shell;
+	
+	if (shell == NULL)
+	{
+		shell = (t_shell *)malloc(sizeof(t_shell));
+		if (shell == NULL)
+			return (NULL);
+	}
+	return (shell);
+}

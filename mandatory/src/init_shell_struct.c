@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 19:19:44 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:07:41 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,15 @@ static int	manage_pwd(t_shell *shell)
 	return (free(tmp), 1);
 }
 
-int	init_shell_struct(t_shell *shell, int as, char **av, char **ep)
+t_shell	*init_shell_struct(int as, char **av, char **ep)
 {
+	t_shell	*shell;
+
 	(void)as;
 	(void)av;
+	shell = (t_shell*)malloc(sizeof(t_shell));
+	if (shell == NULL)
+		return (NULL);
 	shell->cmds = NULL;
 	shell->pwd_save = NULL;
 	shell->pwd = NULL;
@@ -104,11 +109,11 @@ int	init_shell_struct(t_shell *shell, int as, char **av, char **ep)
 	shell->env = copy_strarray(ep);
 	shell->export = create_export(ep);
 	if (shell->env == NULL || shell->export == NULL)
-		return (free_strarray(shell->env), free_strarray(shell->export), 0);
+		return (free_shell_struct(&shell), NULL);
 	if (manage_pwd(shell) == 0)
-		return (free_shell_struct(shell), 0);
+		return (free_shell_struct(&shell), NULL);
 	shell->fdin = dup(STDIN_FILENO);
 	shell->exit_code = 0;
 	shell->is_exit = 0;
-	return (1);
+	return (shell);
 }

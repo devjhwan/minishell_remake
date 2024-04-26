@@ -1,88 +1,78 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cd_utils.c                                    :+:      :+:    :+:   */
+/*   exec_cd_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 17:55:13 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:25:04 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "libft.h"
-#include "get_next_line.h"
+#include "executor.h"
 #include "utils.h"
-#include <sys/types.h>
-#include <sys/wait.h>
+#include "libft.h"
 #include <unistd.h>
-#include <fcntl.h>
 
-static void	call_whoami(int p[2], t_shell *shell)
+static void	update_oldpwd(t_shell *shell)
 {
-	dup2(p[1], STDOUT_FILENO);
-	close(p[0]);
-	close(p[1]);
-	if (execve("/usr/bin/whoami", \
-			(char *[]){"/usr/bin/whoami", NULL}, shell->env) < 0)
-		shell->is_exit = 1;
-}
+	char	*tmp;
+	char	*tmp2;
 
-static char	*get_username(t_shell *shell)
-{
-	char	*username;
-	pid_t	pid;
-	int		p[2];
-
-	username = NULL;
-	if (pipe(p) < 0)
-		return (NULL);
-	pid = fork();
-	if (pid == 0)
-		call_whoami(p, shell);
-	else if (pid > 0)
+	tmp = search_environment("PWD");
+	if (tmp == NULL || ft_strlen(tmp) == 0)
 	{
-		username = get_next_line(p[0]);
-		waitpid(pid, &shell->exit_code, 0);
+		exec_unset((char *[]){"unset", "OLDPWD", NULL}, shell);
+		exec_export((char *[]){"export", "OLDPWD", NULL}, shell);
+		free(tmp);
 	}
-	if (username != NULL)
-		username[ft_strlen(username) - 1] = '\0';
-	return (close(p[0]), close(p[1]), username);
-}
-
-/*
-static char	*get_userpasswd(int fd, t_shell *shell)
-{
-	char	*username;
-	int		len;
-	char	*line;
-
-	username = get_username(shell);
-	if (username == NULL)
-		return (NULL);
-	len = ft_strlen(username);
-	line = get_next_line(fd);
-	while (line != NULL)
+	else
 	{
-		if (ft_strncmp(line, username, len - 1) == 0 && \
-			line[len] == ':')
-			return (free(username), line);
-		free(line);
-		line = get_next_line(fd);
+		tmp2 = ft_strjoin(2, "OLDPWD=", tmp);
+		free(tmp);
+		if (tmp2 != NULL)
+			exec_export((char *[]){"export", tmp2, NULL}, shell);
+		free(tmp2);
 	}
-	return (free(username), NULL);
 }
-*/
 
-char	*get_homepath(t_shell *shell)
+static void	update_pwd(char *path, t_shell *shell)
 {
-	char	*username;
-	char	*homepath;
+	char	*tmp;
 
-	username = get_username(shell);
-	if (username == NULL)
-		return (NULL);
-	homepath = ft_strjoin(2, "/Users/", username);
-	return (free(username), homepath);
+	tmp = ft_strjoin(2, "PWD=", path);
+	if (tmp != NULL)
+		exec_export((char *[]){"export", tmp, NULL}, shell);
+	free(tmp);
+}
+
+int	change_directory(char *path, t_shell *shell)
+{
+	if (access(path, F_OK) == -1)
+		return (print_error(NO_FILE2, "cd", path), 0);
+	else if (!isdir(path))
+		return (print_error(NOT_A_DIRECTORY, "cd", path), 0);
+	else if (access(path, X_OK) == -1)
+		return (print_error(PERMISSION_DENIED2, "cd", path), 0);
+	else if (chdir(path) == 0)
+	{
+		if (contains_export("OLDPWD", shell->export) != -1)
+			update_oldpwd(shell);
+		if (contains_export("PWD", shell->export) != -1)
+			update_pwd(path, shell);
+		free(shell->oldpwd);
+		shell->oldpwd = shell->pwd;
+		shell->pwd = (char *)malloc(sizeof(char) * 1024);
+		if (shell->pwd == NULL)
+			return (0);
+		getcwd(shell->pwd, 1024);
+		free(shell->pwd_save);
+		shell->pwd_save = ft_strdup(shell->pwd);
+		if (shell->pwd_save == NULL)
+			return (0);
+		return (1);
+	}
+	return (0);
 }

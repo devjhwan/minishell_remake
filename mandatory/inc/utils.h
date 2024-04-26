@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:24:47 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:36:35 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ char	**copy_strarray(char **args);
 void	free_strarray(char **strarr);
 int		isbuiltin(char *arg);
 int		isdir(char *filepath);
+char	*get_homepath(void);
 
 #endif

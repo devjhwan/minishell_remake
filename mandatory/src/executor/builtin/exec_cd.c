@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:25:06 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:37:12 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	cd_home(t_shell *shell)
 {
 	char	*homepath;
 
-	homepath = get_homepath(shell);
+	homepath = get_homepath();
 	if (homepath != NULL)
 	{
 		change_directory(homepath, shell);

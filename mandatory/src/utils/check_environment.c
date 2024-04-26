@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:12:31 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:33:54 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_environment(char *arg)
 	shell = get_shell_struct();
 	if (arg_len == 0)
 		return (1);
-	if (arg[0] == '\'' || arg[0] == '\"')
+	if (arg[0] == '\'' || arg[0] == '\"' || arg[0] == '~')
 		return (1);
 	while (shell->env[i] != NULL)
 	{

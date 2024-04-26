@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 18:15:07 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:28:54 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	unset_envvar(int pos, char **env)
 	env[pos - 1] = NULL;
 }
 
-static void unset_pwd_manage(char *arg, t_shell *shell)
+static void	unset_pwd_manage(char *arg, t_shell *shell)
 {
 	if (ft_strncmp(arg, "PWD", 4) == 0)
 	{

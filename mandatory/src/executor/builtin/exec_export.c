@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 18:22:52 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:28:48 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void	exec_export(char **args, t_shell *shell)
 					_export_pwd_management(var_name, content, shell) == 0 || \
 					add_to_export(var_name, content, append_f, shell) == 0 || \
 					add_to_env(var_name, content, append_f, shell) == 0)
-					break ;
+				break ;
 			i++;
 		}
 	}

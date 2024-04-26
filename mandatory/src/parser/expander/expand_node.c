@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 21:54:14 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:13:16 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:48:26 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 char	*_expand_singular_env(char *args);
 char	*_expand_dquote_env(char *arg);
+char	*_expand_homepath(char *arg);
 
 int	_expand_node(t_ptree *node)
 {
@@ -33,6 +34,9 @@ int	_expand_node(t_ptree *node)
 	}
 	else if (node->arg[0] == '\'' || node->arg[0] == '\"')
 		new_arg = remove_quote(node->arg);
+	else if (node->arg[0] == '~' && \
+			(node->arg[1] == '/' || node->arg[1] == '\0'))
+		new_arg = _expand_homepath(node->arg);
 	else
 		return (1);
 	if (new_arg == NULL)

@@ -6,12 +6,13 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 18:07:39 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:32:15 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "libft.h"
+#include "shell.h"
 #include <stdio.h>
 
 void	print_unexpected_token(char *arg)
@@ -49,6 +50,7 @@ void	print_command_not_found(char *arg)
 {
 	ft_putstrerr(arg);
 	ft_putstrerr(": command not found\n");
+	get_shell_struct()->exit_code = 127;
 }
 
 void	print_too_many_arguments(char *arg)

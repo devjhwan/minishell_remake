@@ -6,12 +6,13 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 21:51:23 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:24:36 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:37:02 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 #include "libft.h"
+#include "utils.h"
 #include <stdio.h>
 
 char	*search_environment(char *arg)
@@ -27,6 +28,8 @@ char	*search_environment(char *arg)
 		return (ft_strdup("$"));
 	if (arg[0] == '?')
 		return (ft_itoa(shell->exit_code));
+	if (arg[0] == '~')
+		return (get_homepath());
 	while (shell->env[i] != NULL)
 	{
 		if (ft_strncmp(shell->env[i], arg, arg_len) == 0 && \

@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:10:13 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 21:31:14 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,10 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-int	main(int args, char **argv, char **envp)
+void	main_loop(t_shell *shell)
 {
-	t_shell	*shell;
 	char	*str;
-	int		exit_code;
 
-	shell = init_shell_struct(args, argv, envp);
-	if (shell == NULL)
-		return (0);
 	while (!shell->is_exit)
 	{
 		free_cmds(&shell->cmds);
@@ -45,6 +40,17 @@ int	main(int args, char **argv, char **envp)
 		set_execution_signal();
 		execute(shell);
 	}
+}
+
+int	main(int args, char **argv, char **envp)
+{
+	t_shell	*shell;
+	int		exit_code;
+
+	shell = init_shell_struct(args, argv, envp);
+	if (shell == NULL)
+		return (0);
+	main_loop(shell);
 	exit_code = shell->exit_code;
 	free_shell_struct(&shell);
 	return (rollback_terminal_setting(), exit_code);

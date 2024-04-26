@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 03:04:02 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 03:19:05 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static int	manage_pwd(t_shell *shell)
 	if (tmp == NULL)
 		return (0);
 	exec_export((char *[]){"export", tmp, NULL}, shell);
-	return (1);
+	return (free(tmp), 1);
 }
 
 int	init_shell_struct(t_shell *shell, int as, char **av, char **ep)

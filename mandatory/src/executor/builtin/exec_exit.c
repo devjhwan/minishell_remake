@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:46:09 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/26 03:18:33 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ static int	isnumeric(char *arg)
 	char	*nb;
 
 	i = 0;
-	nb = "9223372036854775807";
+	nb = ft_strdup("9223372036854775807");
+	if (nb == NULL)
+		return (0);
 	if (arg[i] == '+')
 		arg++;
 	else if (arg[i] == '-')
@@ -32,14 +34,14 @@ static int	isnumeric(char *arg)
 	while (arg[i] != '\0' && ft_isdigit(arg[i]) && i < 19)
 		i++;
 	if (arg[i] != '\0' && !ft_isdigit(arg[i]))
-		return (0);
+		return (free(nb), 0);
 	if (i < 19)
-		return (1);
+		return (free(nb), 1);
 	while (i >= 0 && arg[i] < nb[i])
 		i--;
 	if (i >= 0)
-		return (0);
-	return (1);
+		return (free(nb), 0);
+	return (free(nb), 1);
 }
 
 static char	atoc(char *arg)
@@ -64,7 +66,7 @@ static char	atoc(char *arg)
 			nb = nb * 10 + (*arg++ - '0');
 	return (nb);
 }
-#include <stdio.h>
+
 void	exec_exit(char **args, t_shell *shell)
 {
 	ft_putstrerr("exit\n");

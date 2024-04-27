@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 16:39:38 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/27 15:44:38 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:18:29 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	count_arguments(t_ptree *node)
 	int	count;
 
 	count = 0;
-	if (node->left->t == ARGUMENT)
+	if (node->left->t == ARGUMENT || node->left->t == ARGUMENT_EXP)
 		count++;
 	if (node->right != NULL)
 		count += count_arguments(node->right);
@@ -27,7 +27,7 @@ static int	count_arguments(t_ptree *node)
 
 static int	append_argument(char **args, t_ptree *node)
 {
-	if (node->left->t == ARGUMENT)
+	if (node->left->t == ARGUMENT || node->left->t == ARGUMENT_EXP)
 	{
 		*args = join_tree_arguments(node->left);
 		if (*args == NULL)

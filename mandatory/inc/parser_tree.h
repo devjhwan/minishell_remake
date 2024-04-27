@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:30:53 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/27 14:42:03 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:17:28 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ typedef enum s_nodetype
 	COMMAND,
 	CONTENT,
 	ARGUMENT,
-	REDIRECTION
+	REDIRECTION,
+	ARGUMENT_EXP
 }	t_nodetype;
 
 typedef struct s_ptree

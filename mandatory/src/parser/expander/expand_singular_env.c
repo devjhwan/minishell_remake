@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 21:52:18 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/27 16:14:44 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:17:57 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	append_new_node(char *arg, t_ptree *content)
 	new_content = create_new_node(CONTENT, NULL);
 	if (new_content == NULL)
 		return (0);
-	new_content->left = create_new_node(ARGUMENT, arg);
+	new_content->left = create_new_node(ARGUMENT_EXP, arg);
 	if (new_content->left == NULL)
 		return (free_tree(new_content), 0);
 	new_content->right = content->right;

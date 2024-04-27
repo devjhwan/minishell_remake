@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:20:27 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/27 15:40:21 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 16:20:35 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*substr_quote(char **line)
 
 	len = 1;
 	while ((*line)[len] != '\0' && \
-			ft_strchr("|\'", (*line)[len]) == NULL)
+			ft_strchr("\'", (*line)[len]) == NULL)
 		len++;
 	if ((*line)[len] == '\'')
 		str = ft_substr(*line, 0, ++len);
@@ -43,7 +43,7 @@ char	*substr_dquote(char **line)
 
 	len = 1;
 	while ((*line)[len] != '\0' && \
-			ft_strchr("|\"", (*line)[len]) == NULL)
+			ft_strchr("\"", (*line)[len]) == NULL)
 		len++;
 	if ((*line)[len] == '\"')
 		str = ft_substr(*line, 0, ++len);

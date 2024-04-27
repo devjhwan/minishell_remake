@@ -6,20 +6,20 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 16:47:07 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 18:37:45 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:39:02 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser_token.h"
 #include "libft.h"
 
-int	_ispipe(char *line);
-int	_isredir(char *line);
-int	_isenv(char *line);
-int	_isquote(char *line);
-int	_isdquote(char *line);
-int	_isspace(char *line);
-int	_isargument(char *line);
+int	ispipe(char *line);
+int	isredir(char *line);
+int	isenv(char *line);
+int	isquote(char *line);
+int	isdquote(char *line);
+int	is_space(char *line);
+int	isargument(char *line);
 
 t_ptoken	*lexer(char *line)
 {
@@ -28,19 +28,19 @@ t_ptoken	*lexer(char *line)
 	tokens = NULL;
 	while (*line != '\0')
 	{
-		if (_ispipe(line) && append_token(&tokens, &line, PIPE) == 0)
+		if (ispipe(line) && append_token(&tokens, &line, PIPE) == 0)
 			return (free_tokens(tokens), NULL);
-		else if (_isredir(line) && append_token(&tokens, &line, RD) == 0)
+		else if (isredir(line) && append_token(&tokens, &line, RD) == 0)
 			return (free_tokens(tokens), NULL);
-		else if (_isenv(line) && append_token(&tokens, &line, ENV) == 0)
+		else if (isenv(line) && append_token(&tokens, &line, ENV) == 0)
 			return (free_tokens(tokens), NULL);
-		else if (_isquote(line) && append_token(&tokens, &line, SQ) == 0)
+		else if (isquote(line) && append_token(&tokens, &line, SQ) == 0)
 			return (free_tokens(tokens), NULL);
-		else if (_isdquote(line) && append_token(&tokens, &line, DQ) == 0)
+		else if (isdquote(line) && append_token(&tokens, &line, DQ) == 0)
 			return (free_tokens(tokens), NULL);
-		else if (_isspace(line) && append_token(&tokens, &line, SP) == 0)
+		else if (is_space(line) && append_token(&tokens, &line, SP) == 0)
 			return (free_tokens(tokens), NULL);
-		else if (_isargument(line) && append_token(&tokens, &line, ARG) == 0)
+		else if (isargument(line) && append_token(&tokens, &line, ARG) == 0)
 			return (free_tokens(tokens), NULL);
 	}
 	return (tokens);

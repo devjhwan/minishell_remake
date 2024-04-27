@@ -6,13 +6,13 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:21:37 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 17:31:26 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:37:37 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	_ispipe(char *line)
+int	ispipe(char *line)
 {
 	if (*line == '|')
 		return (1);
@@ -20,7 +20,7 @@ int	_ispipe(char *line)
 		return (0);
 }
 
-int	_isredir(char *line)
+int	isredir(char *line)
 {
 	if (ft_strncmp(line, "<<", 2) == 0)
 		return (1);
@@ -34,7 +34,7 @@ int	_isredir(char *line)
 		return (0);
 }
 
-int	_isenv(char *line)
+int	isenv(char *line)
 {
 	if (*line == '$')
 		return (1);

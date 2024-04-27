@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 03:02:56 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 13:59:23 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ static int	manage_parent_redirection(int p[2], t_executor *exec, \
 static int	check_command_path(char *path)
 {
 	if (path == NULL)
+		return (0);
+	if (path[0] == '\0')
 		return (0);
 	else if (access(path, F_OK) == -1)
 		return (print_error(COMMAND_NOT_FOUND, path, NULL), 0);

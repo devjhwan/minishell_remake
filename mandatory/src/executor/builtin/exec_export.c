@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:28:48 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:39:52 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include "utils.h"
 #include "libft.h"
 
-int		_is_valid_argument(char *arg);
-char	*_create_new_export_arg(char *var_name, char *content);
-int		_split_argument(char *arg, char **v_name, char **cntnt, int *append_f);
-int		_export_pwd_management(char *var_name, char *content, t_shell *shell);
+int		is_valid_argument(char *arg);
+char	*create_new_export_arg(char *var_name, char *content);
+int		split_argument(char *arg, char **v_name, char **cntnt, int *append_f);
+int		export_pwd_management(char *var_name, char *content, t_shell *shell);
 
 int	append_to_export(char *var_name, char *new_content, t_shell *shell)
 {
@@ -25,7 +25,7 @@ int	append_to_export(char *var_name, char *new_content, t_shell *shell)
 	int		count;
 	char	**tmp;
 
-	new_arg = _create_new_export_arg(var_name, new_content);
+	new_arg = create_new_export_arg(var_name, new_content);
 	if (new_arg == NULL)
 		return (free(var_name), free(new_content), 0);
 	count = 0;
@@ -147,11 +147,11 @@ void	exec_export(char **args, t_shell *shell)
 		i = 1;
 		while (args[i] != NULL)
 		{
-			if (!_is_valid_argument(args[i]))
+			if (!is_valid_argument(args[i]))
 				print_error(NOT_A_VALID_IDENTIFIER, "export", args[i]);
-			else if (_split_argument(args[i], &var_name, \
+			else if (split_argument(args[i], &var_name, \
 									&content, &append_f) == 0 || \
-					_export_pwd_management(var_name, content, shell) == 0 || \
+					export_pwd_management(var_name, content, shell) == 0 || \
 					add_to_export(var_name, content, append_f, shell) == 0 || \
 					add_to_env(var_name, content, append_f, shell) == 0)
 				break ;

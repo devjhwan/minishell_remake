@@ -6,13 +6,13 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:25:02 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 17:46:04 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:39:02 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	_isquote(char *line)
+int	isquote(char *line)
 {
 	if (*line == '\'')
 		return (1);
@@ -20,7 +20,7 @@ int	_isquote(char *line)
 		return (0);
 }
 
-int	_isdquote(char *line)
+int	isdquote(char *line)
 {
 	if (*line == '\"')
 		return (1);
@@ -28,7 +28,7 @@ int	_isdquote(char *line)
 		return (0);
 }
 
-int	_isspace(char *line)
+int	is_space(char *line)
 {
 	if (*line == ' ')
 		return (1);
@@ -36,7 +36,7 @@ int	_isspace(char *line)
 		return (0);
 }
 
-int	_isargument(char *line)
+int	isargument(char *line)
 {
 	if (ft_strchr("|$<> \'\"", *line) == NULL)
 		return (1);

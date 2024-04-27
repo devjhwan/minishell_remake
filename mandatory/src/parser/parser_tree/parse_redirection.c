@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 20:08:35 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 13:06:22 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 14:44:53 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ t_ptree	*parse_redirection(t_ptoken **tokens)
 	redirection->left = parse_argument(tokens);
 	if (redirection->left == NULL)
 		return (free_tree(redirection), NULL);
+	redirection->left->parent = redirection;
 	return (redirection);
 }

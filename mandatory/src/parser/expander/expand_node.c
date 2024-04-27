@@ -6,41 +6,49 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 21:54:14 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:48:26 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:36:40 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser_tree.h"
 #include "utils.h"
 
-char	*_expand_singular_env(char *args);
-char	*_expand_dquote_env(char *arg);
-char	*_expand_homepath(char *arg);
+int		expand_singular_env(t_ptree *node);
+char	*expand_dquote_env(char *arg);
+char	*expand_homepath(char *arg);
 
-int	_expand_node(t_ptree *node)
+static char	*get_new_argument(t_ptree *node)
 {
 	char	*new_arg;
 
-	if (node->arg != NULL && ft_strchr(node->arg, '$') != NULL)
+	if (ft_strchr(node->arg, '$') != NULL)
 	{
-		if (node->arg[0] == '$')
-			new_arg = _expand_singular_env(node->arg);
-		else if (node->arg[0] == '\'')
+		if (node->arg[0] == '\'')
 			new_arg = remove_quote(node->arg);
 		else if (node->arg[0] == '\"')
-			new_arg = _expand_dquote_env(node->arg);
+			new_arg = expand_dquote_env(node->arg);
 		else
-			new_arg = ft_strdup(node->arg);
+			new_arg = ft_strdup("");
 	}
 	else if (node->arg[0] == '\'' || node->arg[0] == '\"')
 		new_arg = remove_quote(node->arg);
 	else if (node->arg[0] == '~' && \
 			(node->arg[1] == '/' || node->arg[1] == '\0'))
-		new_arg = _expand_homepath(node->arg);
+		new_arg = expand_homepath(node->arg);
 	else
-		return (1);
-	if (new_arg == NULL)
+		new_arg = ft_strdup(node->arg);
+	return (new_arg);
+}
+
+int	expand_node(t_ptree *node)
+{
+	char	*new_arg;
+
+	if (node->arg == NULL)
 		return (0);
+	if (node->arg[0] == '$')
+		return (expand_singular_env(node));
+	new_arg = get_new_argument(node);
 	free(node->arg);
 	node->arg = new_arg;
 	return (1);

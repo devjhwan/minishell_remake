@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 19:31:04 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 23:48:10 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 14:44:25 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static t_ptree	*create_and_parse_content(t_ptoken **tokens)
 		if (content->left == NULL)
 			return (free_tree(content), NULL);
 	}
+	content->left->parent = content;
 	return (content);
 }
 

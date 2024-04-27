@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 19:05:02 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 23:48:24 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 14:43:40 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ t_ptree	*parse_command(t_ptoken *tokens)
 	command->left = parse_content(&tokens);
 	if (command->left == NULL)
 		return (free_tree(command), NULL);
+	command->left->parent = command;
 	tokens = skip_space_tokens(tokens);
 	if (tokens != NULL)
 	{
 		command->right = parse_command(tokens);
 		if (command->right == NULL)
 			return (free_tree(command), NULL);
+		command->right->parent = command;
 	}
 	return (command);
 }

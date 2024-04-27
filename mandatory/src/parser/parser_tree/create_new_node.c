@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:45:41 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 13:05:36 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 14:42:11 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_ptree	*create_new_node(t_nodetype	t, char *arg)
 		if (new_node->arg == NULL)
 			return (free(new_node), NULL);
 	}
+	new_node->parent = NULL;
 	new_node->left = NULL;
 	new_node->right = NULL;
 	return (new_node);

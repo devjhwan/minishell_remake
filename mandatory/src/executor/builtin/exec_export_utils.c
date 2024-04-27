@@ -6,14 +6,14 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:30:48 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 18:25:03 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:39:52 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 #include "libft.h"
 
-int	_is_valid_argument(char *arg)
+int	is_valid_argument(char *arg)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ int	_is_valid_argument(char *arg)
 	return (1);
 }
 
-char	*_create_new_export_arg(char *var_name, char *content)
+char	*create_new_export_arg(char *var_name, char *content)
 {
 	if (content == NULL)
 		return (ft_strjoin(2, "declare -x ", var_name));
@@ -38,7 +38,7 @@ char	*_create_new_export_arg(char *var_name, char *content)
 		return (ft_strjoin(5, "declare -x ", var_name, "=\"", content, "\""));
 }
 
-int	_split_argument(char *arg, char **var_name, char **content, int *append_f)
+int	split_argument(char *arg, char **var_name, char **content, int *append_f)
 {
 	char	*tmp;
 
@@ -67,7 +67,7 @@ int	_split_argument(char *arg, char **var_name, char **content, int *append_f)
 	return (1);
 }
 
-int	_export_pwd_management(char *var_name, char *content, t_shell *shell)
+int	export_pwd_management(char *var_name, char *content, t_shell *shell)
 {
 	if (content == NULL)
 		return (1);

@@ -6,13 +6,13 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:20:27 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:11:54 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:40:21 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*_substr_quote(char **line)
+char	*substr_quote(char **line)
 {
 	int		len;
 	char	*str;
@@ -36,7 +36,7 @@ char	*_substr_quote(char **line)
 	return (str);
 }
 
-char	*_substr_dquote(char **line)
+char	*substr_dquote(char **line)
 {
 	int		len;
 	char	*str;
@@ -60,7 +60,7 @@ char	*_substr_dquote(char **line)
 	return (str);
 }
 
-char	*_substr_space(char **line)
+char	*substr_space(char **line)
 {
 	int		len;
 	char	*str;
@@ -73,7 +73,7 @@ char	*_substr_space(char **line)
 	return (str);
 }
 
-char	*_substr_argument(char **line)
+char	*substr_argument(char **line)
 {
 	int		len;
 	char	*str;

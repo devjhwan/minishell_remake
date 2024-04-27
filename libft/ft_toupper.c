@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_homepath.c                                  :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 21:48:16 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/27 15:36:18 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/27 14:09:15 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/27 14:11:10 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "utils.h"
-
-char	*expand_homepath(char *arg)
+char	*ft_toupper(char *str)
 {
-	char	*new_arg;
-	char	*tmp;
+	int	i;
 
-	tmp = get_homepath();
-	if (tmp == NULL)
-		return (NULL);
-	new_arg = ft_strjoin(2, tmp, arg + 1);
-	return (new_arg);
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] >= 'a' && str[i] <= 'z')
+			str[i] += 'A' - 'a';
+		i++;
+	}
+	return (str);
 }

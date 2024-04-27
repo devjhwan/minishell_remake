@@ -6,13 +6,14 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 21:53:07 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:25:09 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:35:56 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 #include "libft.h"
 #include "utils.h"
+#include "stdio.h"
 
 static char	*replace_env(char *arg, int i)
 {
@@ -35,7 +36,7 @@ static char	*replace_env(char *arg, int i)
 	return (free(tmp1), free(tmp2), free(tmp3), arg);
 }
 
-char	*_expand_dquote_env(char *arg)
+char	*expand_dquote_env(char *arg)
 {
 	int		i;
 	char	*new_arg;
@@ -55,6 +56,8 @@ char	*_expand_dquote_env(char *arg)
 			if (new_arg == NULL)
 				return (NULL);
 			arg = new_arg;
+			if (arg[i] == '$')
+				i++;
 		}
 	}
 	return (new_arg);

@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:33:17 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:05:01 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 14:12:58 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		ft_abs(int n);
 int		ft_isalpha(int ch);
 int		ft_isalnum(int ch);
 int		ft_isdigit(int ch);
+char	*ft_toupper(char *str);
+char	*ft_tolower(char *str);
 void	ft_putstrerr(char *str);
 void	ft_putnbr(int nb);
 void	*ft_calloc(size_t count, size_t size);

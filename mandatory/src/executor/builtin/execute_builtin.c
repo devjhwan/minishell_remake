@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 19:24:37 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 14:13:00 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	execute_builtin(t_executor *exec, t_shell *shell)
 {
 	(void) shell;
-	if (ft_strncmp(exec->args[0], "echo", 5) == 0)
+	if (ft_strncmp(ft_tolower(exec->args[0]), "echo", 5) == 0)
 		exec_echo(exec->args);
 	else if (ft_strncmp(exec->args[0], "cd", 3) == 0)
 		exec_cd(exec->args, shell);

@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 16:39:38 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:43:31 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:48:59 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "parser_token.h"
 #include "parser_tree.h"
 
-t_cmd	*_parse_tree_to_cmds(t_ptree *tree);
+t_cmd	*parse_tree_to_cmds(t_ptree *tree);
 
 t_cmd	*parser(char *line)
 {
@@ -36,7 +36,7 @@ t_cmd	*parser(char *line)
 	if (expander(parser_tree) == 0)
 		return (free_tree(parser_tree), NULL);
 	// print_parser_tree(parser_tree);
-	cmds = _parse_tree_to_cmds(parser_tree);
+	cmds = parse_tree_to_cmds(parser_tree);
 	free_tree(parser_tree);
 	// print_command(cmds);
 	return (cmds);

@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 20:50:36 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:14:42 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:36:28 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "utils.h"
 #include "libft.h"
 
-int	_expand_node(t_ptree *node);
+int	expand_node(t_ptree *node);
 
 int	is_ambiguous(t_ptree *node)
 {
@@ -61,7 +61,7 @@ int	expander(t_ptree *tree)
 {
 	if (tree != NULL)
 	{
-		if (tree->t == ARGUMENT && _expand_node(tree) == 0)
+		if (tree->t == ARGUMENT && expand_node(tree) == 0)
 			return (0);
 		else if (tree->t == REDIRECTION && is_ambiguous(tree->left))
 			return (print_ambiguous_redirection(tree->left), 0);

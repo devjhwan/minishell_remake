@@ -6,16 +6,16 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:19:37 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 16:05:01 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:40:11 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*_substr_quote(char **line);
-char	*_substr_dquote(char **line);
+char	*substr_quote(char **line);
+char	*substr_dquote(char **line);
 
-char	*_substr_pipe(char **line)
+char	*substr_pipe(char **line)
 {
 	char	*str;
 
@@ -24,7 +24,7 @@ char	*_substr_pipe(char **line)
 	return (str);
 }
 
-char	*_substr_redir(char **line)
+char	*substr_redir(char **line)
 {
 	char	*str;
 
@@ -52,7 +52,7 @@ char	*_substr_redir(char **line)
 	return (str);
 }
 
-char	*_substr_env(char **line)
+char	*substr_env(char **line)
 {
 	int		len;
 	char	*str;
@@ -68,9 +68,9 @@ char	*_substr_env(char **line)
 	if (len == 1 && (**line == '\'' || **line == '\"'))
 	{
 		if (**line == '\'')
-			tmp = _substr_quote(line);
+			tmp = substr_quote(line);
 		else
-			tmp = _substr_dquote(line);
+			tmp = substr_dquote(line);
 		if (tmp == NULL)
 			return (NULL);
 		tmp2 = ft_strjoin(2, str, tmp);

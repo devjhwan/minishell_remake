@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 16:39:38 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:16:25 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:44:38 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	append_redirection(t_redir **redir, t_ptree *node)
 	return (1);
 }
 
-int	_parse_to_cmd_arguments(t_cmd *cmd, t_ptree *node)
+int	parse_to_cmd_arguments(t_cmd *cmd, t_ptree *node)
 {
 	int	count;
 
@@ -75,7 +75,7 @@ int	_parse_to_cmd_arguments(t_cmd *cmd, t_ptree *node)
 	return (1);
 }
 
-int	_parse_to_cmd_redirections(t_cmd *cmd, t_ptree *node)
+int	parse_to_cmd_redirections(t_cmd *cmd, t_ptree *node)
 {
 	if (append_redirection(&cmd->redirs, node) == 0)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:30:53 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:14:51 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 14:42:03 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_ptree
 {
 	t_nodetype		t;
 	char			*arg;
+	struct s_ptree	*parent;
 	struct s_ptree	*left;
 	struct s_ptree	*right;
 }	t_ptree;

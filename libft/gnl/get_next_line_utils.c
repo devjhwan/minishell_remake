@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 19:55:42 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 11:03:22 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:38:38 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	*ft_freebuffer(t_buff **blist, int fd)
 void	*ft_realloc(void *p, size_t oldsize, size_t newsize)
 {
 	char	*s;
-	char	*_p;
+	char	*ch_p;
 	size_t	i;
 
 	if (p == NULL)
@@ -88,11 +88,11 @@ void	*ft_realloc(void *p, size_t oldsize, size_t newsize)
 	s = (char *)malloc(sizeof(char) * newsize);
 	if (s == NULL)
 		return (NULL);
-	_p = (char *)p;
+	ch_p = (char *)p;
 	i = 0;
 	while (i < oldsize)
 	{
-		s[i] = _p[i];
+		s[i] = ch_p[i];
 		i++;
 	}
 	return (s);

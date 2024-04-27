@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 20:08:35 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 13:05:49 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 14:43:04 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_ptree	*parse_argument(t_ptoken **tokens)
 		argument->right = parse_argument(tokens);
 		if (argument->right == NULL)
 			return (free_tree(argument), NULL);
+		argument->right->parent = argument;
 	}
 	return (argument);
 }

@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 22:58:34 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:52:08 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static char	atoc(char *arg)
 
 void	exec_exit(char **args, t_shell *shell)
 {
-	ft_putstrerr("exit\n");
+	// ft_putstrerr("exit\n");
 	if (args[1] == NULL)
 	{
 		shell->new_exit_code = shell->exit_code;

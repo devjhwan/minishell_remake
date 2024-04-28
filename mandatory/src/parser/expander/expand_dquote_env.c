@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 21:53:07 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/27 16:18:05 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:17:02 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static char	*replace_env(char *arg, int i)
 	tmp3 = ft_substr(arg, i + env_len, ft_strlen(arg));
 	arg[i + env_len] = '\0';
 	tmp2 = search_environment(&arg[i + 1]);
+	if (tmp2 == NULL)
+		tmp2 = ft_strdup("");
 	if (tmp1 == NULL || tmp2 == NULL || tmp3 == NULL)
 		return (free(tmp1), free(tmp2), free(tmp3), NULL);
 	arg = ft_strjoin(3, tmp1, tmp2, tmp3);

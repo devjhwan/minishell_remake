@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/27 15:52:08 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 18:20:34 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,22 +92,27 @@ static char	atoc(char *arg)
 
 void	exec_exit(char **args, t_shell *shell)
 {
+	int i;
+
 	// ft_putstrerr("exit\n");
-	if (args[1] == NULL)
+	i = 1;
+	if (args[i] != NULL && ft_strncmp(args[i], "--", 3) == 0)
+		i++;
+	if (args[i] == NULL)
 	{
 		shell->new_exit_code = shell->exit_code;
 		shell->is_exit = 1;
 	}
-	else if (!isnumeric(args[1]))
+	else if (!isnumeric(args[i]))
 	{
-		print_error(NUMERIC_ARGUMENT, args[0], args[1]);
+		print_error(NUMERIC_ARGUMENT, args[0], args[i]);
 		shell->is_exit = 1;
 	}
-	else if (args[2] != NULL)
+	else if (args[i + 1] != NULL)
 		print_error(TOO_MANY_ARGUMENTS, args[0], NULL);
 	else
 	{
-		shell->new_exit_code = atoc(args[1]);
+		shell->new_exit_code = atoc(args[i]);
 		shell->is_exit = 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 22:56:54 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 18:17:24 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	cd_path(char *arg, t_shell *shell)
 {
 	char	*tmp;
 
-	if (ft_strncmp(arg, ".", 2) == 0 && access(".", F_OK) < 0)
+	if (ft_strncmp(arg, ".", 2) == 0 && \
+			access(get_shell_struct()->pwd_save, F_OK) < 0)
 	{
 		ft_putstrerr("cd: error retrieving current directory: ");
 		ft_putstrerr("getcwd: cannot access parent directories: ");

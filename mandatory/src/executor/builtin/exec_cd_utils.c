@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 22:53:14 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 18:26:03 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "utils.h"
 #include "libft.h"
 #include <unistd.h>
+#include <stdio.h>
 
 static void	update_oldpwd(t_shell *shell)
 {
@@ -86,10 +87,6 @@ int	change_directory(char *path, t_shell *shell)
 {
 	if (check_exception(path) && chdir(path) == 0)
 	{
-		if (contains_export("OLDPWD", shell->export) != -1)
-			update_oldpwd(shell);
-		if (contains_export("PWD", shell->export) != -1)
-			update_pwd(path, shell);
 		free(shell->oldpwd);
 		shell->oldpwd = shell->pwd;
 		shell->pwd = (char *)malloc(sizeof(char) * 1024);
@@ -100,6 +97,10 @@ int	change_directory(char *path, t_shell *shell)
 		shell->pwd_save = ft_strdup(shell->pwd);
 		if (shell->pwd_save == NULL)
 			return (0);
+		if (contains_export("OLDPWD", shell->export) != -1)
+			update_oldpwd(shell);
+		if (contains_export("PWD", shell->export) != -1)
+			update_pwd(shell->pwd, shell);
 		return (1);
 	}
 	return (0);

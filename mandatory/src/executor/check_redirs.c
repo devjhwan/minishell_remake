@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/27 15:36:48 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 17:15:56 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	check_file_out(char *filename)
 		if (errno == EACCES)
 			return (print_error(PERMISSION_DENIED, filename, NULL), 0);
 		else if (errno == EISDIR)
-			return (print_error(IS_DIRECTORY, filename, NULL), 0);
+			return (print_error(IS_DIRECTORY2, filename, NULL), 0);
 		return (0);
 	}
 	else
@@ -78,10 +78,10 @@ static int	check_file_out_append(char *filename)
 {
 	int			fd;
 
-	if (access(filename, F_OK) != 0)
+	if (access(filename, F_OK) == 0)
 	{
 		if (isdir(filename))
-			return (print_error(IS_DIRECTORY, filename, NULL), 0);
+			return (print_error(IS_DIRECTORY2, filename, NULL), 0);
 		else if (access(filename, W_OK) != 0)
 			return (print_error(PERMISSION_DENIED, filename, NULL), 0);
 		return (1);

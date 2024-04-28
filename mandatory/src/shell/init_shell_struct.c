@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:24:53 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 17:54:50 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,11 @@ t_shell	*init_shell_struct(int as, char **av, char **ep)
 	shell->export = create_export(ep);
 	if (shell->env == NULL || shell->export == NULL)
 		return (free_shell_struct(&shell), NULL);
+	manage_shlvl(shell);
 	if (manage_pwd(shell) == 0)
 		return (free_shell_struct(&shell), NULL);
 	shell->fdin = dup(STDIN_FILENO);
+	shell->fdout = dup(STDOUT_FILENO);
 	shell->exit_code = 0;
 	shell->is_exit = 0;
 	return (shell);

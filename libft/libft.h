@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:33:17 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/27 14:12:58 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 17:34:36 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 
 int		ft_abs(int n);
+int		ft_atoi(const char *str);
 int		ft_isalpha(int ch);
 int		ft_isalnum(int ch);
 int		ft_isdigit(int ch);

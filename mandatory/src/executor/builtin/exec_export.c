@@ -6,13 +6,14 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/27 15:39:52 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 17:38:01 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 #include "utils.h"
 #include "libft.h"
+#include <stdio.h>
 
 int		is_valid_argument(char *arg);
 char	*create_new_export_arg(char *var_name, char *content);

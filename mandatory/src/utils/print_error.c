@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/28 16:38:47 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 17:28:55 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ void	print_is_directory(char *arg)
 	ft_putstrerr(arg);
 	ft_putstrerr(": is a directory\n");
 	get_shell_struct()->new_exit_code = 126;
+}
+
+void	print_is_directory2(char *arg)
+{
+	ft_putstrerr(arg);
+	ft_putstrerr(": Is a directory\n");
+	get_shell_struct()->new_exit_code = 1;
 }
 
 void	print_command_not_found(char *arg)
@@ -131,6 +138,13 @@ void	print_filename_too_long(char *arg1, char *arg2)
 	get_shell_struct()->new_exit_code = 1;
 }
 
+void	print_high_shlvl(char *arg)
+{
+	ft_putstrerr("warning: shell level (");
+	ft_putstrerr(arg);
+	ft_putstrerr(") too high, resetting to 1\n");
+}
+
 void	print_error(t_errtype t, char *arg1, char *arg2)
 {
 	ft_putstrerr("minishell: ");
@@ -144,6 +158,8 @@ void	print_error(t_errtype t, char *arg1, char *arg2)
 		print_permission_denied(arg1);
 	else if (t == IS_DIRECTORY)
 		print_is_directory(arg1);
+	else if (t == IS_DIRECTORY2)
+		print_is_directory2(arg1);
 	else if (t == COMMAND_NOT_FOUND)
 		print_command_not_found(arg1);
 	else if (t == TOO_MANY_ARGUMENTS)
@@ -164,4 +180,6 @@ void	print_error(t_errtype t, char *arg1, char *arg2)
 		print_oldpwd_not_set(arg1);
 	else if (t == FILENAME_TOO_LONG)
 		print_filename_too_long(arg1, arg2);
+	else if (t == HIGH_SHLVL)
+		print_high_shlvl(arg1);
 }

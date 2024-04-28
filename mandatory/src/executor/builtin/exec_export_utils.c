@@ -6,12 +6,13 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:30:48 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/27 15:39:52 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 17:45:57 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 #include "libft.h"
+#include <stdio.h>
 
 int	is_valid_argument(char *arg)
 {

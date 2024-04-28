@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 22:55:38 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 17:27:49 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef enum e_errtype
 	NO_FILE,
 	PERMISSION_DENIED,
 	IS_DIRECTORY,
+	IS_DIRECTORY2,
 	COMMAND_NOT_FOUND,
 	TOO_MANY_ARGUMENTS,
 	NUMERIC_ARGUMENT,
@@ -29,7 +30,8 @@ typedef enum e_errtype
 	PERMISSION_DENIED2,
 	NOT_A_VALID_IDENTIFIER,
 	OLDPWD_NOT_SET,
-	FILENAME_TOO_LONG
+	FILENAME_TOO_LONG,
+	HIGH_SHLVL
 }	t_errtype;
 
 char	*remove_quote(char *arg);

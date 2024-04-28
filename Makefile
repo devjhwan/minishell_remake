@@ -6,7 +6,7 @@
 #    By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 14:32:42 by junghwle          #+#    #+#              #
-#    Updated: 2024/04/26 21:49:11 by junghwle         ###   ########.fr        #
+#    Updated: 2024/04/28 17:55:51 by junghwle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,9 @@ NAME			:=minishell
 
 SRCDIR			:=./mandatory/src
 
-MAIN_SRCS		:=main.c signal_handler.c terminal_setting.c \
-				  init_shell_struct.c free_shell_struct.c get_shell_struct.c
+MAIN_SRCS		:=main.c signal_handler.c terminal_setting.c 
+SHELL_SRCS		:=init_shell_struct.c free_shell_struct.c get_shell_struct.c \
+				  manage_shlvl.c
 COMMAND_SRCS	:=create_new_cmd.c free_cmds.c free_redirections.c \
 				  get_cmd_type.c print_cmds.c get_redir_type.c \
 				  parse_to_cmd.c
@@ -40,7 +41,7 @@ BUILTIN_SRCS	:=execute_builtin.c exec_echo.c exec_env.c exec_export.c \
 				  exec_export_utils.c exec_exit.c exec_unset.c exec_pwd.c \
 				  exec_cd.c exec_cd_utils.c
 				  
-SRCS			:=$(MAIN_SRCS) $(COMMAND_SRCS) $(EXPANDER_SRCS) \
+SRCS			:=$(MAIN_SRCS) $(SHELL_SRCS) $(COMMAND_SRCS) $(EXPANDER_SRCS) \
 				  $(PARSER_SRCS) $(P_TOKEN_SRCS) $(P_TREE_SRCS) \
 				  $(UTILS_SRCS) $(EXECUTOR_SRCS) $(BUILTIN_SRCS)
 

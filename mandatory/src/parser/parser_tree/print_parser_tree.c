@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 19:14:32 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 11:58:33 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:04:27 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static char	*get_enum_name(t_nodetype t)
 	else if (t == CONTENT)
 		return ("CONTENT");
 	else if (t == ARGUMENT)
+		return ("ARGUMENT");
+	else if (t == ARGUMENT_EXP)
 		return ("ARGUMENT");
 	else if (t == REDIRECTION)
 		return ("REDIRECTION");

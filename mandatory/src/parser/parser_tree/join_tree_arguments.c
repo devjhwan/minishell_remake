@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 16:39:38 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 01:13:37 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:09:50 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ char	*join_tree_arguments(t_ptree *node)
 	else
 	{
 		tmp2 = join_tree_arguments(node->right);
+		if (tmp1 == NULL)
+			return (tmp2);
 		if (tmp2 == NULL)
-			return (free(tmp1), NULL);
+			return (tmp1);
 		str = ft_strjoin(2, tmp1, tmp2);
 		return (free(tmp1), free(tmp2), str);
 	}

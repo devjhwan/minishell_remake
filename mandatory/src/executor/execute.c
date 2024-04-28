@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 22:24:47 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:05:25 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <stdio.h>
 
 int	execute_one_command(t_cmd *cmd, t_shell *shell)
 {
@@ -26,7 +27,7 @@ int	execute_one_command(t_cmd *cmd, t_shell *shell)
 	exec = create_new_executor(cmd);
 	if (exec != NULL)
 	{
-		if (isbuiltin(exec->args[0]))
+		if (exec->args[0] != NULL && isbuiltin(exec->args[0]))
 			execute_builtin(exec, shell);
 		else
 			pid = execute_command(exec, shell);

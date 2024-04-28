@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 21:52:18 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/27 17:17:57 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 15:44:29 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,12 @@ int	expand_singular_env(t_ptree *node)
 	else
 	{
 		new_arg = search_environment(node->arg + 1);
-		if (new_arg == NULL)
-			return (0);
-		if (ft_strchr(new_arg, ' ') == NULL)
-			return (free(node->arg), node->arg = new_arg, 1);
+		if (new_arg == NULL || ft_strchr(new_arg, ' ') == NULL)
+		{
+			free(node->arg);
+			node->arg = new_arg;
+			return (1);
+		}
 		if (expand_argument_node(new_arg, node) == 0)
 			return (free(new_arg), 0);
 		free(new_arg);

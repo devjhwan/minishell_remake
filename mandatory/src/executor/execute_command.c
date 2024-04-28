@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/27 13:59:23 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:01:35 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdio.h>
 
 static int	manage_child_redirection(int p[2], t_executor *exec, \
 												t_shell *shell)
@@ -64,9 +65,7 @@ static int	check_command_path(char *path)
 {
 	if (path == NULL)
 		return (0);
-	if (path[0] == '\0')
-		return (0);
-	else if (access(path, F_OK) == -1)
+	else if (path[0] == '\0' || access(path, F_OK) == -1)
 		return (print_error(COMMAND_NOT_FOUND, path, NULL), 0);
 	else if (access(path, X_OK) == -1)
 		return (print_error(PERMISSION_DENIED, path, NULL), 0);
@@ -84,17 +83,16 @@ pid_t	execute_command(t_executor *exec, t_shell *shell)
 	pid = fork();
 	if (pid == 0)
 	{
-		path = get_path_from_env(exec->args[0], shell->env);
-		if (manage_child_redirection(p, exec, shell) == 0)
-			shell->is_exit = 1;
-		if (isbuiltin(exec->args[0]))
-		{
+		path = NULL;
+		if (exec->args[0] != NULL)
+			path = get_path_from_env(exec->args[0], shell->env);
+		if (exec->args[0] != NULL && \
+				manage_child_redirection(p, exec, shell) && \
+				isbuiltin(exec->args[0]))
 			execute_builtin(exec, shell);
-			shell->is_exit = 1;
-		}
-		else if (check_command_path(path) == 0 || \
-				execve(path, exec->args, shell->env) < 0)
-			shell->is_exit = 1;
+		else if (check_command_path(path) == 0)
+			execve(path, exec->args, shell->env);
+		shell->is_exit = 1;
 		free(path);
 	}
 	else if (manage_parent_redirection(p, exec, shell) == 0)

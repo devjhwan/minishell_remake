@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 21:51:23 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/27 14:15:21 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 15:41:38 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "utils.h"
 #include <stdio.h>
 
-char	*search_envvar_from_envp(char *arg, int arg_len, char **envp)
+static char	*search_envvar_from_envp(char *arg, int arg_len, char **envp)
 {
 	int		i;
 	char	*env_var;
@@ -33,7 +33,7 @@ char	*search_envvar_from_envp(char *arg, int arg_len, char **envp)
 		i++;
 	}
 	if (envp[i] == NULL)
-		return (ft_strdup(""));
+		return (NULL);
 	return (env_var);
 }
 

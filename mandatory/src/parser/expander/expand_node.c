@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 21:54:14 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/27 15:36:40 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:25:21 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int		expand_singular_env(t_ptree *node);
 char	*expand_dquote_env(char *arg);
-char	*expand_homepath(char *arg);
+char	*expand_homepath(t_ptree *node);
 
 static char	*get_new_argument(t_ptree *node)
 {
@@ -32,9 +32,8 @@ static char	*get_new_argument(t_ptree *node)
 	}
 	else if (node->arg[0] == '\'' || node->arg[0] == '\"')
 		new_arg = remove_quote(node->arg);
-	else if (node->arg[0] == '~' && \
-			(node->arg[1] == '/' || node->arg[1] == '\0'))
-		new_arg = expand_homepath(node->arg);
+	else if (node->arg[0] == '~')
+		new_arg = expand_homepath(node);
 	else
 		new_arg = ft_strdup(node->arg);
 	return (new_arg);

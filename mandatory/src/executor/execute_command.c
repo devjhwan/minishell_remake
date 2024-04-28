@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/28 16:01:35 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:22:36 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static int	check_command_path(char *path)
 {
 	if (path == NULL)
 		return (0);
+	else if (isdir(path))
+		return (print_error(IS_DIRECTORY, path, NULL), 0);
 	else if (path[0] == '\0' || access(path, F_OK) == -1)
 		return (print_error(COMMAND_NOT_FOUND, path, NULL), 0);
 	else if (access(path, X_OK) == -1)
@@ -90,7 +92,7 @@ pid_t	execute_command(t_executor *exec, t_shell *shell)
 				manage_child_redirection(p, exec, shell) && \
 				isbuiltin(exec->args[0]))
 			execute_builtin(exec, shell);
-		else if (check_command_path(path) == 0)
+		else if (check_command_path(path))
 			execve(path, exec->args, shell->env);
 		shell->is_exit = 1;
 		free(path);

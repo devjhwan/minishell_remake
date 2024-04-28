@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 22:57:35 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:38:47 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ void	print_unexpected_token(char *arg)
 	ft_putstrerr("syntax error near unexpected token `");
 	ft_putstrerr(arg);
 	ft_putstrerr("'\n");
+	get_shell_struct()->exit_code = 2;
 }
 
 void	print_ambiguous_redirect(char *arg)
 {
 	ft_putstrerr(arg);
 	ft_putstrerr(": ambiguous redirect\n");
+	get_shell_struct()->exit_code = 1;
 }
 
 void	print_no_file(char *arg)
@@ -45,7 +47,8 @@ void	print_permission_denied(char *arg)
 void	print_is_directory(char *arg)
 {
 	ft_putstrerr(arg);
-	ft_putstrerr(": Is a directory\n");
+	ft_putstrerr(": is a directory\n");
+	get_shell_struct()->new_exit_code = 126;
 }
 
 void	print_command_not_found(char *arg)

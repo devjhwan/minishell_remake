@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd_enum_name.c                                :+:      :+:    :+:   */
+/*   get_next_command_tokens.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/29 13:45:30 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 16:50:43 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/29 14:42:12 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "command.h"
+#include "token.h"
 
-char	*get_cmd_enum_name(t_cmdtype t)
+t_token	*get_next_command_tokens(t_token **tokens)
 {
-	if (t == PIPE_CMD)
-		return ("PIPE");
-	else if (t == SINGLE_CMD)
-		return ("ERROR");
-	else
-		return ("UNKNOWN");
+	t_token	*next_tokens;
+
+	next_tokens = *tokens;
+	if (*tokens != NULL)
+		*tokens = (*tokens)->next;
+	while (*tokens != NULL && (*tokens)->t != PIPE)
+		(*tokens) = (*tokens)->next;
+	if (*tokens != NULL && (*tokens)->prev != NULL)
+	{
+		(*tokens)->prev->next = NULL;
+		(*tokens)->prev = NULL;
+	}
+	return (next_tokens);
 }

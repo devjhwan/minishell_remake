@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/29 13:37:29 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:17:41 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,8 @@ static void	print_redirections(t_redir *redirs)
 
 void	print_command(t_cmd *cmds)
 {
-	while (cmds != NULL)
-	{
-		printf("Command type: %s\n", get_cmd_enum_name(cmds->t));
-		print_arguments(cmds->args);
-		print_redirections(cmds->redirs);
-		cmds = cmds->next;
-	}
+	printf("Command type: %s\n", get_cmd_enum_name(cmds->t));
+	print_arguments(cmds->args);
+	print_redirections(cmds->redirs);
 	printf("\n");
 }

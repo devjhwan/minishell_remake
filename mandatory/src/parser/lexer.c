@@ -6,11 +6,11 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 16:47:07 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/29 12:06:02 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:25:02 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "token.h"
+#include "lexer.h"
 #include "libft.h"
 
 int	ispipe(char *line);
@@ -43,5 +43,7 @@ t_token	*lexer(char *line)
 		else if (isargument(line) && append_token(&tokens, &line, ARG) == 0)
 			return (free_tokens(tokens), NULL);
 	}
+	if (syntax_analyzer(tokens) == 0)
+		return (free_tokens(tokens), NULL);
 	return (tokens);
 }

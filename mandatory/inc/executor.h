@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/29 12:59:25 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:19:40 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ typedef struct s_executor
 	char	**args;
 	t_redir	*rdin;
 	t_redir	*rdout;
-	int		islast;
 }	t_executor;
 
 void		execute(t_token	*tokens);

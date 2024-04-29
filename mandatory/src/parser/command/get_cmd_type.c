@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 00:23:19 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:45:33 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 t_cmdtype	get_cmd_type(char *arg)
 {
 	if (ft_strncmp(arg, "|", 2) == 0)
-		return (P);
+		return (PIPE_CMD);
 	else
-		return (ERR);
+		return (SINGLE_CMD);
 }

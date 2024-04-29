@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd_enum_name.c                                :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/29 13:45:30 by junghwle         ###   ########.fr       */
+/*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/29 14:15:39 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "command.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-char	*get_cmd_enum_name(t_cmdtype t)
-{
-	if (t == PIPE_CMD)
-		return ("PIPE");
-	else if (t == SINGLE_CMD)
-		return ("ERROR");
-	else
-		return ("UNKNOWN");
-}
+# include "command.h"
+# include "token.h"
+
+t_cmd	*parser(t_token *tokens);
+
+#endif

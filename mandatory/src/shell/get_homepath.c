@@ -6,7 +6,7 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:44:45 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 12:07:17 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*get_homepath(void)
 	char	*homepath;
 	t_shell	*shell;
 
-	shell = get_shell_struct();
+	shell = get_shell();
 	username = get_username(shell);
 	if (username == NULL)
 		return (NULL);

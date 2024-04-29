@@ -6,13 +6,14 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/28 17:38:01 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:31:07 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "utils.h"
 #include "libft.h"
+#include "print_error.h"
+#include "utils.h"
 #include <stdio.h>
 
 int		is_valid_argument(char *arg);
@@ -55,7 +56,7 @@ int	add_to_export(char *var_name, char *new_content, \
 	char	*prev_content;
 	char	*new_arg;
 
-	pos = contains_export(var_name, shell->export);
+	pos = contains_export(var_name);
 	if (pos != -1 && new_content != NULL)
 	{
 		prev_content = ft_strchr(shell->export[pos], '=');
@@ -114,7 +115,7 @@ int	add_to_env(char *var_name, char *new_content, \
 
 	if (new_content == NULL)
 		return (free(var_name), free(new_content), 1);
-	pos = contains_env(var_name, shell->env);
+	pos = contains_env(var_name);
 	if (pos != -1 && new_content != NULL)
 	{
 		prev_content = ft_strchr(shell->env[pos], '=');
@@ -134,29 +135,30 @@ int	add_to_env(char *var_name, char *new_content, \
 	return (free(var_name), free(new_content), 1);
 }
 
-void	exec_export(char **args, t_shell *shell)
+void	exec_export(char **args)
 {
-	int		i;
+	t_shell	*shell;
 	char	*var_name;
 	char	*content;
 	int		append_f;
 
+	shell = get_shell();
 	if (args[1] == NULL)
 		print_strarray(shell->export);
 	else
 	{
-		i = 1;
-		while (args[i] != NULL)
+		args++;
+		while (args != NULL)
 		{
-			if (!is_valid_argument(args[i]))
-				print_error(NOT_A_VALID_IDENTIFIER, "export", args[i]);
-			else if (split_argument(args[i], &var_name, \
+			if (!is_valid_argument(*args))
+				print_error(NOT_A_VALID_IDENTIFIER, "export", *args);
+			else if (split_argument(*args, &var_name, \
 									&content, &append_f) == 0 || \
 					export_pwd_management(var_name, content, shell) == 0 || \
 					add_to_export(var_name, content, append_f, shell) == 0 || \
 					add_to_env(var_name, content, append_f, shell) == 0)
 				break ;
-			i++;
+			args++;
 		}
 	}
 }

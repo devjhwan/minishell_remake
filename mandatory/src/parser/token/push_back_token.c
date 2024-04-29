@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   contains_env.c                                     :+:      :+:    :+:   */
+/*   push_back_token.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 18:11:42 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:29:04 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 17:15:44 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/29 12:06:02 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "token.h"
 
-int	contains_env(char *arg, char **strarr)
+void	push_back_token(t_token **tokens, t_token *new_token)
 {
-	int		i;
-	int		len;
+	t_token	*tmp;
 
-	i = 0;
-	len = ft_strlen(arg);
-	while (strarr[i] != NULL)
+	if (*tokens == NULL)
+		*tokens = new_token;
+	else
 	{
-		if (ft_strncmp(strarr[i], arg, len) == 0)
-			return (i);
-		i++;
+		tmp = *tokens;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new_token;
+		new_token->prev = tmp;
 	}
-	return (-1);
 }

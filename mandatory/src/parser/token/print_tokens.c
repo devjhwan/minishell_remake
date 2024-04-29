@@ -6,11 +6,11 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 17:34:09 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 00:12:07 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 12:06:02 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser_token.h"
+#include "token.h"
 #include <stdio.h>
 
 static char	*get_enum_name(t_tokentype t)
@@ -33,7 +33,7 @@ static char	*get_enum_name(t_tokentype t)
 		return ("UNKNOWN");
 }
 
-void	print_tokens(t_ptoken *tokens)
+void	print_tokens(t_token *tokens)
 {
 	while (tokens != NULL)
 	{

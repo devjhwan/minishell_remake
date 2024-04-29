@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_redirections.c                                :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/21 16:45:41 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 02:01:56 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 16:36:05 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/29 12:18:28 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "command.h"
+#ifndef LEXER_H
+# define LEXER_H
 
-void	free_redirections(t_redir *redir)
-{
-	t_redir	*tmp;
+# include "token.h"
 
-	tmp = redir;
-	while (tmp != NULL)
-	{
-		redir = tmp->next;
-		free(tmp->filename);
-		tmp->filename = NULL;
-		tmp->next = NULL;
-		free(tmp);
-		tmp = redir;
-	}
-}
+t_token	*lexer(char *line);
+int		syntax_analyzer(t_token *tokens);
+
+#endif

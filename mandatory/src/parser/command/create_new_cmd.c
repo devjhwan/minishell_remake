@@ -6,11 +6,12 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/22 02:01:59 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:36:23 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command.h"
+#include <stdlib.h>
 
 t_cmd	*create_new_cmd(t_cmdtype t)
 {

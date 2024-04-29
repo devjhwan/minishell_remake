@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_env.c                                         :+:      :+:    :+:   */
+/*   free_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/29 11:50:55 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 16:50:43 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/29 12:06:02 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
-#include "utils.h"
-#include <stdlib.h>
+#include "token.h"
 
-void	exec_env(char **args)
+void	free_tokens(t_token *tokens)
 {
-	if (args[1] == NULL)
-		print_strarray(get_shell()->env);
+	t_token	*deltoken;
+
+	while (tokens != NULL)
+	{
+		deltoken = tokens;
+		tokens = tokens->next;
+		free(deltoken->arg);
+		deltoken->arg = NULL;
+		deltoken->next = NULL;
+		free(deltoken);
+	}
 }

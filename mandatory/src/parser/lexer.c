@@ -6,11 +6,11 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 16:47:07 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/27 16:19:46 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 12:06:02 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser_token.h"
+#include "token.h"
 #include "libft.h"
 
 int	ispipe(char *line);
@@ -21,9 +21,9 @@ int	isdquote(char *line);
 int	is_space(char *line);
 int	isargument(char *line);
 
-t_ptoken	*lexer(char *line)
+t_token	*lexer(char *line)
 {
-	t_ptoken	*tokens;
+	t_token	*tokens;
 
 	tokens = NULL;
 	while (*line != '\0')

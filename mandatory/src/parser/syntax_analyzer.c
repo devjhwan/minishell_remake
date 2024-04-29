@@ -6,14 +6,14 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:08:33 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 18:37:45 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 12:06:02 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser_token.h"
-#include "utils.h"
+#include "token.h"
+#include "print_error.h"
 
-static int	is_next_argument_rd(t_ptoken *token)
+static int	is_next_argument_rd(t_token *token)
 {
 	token = token->next;
 	while (token != NULL)
@@ -27,7 +27,7 @@ static int	is_next_argument_rd(t_ptoken *token)
 	return (0);
 }
 
-static int	is_next_argument_pipe(t_ptoken *token)
+static int	is_next_argument_pipe(t_token *token)
 {
 	token = token->next;
 	while (token != NULL)
@@ -41,7 +41,7 @@ static int	is_next_argument_pipe(t_ptoken *token)
 	return (0);
 }
 
-static int	is_prev_argument(t_ptoken *token)
+static int	is_prev_argument(t_token *token)
 {
 	token = token->prev;
 	while (token != NULL)
@@ -60,7 +60,7 @@ static int	is_prev_argument(t_ptoken *token)
  * Searchs for the first not empty argument and returns it's value.
  * If value is NULL then function has reached to the end without any arguments.
 */
-static char	*get_next_token_argument(t_ptoken *token)
+static char	*get_next_token_argument(t_token *token)
 {
 	token = token->next;
 	while (token != NULL)
@@ -72,7 +72,7 @@ static char	*get_next_token_argument(t_ptoken *token)
 	return ("newline");
 }
 
-int	syntax_analyzer(t_ptoken *tokens)
+int	syntax_analyzer(t_token *tokens)
 {
 	while (tokens != NULL)
 	{

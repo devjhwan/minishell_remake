@@ -6,13 +6,13 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/28 17:28:55 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 12:07:42 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
 #include "libft.h"
 #include "shell.h"
+#include "print_error.h"
 #include <stdio.h>
 
 void	print_unexpected_token(char *arg)
@@ -20,56 +20,56 @@ void	print_unexpected_token(char *arg)
 	ft_putstrerr("syntax error near unexpected token `");
 	ft_putstrerr(arg);
 	ft_putstrerr("'\n");
-	get_shell_struct()->exit_code = 2;
+	get_shell()->exit_code = 2;
 }
 
 void	print_ambiguous_redirect(char *arg)
 {
 	ft_putstrerr(arg);
 	ft_putstrerr(": ambiguous redirect\n");
-	get_shell_struct()->exit_code = 1;
+	get_shell()->exit_code = 1;
 }
 
 void	print_no_file(char *arg)
 {
 	ft_putstrerr(arg);
 	ft_putstrerr(": No such file or directory\n");
-	get_shell_struct()->new_exit_code = 1;
+	get_shell()->new_exit_code = 1;
 }
 
 void	print_permission_denied(char *arg)
 {
 	ft_putstrerr(arg);
 	ft_putstrerr(": Permission denied\n");
-	get_shell_struct()->new_exit_code = 1;
+	get_shell()->new_exit_code = 1;
 }
 
 void	print_is_directory(char *arg)
 {
 	ft_putstrerr(arg);
 	ft_putstrerr(": is a directory\n");
-	get_shell_struct()->new_exit_code = 126;
+	get_shell()->new_exit_code = 126;
 }
 
 void	print_is_directory2(char *arg)
 {
 	ft_putstrerr(arg);
 	ft_putstrerr(": Is a directory\n");
-	get_shell_struct()->new_exit_code = 1;
+	get_shell()->new_exit_code = 1;
 }
 
 void	print_command_not_found(char *arg)
 {
 	ft_putstrerr(arg);
 	ft_putstrerr(": command not found\n");
-	get_shell_struct()->new_exit_code = 127;
+	get_shell()->new_exit_code = 127;
 }
 
 void	print_too_many_arguments(char *arg)
 {
 	ft_putstrerr(arg);
 	ft_putstrerr(": too many arguments\n");
-	get_shell_struct()->new_exit_code = 1;
+	get_shell()->new_exit_code = 1;
 }
 
 void	print_numeric_argument_requiered(char *arg1, char *arg2)
@@ -78,7 +78,7 @@ void	print_numeric_argument_requiered(char *arg1, char *arg2)
 	ft_putstrerr(": ");
 	ft_putstrerr(arg2);
 	ft_putstrerr(": numeric argument required\n");
-	get_shell_struct()->new_exit_code = 255;
+	get_shell()->new_exit_code = 255;
 }
 
 void	print_home_not_set(char *arg)
@@ -93,7 +93,7 @@ void	print_no_file2(char *arg1, char *arg2)
 	ft_putstrerr(": ");
 	ft_putstrerr(arg2);
 	ft_putstrerr(": No such file or directory\n");
-	get_shell_struct()->new_exit_code = 1;
+	get_shell()->new_exit_code = 1;
 }
 
 void	print_not_a_directory(char *arg1, char *arg2)
@@ -102,7 +102,7 @@ void	print_not_a_directory(char *arg1, char *arg2)
 	ft_putstrerr(": ");
 	ft_putstrerr(arg2);
 	ft_putstrerr(": Not a directory\n");
-	get_shell_struct()->new_exit_code = 1;
+	get_shell()->new_exit_code = 1;
 }
 
 void	print_permission_denied2(char *arg1, char *arg2)
@@ -111,7 +111,7 @@ void	print_permission_denied2(char *arg1, char *arg2)
 	ft_putstrerr(": ");
 	ft_putstrerr(arg2);
 	ft_putstrerr(": Permission denied\n");
-	get_shell_struct()->new_exit_code = 1;
+	get_shell()->new_exit_code = 1;
 }
 
 void	print_not_a_valid_identifier(char *arg1, char *arg2)
@@ -120,7 +120,7 @@ void	print_not_a_valid_identifier(char *arg1, char *arg2)
 	ft_putstrerr(": `");
 	ft_putstrerr(arg2);
 	ft_putstrerr("': not a valid identifier\n");
-	get_shell_struct()->new_exit_code = 1;
+	get_shell()->new_exit_code = 1;
 }
 
 void	print_oldpwd_not_set(char *arg)
@@ -135,7 +135,7 @@ void	print_filename_too_long(char *arg1, char *arg2)
 	ft_putstrerr(": ");
 	ft_putstrerr(arg2);
 	ft_putstrerr(": File name too long\n");
-	get_shell_struct()->new_exit_code = 1;
+	get_shell()->new_exit_code = 1;
 }
 
 void	print_high_shlvl(char *arg)

@@ -6,18 +6,18 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/28 18:26:03 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:34:33 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "executor.h"
+#include "builtin.h"
+#include "print_error.h"
 #include "utils.h"
 #include "libft.h"
 #include <unistd.h>
-#include <stdio.h>
 
-static void	update_oldpwd(t_shell *shell)
+static void	update_oldpwd(void)
 {
 	char	*tmp;
 	char	*tmp2;
@@ -25,8 +25,8 @@ static void	update_oldpwd(t_shell *shell)
 	tmp = search_environment("PWD");
 	if (tmp == NULL || ft_strlen(tmp) == 0)
 	{
-		exec_unset((char *[]){"unset", "OLDPWD", NULL}, shell);
-		exec_export((char *[]){"export", "OLDPWD", NULL}, shell);
+		exec_unset((char *[]){"unset", "OLDPWD", NULL});
+		exec_export((char *[]){"export", "OLDPWD", NULL});
 		free(tmp);
 	}
 	else
@@ -34,18 +34,18 @@ static void	update_oldpwd(t_shell *shell)
 		tmp2 = ft_strjoin(2, "OLDPWD=", tmp);
 		free(tmp);
 		if (tmp2 != NULL)
-			exec_export((char *[]){"export", tmp2, NULL}, shell);
+			exec_export((char *[]){"export", tmp2, NULL});
 		free(tmp2);
 	}
 }
 
-static void	update_pwd(char *path, t_shell *shell)
+static void	update_pwd(void)
 {
 	char	*tmp;
 
-	tmp = ft_strjoin(2, "PWD=", path);
+	tmp = ft_strjoin(2, "PWD=", get_shell()->pwd);
 	if (tmp != NULL)
-		exec_export((char *[]){"export", tmp, NULL}, shell);
+		exec_export((char *[]){"export", tmp, NULL});
 	free(tmp);
 }
 
@@ -97,10 +97,10 @@ int	change_directory(char *path, t_shell *shell)
 		shell->pwd_save = ft_strdup(shell->pwd);
 		if (shell->pwd_save == NULL)
 			return (0);
-		if (contains_export("OLDPWD", shell->export) != -1)
-			update_oldpwd(shell);
-		if (contains_export("PWD", shell->export) != -1)
-			update_pwd(shell->pwd, shell);
+		if (contains_export("OLDPWD") != -1)
+			update_oldpwd();
+		if (contains_export("PWD") != -1)
+			update_pwd();
 		return (1);
 	}
 	return (0);

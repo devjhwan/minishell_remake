@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_token.h                                     :+:      :+:    :+:   */
+/*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 16:36:05 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 13:21:12 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 12:18:17 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_TOKEN_H
-# define PARSER_TOKEN_H
+#ifndef TOKEN_H
+# define TOKEN_H
 
 # include <stdlib.h>
 
@@ -32,16 +32,13 @@ typedef struct s_token
 	char			*arg;
 	struct s_token	*next;
 	struct s_token	*prev;
-}	t_ptoken;
+}	t_token;
 
-t_ptoken	*lexer(char *line);
-int			syntax_analyzer(t_ptoken *tokens);
-
-t_ptoken	*create_new_token(t_tokentype t, char *arg);
-void		push_back_token(t_ptoken **tokens, t_ptoken *new_token);
-int			append_token(t_ptoken **tokens, char **line, t_tokentype t);
-void		free_tokens(t_ptoken *tokens);
-void		print_tokens(t_ptoken *tokens);
-t_ptoken	*skip_space_tokens(t_ptoken *tokens);
+t_token	*create_new_token(t_tokentype t, char *arg);
+void	push_back_token(t_token **tokens, t_token *new_token);
+int		append_token(t_token **tokens, char **line, t_tokentype t);
+void	free_tokens(t_token *tokens);
+void	print_tokens(t_token *tokens);
+t_token	*skip_space_tokens(t_token *tokens);
 
 #endif

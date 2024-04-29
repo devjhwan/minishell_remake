@@ -6,14 +6,14 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/27 15:37:06 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 12:55:10 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "command.h"
+#include "executor.h"
 #include "libft.h"
 
-int	set_exec_rdin(t_redir *redirs, t_redir **rdin)
+int	set_exec_rdin(t_redir *redirs, t_executor *exec)
 {
 	t_redir	*tmp;
 	t_redir	*tmp2;
@@ -35,11 +35,11 @@ int	set_exec_rdin(t_redir *redirs, t_redir **rdin)
 	if (tmp2->filename == NULL)
 		return (free(tmp2), 0);
 	tmp2->next = NULL;
-	*rdin = tmp2;
+	exec->rdin = tmp2;
 	return (1);
 }
 
-int	set_exec_rdout(t_redir *redirs, t_redir **rdout)
+int	set_exec_rdout(t_redir *redirs, t_executor *exec)
 {
 	t_redir	*tmp;
 	t_redir	*tmp2;
@@ -61,6 +61,6 @@ int	set_exec_rdout(t_redir *redirs, t_redir **rdout)
 	if (tmp2->filename == NULL)
 		return (free(tmp2), 0);
 	tmp2->next = NULL;
-	*rdout = tmp2;
+	exec->rdout = tmp2;
 	return (1);
 }

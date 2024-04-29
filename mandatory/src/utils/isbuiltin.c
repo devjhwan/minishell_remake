@@ -6,11 +6,11 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/28 16:44:21 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:35:19 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "shell.h"
 #include "libft.h"
 
 int	isbuiltin(char *arg)
@@ -22,7 +22,7 @@ int	isbuiltin(char *arg)
 		ft_tolower(low_arg);
 	if (ft_strncmp(arg, "echo", 5) == 0)
 		return (free(low_arg), 1);
-	if (check_environment("PATH") && ft_strncmp(low_arg, "echo", 5) == 0)
+	if (contains_env("PATH") && ft_strncmp(low_arg, "echo", 5) == 0)
 		return (free(low_arg), 1);
 	else if (ft_strncmp(arg, "cd", 3) == 0)
 		return (free(low_arg), 1);

@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   join_tree_arguments.c                              :+:      :+:    :+:   */
+/*   contains_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/21 16:39:38 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/28 16:09:50 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/26 18:11:42 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/29 13:30:24 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser_tree.h"
+#include "shell.h"
+#include "libft.h"
 
-char	*join_tree_arguments(t_ptree *node)
+int	contains_env(char *arg)
 {
-	char	*tmp1;
-	char	*tmp2;
-	char	*str;
+	int		i;
+	int		len;
+	char	**env;
 
-	tmp1 = node->arg;
-	node->arg = NULL;
-	if (node->right == NULL)
-		return (tmp1);
-	else
+	i = 0;
+	len = ft_strlen(arg);
+	env = get_shell()->env;
+	while (env[i] != NULL)
 	{
-		tmp2 = join_tree_arguments(node->right);
-		if (tmp1 == NULL)
-			return (tmp2);
-		if (tmp2 == NULL)
-			return (tmp1);
-		str = ft_strjoin(2, tmp1, tmp2);
-		return (free(tmp1), free(tmp2), str);
+		if (ft_strncmp(env[i], arg, len) == 0)
+			return (i);
+		i++;
 	}
+	return (-1);
 }

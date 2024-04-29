@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_new_token.c                                 :+:      :+:    :+:   */
+/*   get_cmd_enum_name.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/21 17:17:18 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/21 18:37:45 by junghwle         ###   ########.fr       */
+/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/29 13:37:08 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser_token.h"
+#include "command.h"
 
-t_ptoken	*create_new_token(t_tokentype t, char *arg)
+char	*get_cmd_enum_name(t_cmdtype t)
 {
-	t_ptoken	*new_token;
-
-	new_token = (t_ptoken *)malloc(sizeof(t_ptoken));
-	if (new_token == NULL)
-		return (NULL);
-	new_token->t = t;
-	new_token->arg = arg;
-	new_token->next = NULL;
-	new_token->prev = NULL;
-	return (new_token);
+	if (t == P)
+		return ("PIPE");
+	else if (t == ERR)
+		return ("ERROR");
+	else
+		return ("UNKNOWN");
 }

@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_env.c                                         :+:      :+:    :+:   */
+/*   get_shell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/29 11:50:55 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/26 20:47:17 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/29 11:36:06 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "utils.h"
 #include <stdlib.h>
+#include <stdio.h>
 
-void	exec_env(char **args)
+t_shell	*get_shell(void)
 {
-	if (args[1] == NULL)
-		print_strarray(get_shell()->env);
+	static t_shell	shell;
+
+	return (&shell);
 }

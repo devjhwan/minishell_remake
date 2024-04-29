@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_shell_struct.c                                 :+:      :+:    :+:   */
+/*   setup.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 20:47:17 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:44:30 by junghwle         ###   ########.fr       */
+/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/29 11:20:43 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
-#include <stdlib.h>
-#include <stdio.h>
+#ifndef SETUP_H
+# define SETUP_H
 
-t_shell	*get_shell_struct(void)
-{
-	static t_shell	*shell;
+void	set_default_minishell_signal(void);
+void	set_execution_signal(void);
 
-	if (shell == NULL)
-	{
-		shell = (t_shell *)malloc(sizeof(t_shell));
-		if (shell == NULL)
-			return (NULL);
-	}
-	return (shell);
-}
+void	set_minishell_terminal(void);
+void	rollback_terminal_setting(void);
+
+#endif

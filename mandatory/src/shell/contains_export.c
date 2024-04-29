@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_env.c                                         :+:      :+:    :+:   */
+/*   contains_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/29 11:50:55 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/26 18:11:23 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/29 13:30:06 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "utils.h"
-#include <stdlib.h>
+#include "libft.h"
 
-void	exec_env(char **args)
+int	contains_export(char *arg)
 {
-	if (args[1] == NULL)
-		print_strarray(get_shell()->env);
+	int		i;
+	int		len;
+	char	**export;
+
+	i = 0;
+	len = ft_strlen(arg);
+	export = get_shell()->export;
+	while (export[i] != NULL)
+	{
+		if (ft_strncmp(export[i] + 11, arg, len) == 0)
+			return (i);
+		i++;
+	}
+	return (-1);
 }

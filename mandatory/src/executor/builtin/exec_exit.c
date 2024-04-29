@@ -6,12 +6,12 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/28 18:20:34 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 12:01:02 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "utils.h"
+#include "print_error.h"
 #include "libft.h"
 #include <stdlib.h>
 
@@ -90,11 +90,13 @@ static char	atoc(char *arg)
 	return (nb);
 }
 
-void	exec_exit(char **args, t_shell *shell)
+void	exec_exit(char **args)
 {
-	int i;
+	int 	i;
+	t_shell	*shell;
 
-	// ft_putstrerr("exit\n");
+	shell = get_shell();
+	ft_putstrerr("exit\n");
 	i = 1;
 	if (args[i] != NULL && ft_strncmp(args[i], "--", 3) == 0)
 		i++;

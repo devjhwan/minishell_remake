@@ -6,23 +6,22 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/28 17:54:45 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:30:18 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHELL_H
 # define SHELL_H
 
-# include "command.h"
-
 typedef struct s_shell
 {
-	t_cmd	*cmds;
 	char	**env;
 	char	**export;
 	char	*pwd_save;
 	char	*pwd;
 	char	*oldpwd;
+	int		stdin_fd_save;
+	int		stdout_fd_save;
 	int		fdin;
 	int		fdout;
 	int		exit_code;
@@ -30,9 +29,15 @@ typedef struct s_shell
 	int		is_exit;
 }	t_shell;
 
-t_shell	*get_shell_struct(void);
-t_shell	*init_shell_struct(int as, char **av, char **ep);
-void	free_shell_struct(t_shell **shell);
-void	manage_shlvl(t_shell *shell);
+t_shell	*get_shell(void);
+t_shell	*init_shell(int as, char **av, char **ep);
+void	free_shell(t_shell *shell);
+
+int		contains_export(char *arg);
+int		contains_env(char *arg);
+char	*get_path_from_env(char *arg, char **envp);
+char	*search_environment(char *arg);
+char	*get_homepath(void);
+int		manage_shlvl(void);
 
 #endif

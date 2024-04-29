@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   skip_space_tokens.c                                :+:      :+:    :+:   */
+/*   free_redirections.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/21 20:00:53 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/25 13:06:32 by junghwle         ###   ########.fr       */
+/*   Created: 2024/04/21 16:45:41 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/29 12:23:45 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser_tree.h"
+#include "redirection.h"
+#include <stdlib.h>
 
-t_ptoken	*skip_space_tokens(t_ptoken *tokens)
+void	free_redirections(t_redir *redir)
 {
-	while (tokens != NULL)
+	t_redir	*tmp;
+
+	tmp = redir;
+	while (tmp != NULL)
 	{
-		if (tokens->t != SP)
-			return (tokens);
-		tokens = tokens->next;
+		redir = tmp->next;
+		free(tmp->filename);
+		tmp->filename = NULL;
+		tmp->next = NULL;
+		free(tmp);
+		tmp = redir;
 	}
-	return (NULL);
 }

@@ -6,14 +6,15 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/28 17:15:56 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:38:10 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
+#include "redirection.h"
+#include "print_error.h"
+#include "utils.h"
 #include "libft.h"
 #include "get_next_line.h"
-#include "utils.h"
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>

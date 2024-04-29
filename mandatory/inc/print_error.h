@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_environment.c                                :+:      :+:    :+:   */
+/*   print_error.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:33:54 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:59:28 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
-#include "libft.h"
+#ifndef PRINT_ERROR_H
+# define PRINT_ERROR_H
 
-int	check_environment(char *arg)
+typedef enum e_errtype
 {
-	int		i;
-	int		arg_len;
-	t_shell	*shell;
+	UNEXPECTED_TOKEN,
+	AMBIGUOUS_REDIRECT,
+	NO_FILE,
+	PERMISSION_DENIED,
+	IS_DIRECTORY,
+	IS_DIRECTORY2,
+	COMMAND_NOT_FOUND,
+	TOO_MANY_ARGUMENTS,
+	NUMERIC_ARGUMENT,
+	HOME_NOT_SET,
+	NO_FILE2,
+	NOT_A_DIRECTORY,
+	PERMISSION_DENIED2,
+	NOT_A_VALID_IDENTIFIER,
+	OLDPWD_NOT_SET,
+	FILENAME_TOO_LONG,
+	HIGH_SHLVL
+}	t_errtype;
 
-	i = 0;
-	arg_len = ft_strlen(arg);
-	shell = get_shell_struct();
-	if (arg_len == 0)
-		return (1);
-	if (arg[0] == '\'' || arg[0] == '\"' || arg[0] == '~')
-		return (1);
-	while (shell->env[i] != NULL)
-	{
-		if (ft_strncmp(shell->env[i], arg, arg_len) == 0 && \
-						shell->env[i][arg_len] == '=')
-			return (1);
-		i++;
-	}
-	return (0);
-}
+void	print_error(t_errtype t, char *arg1, char *arg2);
+
+#endif

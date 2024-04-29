@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   contains_export.c                                  :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 18:11:23 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/26 21:29:06 by junghwle         ###   ########.fr       */
+/*   Created: 2024/03/26 15:53:44 by junghwle          #+#    #+#             */
+/*   Updated: 2024/04/29 11:51:50 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef BUILTIN_H
+# define BUILTIN_H
 
-int	contains_export(char *arg, char **strarr)
-{
-	int		i;
-	int		len;
+void	exec_echo(char **args);
+void	exec_env(char **args);
+void	exec_export(char **args);
+void	exec_exit(char **args);
+void	exec_unset(char **args);
+void	exec_pwd(void);
+void	exec_cd(char **args);
+void	execute_builtin(char **args);
 
-	i = 0;
-	len = ft_strlen(arg);
-	while (strarr[i] != NULL)
-	{
-		if (ft_strncmp(strarr[i] + 11, arg, len) == 0)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
+#endif

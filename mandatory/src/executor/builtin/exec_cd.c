@@ -6,14 +6,13 @@
 /*   By: junghwle <junghwle@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:50:44 by junghwle          #+#    #+#             */
-/*   Updated: 2024/04/28 18:17:24 by junghwle         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:30:44 by junghwle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "executor.h"
 #include "libft.h"
-#include "utils.h"
+#include "print_error.h"
 #include <stdio.h>
 #include <unistd.h>
 
@@ -23,7 +22,7 @@ void	cd_env_home(t_shell *shell)
 {
 	char	*homepath;
 
-	if (check_environment("HOME") == 0)
+	if (contains_env("HOME") == -1)
 		print_error(HOME_NOT_SET, "cd", NULL);
 	else
 	{
@@ -65,7 +64,7 @@ void	cd_path(char *arg, t_shell *shell)
 	char	*tmp;
 
 	if (ft_strncmp(arg, ".", 2) == 0 && \
-			access(get_shell_struct()->pwd_save, F_OK) < 0)
+			access(shell->pwd_save, F_OK) < 0)
 	{
 		ft_putstrerr("cd: error retrieving current directory: ");
 		ft_putstrerr("getcwd: cannot access parent directories: ");
@@ -86,11 +85,13 @@ void	cd_path(char *arg, t_shell *shell)
 		change_directory(arg, shell);
 }
 
-void	exec_cd(char **args, t_shell *shell)
+void	exec_cd(char **args)
 {
-	int	i;
+	int		i;
+	t_shell	*shell;
 
 	i = 1;
+	shell = get_shell();
 	if (args[i] != NULL && ft_strncmp(args[i], "--", 3) == 0)
 		i++;
 	while (args[i] != NULL && args[i][0] == '\0')
